@@ -21,7 +21,7 @@ or a three digits UN M.49 region code.
 It returns the localized string of region display name to present that code in the
 language specified in the Intl.DisplayNames constructor.
 
-The first parameter for Intl.DisplayNames.prototype.language_with_region() method is an ISO-639 language
+The first parameter for Intl.DisplayNames.prototype.languageWithRegion() method is an ISO-639 language
 code. The second parameter for Intl.DisplayNames.prototype.region method is either an
 ISO-3166 two letter region code, or a three digits UN M.49 region code.
 It returns the localized string of language of region display name to present that two code in the
@@ -35,7 +35,7 @@ language specified in the Intl.DisplayNames constructor.
 Intl.DisplayNames([ locales [ , options ]])
 Intl.DisplayNames.prototype.region(region_code)
 Intl.DisplayNames.prototype.language(language_code)
-Intl.DisplayNames.prototype.language_with_region(language_code, region_code)
+Intl.DisplayNames.prototype.languageWithRegion(language_code, region_code)
 Intl.DisplayNames.prototype.script(script_code)
 get Intl.DisplayNames.regionCodes([type])
 get Intl.DisplayNames.languageCodes([type])
@@ -76,8 +76,8 @@ console.log(dn.language('de')); // "German"
 console.log(dn.language('yue')); // "Cantonese"
 
 // Get language with region names
-console.log(dn.language_with_region('fr', 'CA')); // "French (Canada)"
-console.log(dn.language_with_region('zh', 'TW')); // "Chinese (Taiwan)"
+console.log(dn.languageWithRegion('fr', 'CA')); // "French (Canada)"
+console.log(dn.languageWithRegion('zh', 'TW')); // "Chinese (Taiwan)"
 
 // Get script names
 console.log(dn.script('Latn')); // "Latin"
