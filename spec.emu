@@ -9,7 +9,7 @@ status: proposal
 stage: 0
 location: https://github.com/tc39-transfer/proposal-intl-displaynames
 copyright: true
-contributors: Frank Tang
+contributors: Google, Ecma International
 </pre>
 <emu-biblio href="./biblio.json"></emu-biblio>
 <emu-clause id="segmenter-objects">
