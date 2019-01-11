@@ -1,16 +1,19 @@
 {
   "private": true,
-  "name": "template-for-proposals",
-  "description": "A repository template for ECMAScript proposals.",
+  "name": "proposal-ecma402-displaynames",
+  "version": "0.0.0",
+  "description": "Intl.DisplayNames API Specification proposal.",
   "scripts": {
-    "build": "ecmarkup spec.emu > index.html"
+    "build": "ecmarkup spec.emu out/index.html",
+    "watch": "ecmarkup --watch out/index.html index.html"
   },
-  "homepage": "https://github.com/tc39/template-for-proposals#readme",
+  "homepage": "https://tc39-transfer.github.io/proposal-intl-displaynames",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tc39/template-for-proposals.git"
+    "url": "https://github.com/tc39-transfer/proposal-intl-displaynames.git"
   },
-  "license": "MIT",
+  "author": "Ecma TC39",
+  "license": "SEE LICENSE IN https://tc39.github.io/ecma262/#sec-copyright-and-software-license",
   "devDependencies": {
     "ecmarkup": "^3.11.5"
   }
