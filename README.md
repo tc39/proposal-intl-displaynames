@@ -1,34 +1,37 @@
-# template-for-proposals
+## Proposal: Intl.get[Language|Region|Locale]DisplayNames
 
-A repository template for ECMAScript proposals.
+### Motivation
+Main motivation for Intl project was to enable collation on the client. Collation algorithm requires large amount of data, which is already available in most browsers. Language and region name translations also carry steep data size penalty for developers. Our goal is to expose this data through Intl API for use in e.g. language and region pickers, labeling maps, keyboard selection, etc.
 
-## Before creating a proposal
-
-Please ensure the following:
-  1. You are a member of TC39
-  1. You have read the [process document](https://tc39.github.io/process-document/)
-  1. You have reviewed the [existing proposals](https://github.com/tc39/proposals/)
-
-## Create your proposal repo
-
-Follow these steps:
-  1. Create your own repo, clone this one, and copy its contents into your repo. (Note: Do not fork this repo in GitHub's web interface, as that will later prevent transfer into the TC39 organization)
-  1. Go to your repo settings “Options” page, under “GitHub Pages”, and set the source to the **master branch** and click Save.
-    1. Ensure "Issues" is checked.
-    1. Also, you probably want to disable "Wiki" and "Projects"
-  1. Avoid merge conflicts with build process output files by running:
-```sh
-git config --local --add merge.output.driver true
-git config --local --add merge.output.driver true
+### Syntax
+```js
+Intl.getLanguageDisplayNames(localePriorityList, languagesToDisplayList)
+Intl.getRegionDisplayNames(localePriorityList, regionsToDisplayList)
+Intl.getLocaleDisplayNames(localePriorityList, localesToDisplayList)
 ```
-  1. Add a post-rewrite git hook to auto-rebuild the output on every commit:
-```sh
-cp hooks/post-rewrite .git/hooks/post-rewrite
-chmod +x .git/hooks/post-rewrite
+First parameter, localePriorityList, represents the usual locale resolution, where we try to fulfill request by going from first locale, to last.
+
+* For getLanguageDisplayNames, second parameter represents a list of BCP47 language tags.
+* For getRegionDisplayNames, second parameter represents a list of two letter country codes.
+* For getLocaleDisplayNames, second parameter represents a list of Locale objects or string representations of BCP47 tags.
+
+### Authors
+* Zibi Braniecki (@zbraniecki)
+* Sascha Brawer (@brawer)
+* Nebojša Ćirić (@nciric)
+
+### Prior art
+Mozilla already has [vendor specific implementation](https://firefox-source-docs.mozilla.org/intl/dataintl.html#mozintl-getlanguagedisplaynames-locales-langcodes).
+
+### Usage
+
+```js
+let langs = Intl.getLanguageDisplayNames(["pl"], ["fr", "de", "en", "sr-Latn-XK"]);
+langs === ["Francuski", "Niemiecki", "Angielski", "Serbski"];
+
+let regs = Intl.getRegionDisplayNames(["pl"], ["US", "CA", "MX"]);
+regs === ["Stany Zjednoczone", "Kanada", "Meksyk"];
+
+let locs = Intl.getLocaleDisplayNames(["pl"], ["sr-RU", "es-MX", "fr-CA", "sr-Latn-XK"]);
+locs === ["Serbski (Rosja)", "Hiszpański (Meksyk)", "Francuski (Kanada)", "Serbski (Łacińskie, Kosowo)"];
 ```
-
-## Maintain your proposal repo
-
-  1. Make your changes to `spec.emu` (ecmarkup uses HTML syntax, but is not HTML, so I strongly suggest not naming it ".html")
-  1. Any commit that makes meaningful changes to the spec, should run `npm run build` and commit the resulting output.
-  1. Whenever you update `ecmarkup`, run `npm run build` and commit any changes that come from that dependency.
