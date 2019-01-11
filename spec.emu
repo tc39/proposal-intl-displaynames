@@ -8,7 +8,7 @@ title: Intl.DisplayNames Proposal
 status: proposal
 stage: 0
 location: https://github.com/tc39-transfer/proposal-intl-displaynames
-copyright: false
+copyright: true
 contributors: Frank Tang
 </pre>
 <emu-biblio href="./biblio.json"></emu-biblio>
