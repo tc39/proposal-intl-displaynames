@@ -1,7 +1,7 @@
 ## Proposal: Intl.DisplayNames
 
 ### Motivation
-Main motivation for Intl project was to enable collation on the client. Collation algorithm requires large amount of data, which is already available in most browsers. Language and region name translations also carry steep data size penalty for developers. Our goal is to expose this data through Intl API for use in e.g. language and region pickers, labeling maps, keyboard selection, etc.
+Main motivation for Intl project was to enable collation on the client. Collation algorithm requires large amount of data, which is already available in most browsers. Language, region and script name translations also carry steep data size penalty for developers. Our goal is to expose this data through Intl API for use in e.g. language, region and script pickers, etc.
 
 ### Stage
 Stage 0
