@@ -91,7 +91,7 @@ contributors: Frank Tang
     </emu-clause>
 
     <emu-clause id="sec-Intl.DisplayNames.scriptCodes">
-      <h1>Intl.DisplayNames.scriptCodes ([ _type_ ])</h1>
+      <h1>Intl.DisplayNames.scriptCodes ()</h1>
 
       <p>
         When the *scriptCodes* method of *%DisplayNames%* is called, the following steps are taken:
@@ -159,10 +159,10 @@ contributors: Frank Tang
     </emu-clause>
 
     <emu-clause id="sec-Intl.DisplayNames.prototype.language" aoid="Intl.DisplayNames.prototype.language">
-      <h1>Intl.DisplayNames.prototype.language( _language_code_ )</h1>
+      <h1>Intl.DisplayNames.prototype.language( _languageCode_ )</h1>
 
       <p>
-        When the *Intl.DisplayNames.prototype.language* is called with an argument _language_code_, the following steps are taken:
+        When the *Intl.DisplayNames.prototype.language* is called with an argument _languageCode_, the following steps are taken:
       </p>
 
       <emu-alg>
@@ -171,11 +171,11 @@ contributors: Frank Tang
       </emu-alg>
     </emu-clause>
 
-    <emu-clause id="sec-Intl.DisplayNames.prototype.language_with_region" aoid="Intl.DisplayNames.prototype.language_with_region">
-      <h1>Intl.DisplayNames.prototype.language_with_region( _language_code_ , _region_code_ )</h1>
+    <emu-clause id="sec-Intl.DisplayNames.prototype.languageWithRegion" aoid="Intl.DisplayNames.prototype.languagewithregion">
+      <h1>Intl.DisplayNames.prototype.languageWithRegion( _languageCode_ , _regionCode_ )</h1>
 
       <p>
-        When the *Intl.DisplayNames.prototype.language_with_region* is called with two arguments _language_code_ and _region_code_, the following steps are taken:
+        When the *Intl.DisplayNames.prototype.languageWithRegion* is called with two arguments _languageCode_ and _regionCode_, the following steps are taken:
       </p>
 
       <emu-alg>
@@ -185,10 +185,10 @@ contributors: Frank Tang
     </emu-clause>
 
     <emu-clause id="sec-Intl.DisplayNames.prototype.region" aoid="Intl.DisplayNames.prototype.region">
-      <h1>Intl.DisplayNames.prototype.region( _region_code_ )</h1>
+      <h1>Intl.DisplayNames.prototype.region( _regionCode_ )</h1>
 
       <p>
-        When the *Intl.DisplayNames.prototype.region* is called with an argument _region_code_, the following steps are taken:
+        When the *Intl.DisplayNames.prototype.region* is called with an argument _regionCode_, the following steps are taken:
       </p>
 
       <emu-alg>
@@ -198,10 +198,10 @@ contributors: Frank Tang
     </emu-clause>
 
     <emu-clause id="sec-Intl.DisplayNames.prototype.script" aoid="Intl.DisplayNames.prototype.script">
-      <h1>Intl.DisplayNames.prototype.script( _script_code_ )</h1>
+      <h1>Intl.DisplayNames.prototype.script( _scriptCode_ )</h1>
 
       <p>
-        When the *Intl.DisplayNames.prototype.script* is called with an argument _script_code_, the following steps are taken:
+        When the *Intl.DisplayNames.prototype.script* is called with an argument _scriptCode_, the following steps are taken:
       </p>
 
       <emu-alg>
@@ -258,16 +258,4 @@ contributors: Frank Tang
     </ul>
 
   </emu-clause>
-</emu-clause>
-<emu-clause id="sec-demo-clause">
-  <h1>This is an emu-clause</h1>
-  <p>This is an algorithm:</p>
-  <emu-alg>
-    1. Let _proposal_ be *undefined*.
-    1. If IsAccepted(_proposal_),
-      1. Let _stage_ be *0*.
-    1. Else,
-      1. Let _stage_ be *-1*.
-    1. Return ? ToString(_proposal_).
-  </emu-alg>
 </emu-clause>
