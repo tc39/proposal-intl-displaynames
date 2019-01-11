@@ -33,18 +33,18 @@ language specified in the Intl.DisplayNames constructor.
 
 ```js
 Intl.DisplayNames([ locales [ , options ]])
-Intl.DisplayNames.prototype.region(region_code)
-Intl.DisplayNames.prototype.language(language_code)
-Intl.DisplayNames.prototype.languageWithRegion(language_code, region_code)
-Intl.DisplayNames.prototype.script(script_code)
+Intl.DisplayNames.prototype.region(regionCode)
+Intl.DisplayNames.prototype.language(languageCode)
+Intl.DisplayNames.prototype.languageWithRegion(languageCode, regionCode)
+Intl.DisplayNames.prototype.script(scriptCode)
 get Intl.DisplayNames.regionCodes([type])
 get Intl.DisplayNames.languageCodes([type])
 get Intl.DisplayNames.scriptCodes()
 ```
 
-* region_code is either a two letter ISO 3166-1 alpha-2 region code or a three digits UN M.49 area code.
-* language_code is either a two letters ISO 639-1 language code or a three letters ISO 639-2 language code.
-* script_code is a four letter ISO 15924 script code.
+* regionCode is either a two letter ISO 3166-1 alpha-2 region code or a three digits UN M.49 area code.
+* languageCode is either a two letters ISO 639-1 language code or a three letters ISO 639-2 language code.
+* scriptCode is a four letter ISO 15924 script code.
 * type for Intl.DisplayNames.regionCodes() could be either "all" (default), "two-letters", or "three-digits"
 * type for Intl.DisplayNames.languageCodes() could be either "all" (default), "two-letters", or "three-letters"
 
