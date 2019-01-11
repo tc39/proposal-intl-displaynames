@@ -1,7 +1,7 @@
 ## Proposal: Intl.DisplayNames
 
 ### Motivation
-Main motivation for Intl project was to enable collation on the client. Collation algorithm requires large amount of data, which is already available in most browsers. Language, region and script name translations also carry steep data size penalty for developers. Our goal is to expose this data through Intl API for use in e.g. language, region and script pickers, etc.
+Main motivation for Intl project was to enable collation on the client. Display names of languages, regions and script requires large amount of data, which is already available in most browsers. Language, region and script name translations also carry steep data size penalty for developers. This API will allow web developer to shrink the size of their HTML and/ or ECMA script code without the need to include the human readble form of display names and therefore reduce the download size to decrease latency. Our goal is to expose this data through Intl API for use in e.g. language, region and script pickers, etc.
 
 ### Stage
 Stage 0
@@ -11,25 +11,6 @@ To get localized names of language, script or region, create a Intl.DisplayName 
 
 The parameter for Intl.DisplayNames constructor follow other Intl Objects in ECMA402 Standard.
 The first parameter is Locales, the second parameter is an option Object.
-
-The parameter for Intl.DisplayNames.prototype.language() method is an ISO-639 two or three letters language
-code. It returns the localized string of language display name to present that code in the
-language specified in the Intl.DisplayNames constructor.
-
-The parameter for Intl.DisplayNames.prototype.region() method is either an ISO-3166 two letters region code,
-or a three digits UN M.49 region code.
-It returns the localized string of region display name to present that code in the
-language specified in the Intl.DisplayNames constructor.
-
-The first parameter for Intl.DisplayNames.prototype.languageWithRegion() method is an ISO-639 language
-code. The second parameter for Intl.DisplayNames.prototype.region method is either an
-ISO-3166 two letter region code, or a three digits UN M.49 region code.
-It returns the localized string of language of region display name to present that two code in the
-language specified in the Intl.DisplayNames constructor.
-
-The parameter for Intl.DisplayNames.prototype.script() method is an ISO-15924 four letters script code.
-It returns the localized string of script display name to present that code in the
-language specified in the Intl.DisplayNames constructor.
 
 ```js
 Intl.DisplayNames([ locales [ , options ]])
@@ -42,11 +23,12 @@ get Intl.DisplayNames.languageCodes([type])
 get Intl.DisplayNames.scriptCodes()
 ```
 
-* regionCode is either a two letter ISO 3166-1 alpha-2 region code or a three digits UN M.49 area code.
-* languageCode is either a two letters ISO 639-1 language code or a three letters ISO 639-2 language code.
-* scriptCode is a four letter ISO 15924 script code.
-* type for Intl.DisplayNames.regionCodes() could be either "all" (default), "two-letters", or "three-digits"
-* type for Intl.DisplayNames.languageCodes() could be either "all" (default), "two-letters", or "three-letters"
+* _regionCode_ is either a [ISO-3166 two letters region code](https://www.iso.org/iso-3166-country-codes.html),
+or a [three digits UN M49 Geographic Regions](https://unstats.un.org/unsd/methodology/m49/).
+* _languageCode_ is either a two letters ISO 639-1 language code or a three letters ISO 639-2 language code.
+* _scriptCode_ is a [ISO-15924 four letters script code](http://unicode.org/iso15924/iso15924-codes.html).
+* _type_ for Intl.DisplayNames.regionCodes() could be either "all" (default), "two-letters", or "three-digits"
+* _type_ for Intl.DisplayNames.languageCodes() could be either "all" (default), "two-letters", or "three-letters"
 
 ### Authors
 * Frank Tang (@FrankYFTang)
