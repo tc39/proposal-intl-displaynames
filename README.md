@@ -24,9 +24,9 @@ Intl.DisplayNames.prototype.region(regionCode)
 Intl.DisplayNames.prototype.language(languageCode)
 Intl.DisplayNames.prototype.languageWithRegion(languageCode, regionCode)
 Intl.DisplayNames.prototype.script(scriptCode)
-get Intl.DisplayNames.regionCodes([type])
-get Intl.DisplayNames.languageCodes([type])
-get Intl.DisplayNames.scriptCodes()
+get Intl.DisplayNames.supportedRegionCodesOf([type])
+get Intl.DisplayNames.supportedLanguageCodesOf([type])
+get Intl.DisplayNames.supportedScriptCodes()
 ```
 
 * _regionCode_ is either a [ISO-3166 two letters region code](https://www.iso.org/iso-3166-country-codes.html),
@@ -96,28 +96,28 @@ console.log(dn.script('Kana')); // "片假名"
 To get the list of region codes known by the API:
 ```js
 // Get the list of all region codes known by the API
-console.log(Intl.DisplayNames.regionCodes()); // ["001", "002", ... , "AD", "AE", "AF"...]
+console.log(Intl.DisplayNames.supportedRegionCodesOf()); // ["001", "002", ... , "AD", "AE", "AF"...]
 // Same as above
-console.log(Intl.DisplayNames.regionCodes("all")); // ["001", "002", ... , "AD", "AE", "AF"...]
+console.log(Intl.DisplayNames.supportedRegionCodesOf("all")); // ["001", "002", ... , "AD", "AE", "AF"...]
 // Get the list of three digits (UN M.49) region codes known by the API
-console.log(Intl.DisplayNames.regionCodes("three-digits")); // ["001", "002", ... ]
+console.log(Intl.DisplayNames.supportedRegionCodesOf("three-digits")); // ["001", "002", ... ]
 // Get the list of two letters (ISO 3166-1 alpha-2 ) region codes known by the API
-console.log(Intl.DisplayNames.regionCodes("two-letters")); // ["AD", "AE", "AF"... ]
+console.log(Intl.DisplayNames.supportedRegionCodesOf("two-letters")); // ["AD", "AE", "AF"... ]
 ```
 To get the list of language codes known by the API:
 ```js
 // Get the list of all language codes known by the API
-console.log(Intl.DisplayNames.languageCodes()); // ["aa", "ab", ... , "fil", ...]
+console.log(Intl.DisplayNames.supportedLanguageCodesOf()); // ["aa", "ab", ... , "fil", ...]
 // Same as above
-console.log(Intl.DisplayNames.languageCodes("all")); // ["aa", "ab", ... , "fil", ...]
+console.log(Intl.DisplayNames.supportedLanguageCodesOf("all")); // ["aa", "ab", ... , "fil", ...]
 // Get the list of two letters (ISO 639-1) language codes known by the API
-console.log(Intl.DisplayNames.languageCodes("two-letters")); // ["aa", "ab", ...]
+console.log(Intl.DisplayNames.supportedLanguageCodesOf("two-letters")); // ["aa", "ab", ...]
 // Get the list of three letters (ISO 639-2) language codes known by the API
-console.log(Intl.DisplayNames.languageCodes("three-letters")); // ["aar", "abk", ... , "fil", ...]
+console.log(Intl.DisplayNames.supportedLanguageCodesOf("three-letters")); // ["aar", "abk", ... , "fil", ...]
 ```
 To get the list of script codes known by the API:
 ```js
 // Get the list of all script codes known by the API
-console.log(Intl.DisplayNames.scriptCodes()); // ["Adlm", "Afak", ... ]
+console.log(Intl.DisplayNames.supportedScriptCodes()); // ["Adlm", "Afak", ... ]
 
 ```
