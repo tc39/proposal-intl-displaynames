@@ -64,11 +64,11 @@ contributors: Google, Ecma International
       </p>
     </emu-clause>
 
-    <emu-clause id="sec-Intl.DisplayNames.languageCodes">
-      <h1>Intl.DisplayNames.languageCodes ([ _type_ ])</h1>
+    <emu-clause id="sec-Intl.DisplayNames.supportedLanguageCodesOf">
+      <h1>Intl.DisplayNames.supportedLanguageCodesOf ([ _type_ ])</h1>
 
       <p>
-        When the *languageCodes* method of *%DisplayNames%* is called, the following steps are taken:
+        When the *supportedLanguageCodesOf* method of *%DisplayNames%* is called, the following steps are taken:
       </p>
 
       <emu-alg>
@@ -77,11 +77,11 @@ contributors: Google, Ecma International
       </emu-alg>
     </emu-clause>
 
-    <emu-clause id="sec-Intl.DisplayNames.regionCodes">
-      <h1>Intl.DisplayNames.regionCodes ([ _type_ ])</h1>
+    <emu-clause id="sec-Intl.DisplayNames.supportedRegionCodesOf">
+      <h1>Intl.DisplayNames.supportedRegionCodesOf ([ _type_ ])</h1>
 
       <p>
-        When the *regionCodes* method of *%DisplayNames%* is called, the following steps are taken:
+        When the *supportedRegionCodesOf* method of *%DisplayNames%* is called, the following steps are taken:
       </p>
 
       <emu-alg>
@@ -90,11 +90,11 @@ contributors: Google, Ecma International
       </emu-alg>
     </emu-clause>
 
-    <emu-clause id="sec-Intl.DisplayNames.scriptCodes">
-      <h1>Intl.DisplayNames.scriptCodes ()</h1>
+    <emu-clause id="sec-Intl.DisplayNames.supportedScriptCodes">
+      <h1>Intl.DisplayNames.supportedScriptCodes ()</h1>
 
       <p>
-        When the *scriptCodes* method of *%DisplayNames%* is called, the following steps are taken:
+        When the *supportedScriptCodes* method of *%DisplayNames%* is called, the following steps are taken:
       </p>
 
       <emu-alg>
