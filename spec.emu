@@ -4,20 +4,258 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
 <script src="./spec.js"></script>
 <pre class="metadata">
-title: Proposal Title Goes Here
-stage: -1
-contributors: Your Name Goes Here
+title: Intl.DisplayNames Proposal
+status: proposal
+stage: 0
+location: https://github.com/tc39-transfer/proposal-intl-displaynames
+copyright: true
+contributors: Google, Ecma International
 </pre>
+<emu-biblio href="./biblio.json"></emu-biblio>
+<emu-clause id="segmenter-objects">
+  <h1>DisplayNames Objects</h1>
 
-<emu-clause id="sec-demo-clause">
-  <h1>This is an emu-clause</h1>
-  <p>This is an algorithm:</p>
-  <emu-alg>
-    1. Let _proposal_ be *undefined*.
-    1. If IsAccepted(_proposal_),
-      1. Let _stage_ be *0*.
-    1. Else,
-      1. Let _stage_ be *-1*.
-    1. Return ? ToString(_proposal_).
-  </emu-alg>
+  <emu-clause id="sec-intl-displaynames-constructor">
+    <h1>The Intl.DisplayNames Constructor</h1>
+
+    <p>
+      The DisplayNames constructor is a standard built-in property of the Intl object.</p>
+
+    <emu-clause id="sec-Intl.DisplayNames">
+      <h1>Intl.DisplayNames ([ _locales_ [ , _options_ ]])</h1>
+
+      <p>
+        When the *Intl.DisplayNames* function is called with optional arguments the following steps are taken:
+      </p>
+
+      <emu-alg>
+        1. If NewTarget is *undefined*, throw a *TypeError* exception.
+        1. Let _displayNames_ be ? OrdinaryCreateFromConstructor(NewTarget, `"%DisplayNamesPrototype%"`, « [[InitializedDisplayNames]] »).
+        1. Let _requestedLocales_ be ? CanonicalizeLocaleList(_locales_).
+        1. If _options_ is *undefined*, then
+          1. Let _options_ be ObjectCreate(*null*).
+        1. Else
+          1. Let _options_ be ? ToObject(_options_).
+        1. Let _opt_ be a new Record.
+        1. Let _matcher_ be ? GetOption(_options_, `"localeMatcher"`, `"string"`, &laquo; `"lookup"`, `"best fit"` &raquo;, `"best fit"`).
+        1. Set _opt_.[[localeMatcher]] to _matcher_.
+        1. Let _r_ be ResolveLocale(%DisplayNames%.[[AvailableLocales]], _requestedLocales_, _opt_, %DisplayNames%.[[RelevantExtensionKeys]]).
+        1. Set _displayNames_.[[Locale]] to the value of _r_.[[Locale]].
+        1. Return _displayNames_.
+      </emu-alg>
+    </emu-clause>
+  </emu-clause>
+
+  <emu-clause id="sec-properties-of-intl-displaynames-constructor">
+    <h1>Properties of the Intl.DisplayNames Constructor</h1>
+
+    <p>
+      The Intl.DisplayNames constructor has the following properties:
+    </p>
+
+    <emu-clause id="sec-Intl.DisplayNames.prototype">
+      <h1>Intl.DisplayNames.prototype</h1>
+
+      <p>
+        The value of *Intl.DisplayNames.prototype* is *%DisplayNamesPrototype%*.
+      </p>
+      <p>
+        This property has the attributes { [[Writable]]: *false*, [[Enumerable]]: *false*, [[Configurable]]: *false* }.
+      </p>
+    </emu-clause>
+
+    <emu-clause id="sec-Intl.DisplayNames.supportedLanguageCodesOf">
+      <h1>Intl.DisplayNames.supportedLanguageCodesOf ([ _type_ ])</h1>
+
+      <p>
+        When the *supportedLanguageCodesOf* method of *%DisplayNames%* is called, the following steps are taken:
+      </p>
+
+      <emu-alg>
+        1. Let TBD
+        1. Return TBD
+      </emu-alg>
+    </emu-clause>
+
+    <emu-clause id="sec-Intl.DisplayNames.supportedRegionCodesOf">
+      <h1>Intl.DisplayNames.supportedRegionCodesOf ([ _type_ ])</h1>
+
+      <p>
+        When the *supportedRegionCodesOf* method of *%DisplayNames%* is called, the following steps are taken:
+      </p>
+
+      <emu-alg>
+        1. Let TBD
+        1. Return TBD
+      </emu-alg>
+    </emu-clause>
+
+    <emu-clause id="sec-Intl.DisplayNames.supportedScriptCodes">
+      <h1>Intl.DisplayNames.supportedScriptCodes ()</h1>
+
+      <p>
+        When the *supportedScriptCodes* method of *%DisplayNames%* is called, the following steps are taken:
+      </p>
+
+      <emu-alg>
+        1. Let TBD
+        1. Return TBD
+      </emu-alg>
+    </emu-clause>
+
+    <emu-clause id="sec-Intl.DisplayNames.supportedLocalesOf">
+      <h1>Intl.DisplayNames.supportedLocalesOf ( _locales_ [, _options_ ])</h1>
+
+      <p>
+        When the *supportedLocalesOf* method of *%DisplayNames%* is called, the following steps are taken:
+      </p>
+
+      <emu-alg>
+        1. Let _availableLocales_ be *%DisplayNames%*.[[AvailableLocales]].
+        1. Let _requestedLocales_ be ? CanonicalizeLocaleList(_locales_).
+        1. Return ? SupportedLocales(_availableLocales_, _requestedLocales_, _options_).
+      </emu-alg>
+
+    </emu-clause>
+
+    <emu-clause id="sec-Intl.DisplayNames-internal-slots">
+      <h1>Internal slots</h1>
+
+      <p>
+        The value of the [[AvailableLocales]] internal slot is implementation defined within the constraints described in <emu-xref href="#sec-displaynames-internal-slots"></emu-xref>.
+      </p>
+
+      <p>
+        The value of the [[RelevantExtensionKeys]] internal slot is &laquo;  &raquo;.
+      </p>
+
+    </emu-clause>
+  </emu-clause>
+
+  <emu-clause id="sec-properties-of-intl-displaynames-prototype-object">
+    <h1>Properties of the Intl.DisplayNames Prototype Object</h1>
+
+    <p>
+      The Intl.DisplayNames prototype object, referred to as *%DisplayNamesPrototype%*, is itself an ordinary object. It is not a Intl.DisplayNames instance, does not have an [[InitializedDisplayNames]] internal slot or any of the other internal slots of Intl.DisplayNames instance objects.
+    </p>
+
+    <emu-clause id="sec-Intl.DisplayNames.prototype.constructor">
+      <h1>Intl.DisplayNames.prototype.constructor</h1>
+
+      <p>
+        The initial value of *Intl.DisplayNames.prototype.constructor* is the intrinsic object *%DisplayNames%*.
+      </p>
+    </emu-clause>
+
+    <emu-clause id="sec-Intl.DisplayNames.prototype-@@tostringtag">
+      <h1>Intl.DisplayNames.prototype[ @@toStringTag ]</h1>
+
+      <p>
+        The initial value of the @@toStringTag property is the string value `"Intl.DisplayNames"`.
+      </p>
+      <p>
+        This property has the attributes { [[Writable]]: *false*, [[Enumerable]]: *false*, [[Configurable]]: *true* }.
+      </p>
+    </emu-clause>
+
+    <emu-clause id="sec-Intl.DisplayNames.prototype.language" aoid="Intl.DisplayNames.prototype.language">
+      <h1>Intl.DisplayNames.prototype.language( _languageCode_ )</h1>
+
+      <p>
+        When the *Intl.DisplayNames.prototype.language* is called with an argument _languageCode_, the following steps are taken:
+      </p>
+
+      <emu-alg>
+        1. Let TBD
+        1. Return TBD
+      </emu-alg>
+    </emu-clause>
+
+    <emu-clause id="sec-Intl.DisplayNames.prototype.languageWithRegion" aoid="Intl.DisplayNames.prototype.languagewithregion">
+      <h1>Intl.DisplayNames.prototype.languageWithRegion( _languageCode_ , _regionCode_ )</h1>
+
+      <p>
+        When the *Intl.DisplayNames.prototype.languageWithRegion* is called with two arguments _languageCode_ and _regionCode_, the following steps are taken:
+      </p>
+
+      <emu-alg>
+        1. Let TBD
+        1. Return TBD
+      </emu-alg>
+    </emu-clause>
+
+    <emu-clause id="sec-Intl.DisplayNames.prototype.region" aoid="Intl.DisplayNames.prototype.region">
+      <h1>Intl.DisplayNames.prototype.region( _regionCode_ )</h1>
+
+      <p>
+        When the *Intl.DisplayNames.prototype.region* is called with an argument _regionCode_, the following steps are taken:
+      </p>
+
+      <emu-alg>
+        1. Let TBD
+        1. Return TBD
+      </emu-alg>
+    </emu-clause>
+
+    <emu-clause id="sec-Intl.DisplayNames.prototype.script" aoid="Intl.DisplayNames.prototype.script">
+      <h1>Intl.DisplayNames.prototype.script( _scriptCode_ )</h1>
+
+      <p>
+        When the *Intl.DisplayNames.prototype.script* is called with an argument _scriptCode_, the following steps are taken:
+      </p>
+
+      <emu-alg>
+        1. Let TBD
+        1. Return TBD
+      </emu-alg>
+    </emu-clause>
+
+    <emu-clause id="sec-Intl.DisplayNames.prototype.resolvedOptions">
+      <h1>Intl.DisplayNames.prototype.resolvedOptions ()</h1>
+
+      <p>
+        This function provides access to the locale and options computed during initialization of the object.
+      </p>
+
+      <emu-alg>
+        1. Let _pr_ be the *this* value.
+        1. If Type(_pr_) is not Object or _pr_ does not have an [[InitializedDisplayNames]] internal slot, throw a *TypeError* exception.
+        1. Let _options_ be ! ObjectCreate(%ObjectPrototype%).
+        1. For each row of <emu-xref href="#table-displaynames-resolvedoptions-properties"></emu-xref>, except the header row, in table order, do
+          1. Let _p_ be the Property value of the current row.
+          1. Let _v_ be the value of _pr_'s internal slot whose name is the Internal Slot value of the current row.
+          1. If _v_ is not *undefined*, then
+            1. Perform ! CreateDataPropertyOrThrow(_options_, _p_, _v_).
+        1. Return _options_.
+      </emu-alg>
+
+      <emu-table id="table-displaynames-resolvedoptions-properties">
+        <emu-caption>Resolved Options of DisplayNames Instances</emu-caption>
+        <table class="real-table">
+          <thead>
+            <tr>
+              <th>Internal Slot</th>
+              <th>Property</th>
+            </tr>
+          </thead>
+          <tr>
+            <td>[[Locale]]</td>
+            <td>`"locale"`</td>
+          </tr>
+        </table>
+      </emu-table>
+    </emu-clause>
+
+    <emu-clause id="sec-displaynames-internal-slots">
+    <h1>Internal slots of Intl.DisplayNames Instances</h1>
+
+    <p>
+      Objects that have been successfully initialized as a DisplayNames object also have several internal slots that are computed by the constructor:
+    </p>
+
+    <ul>
+      <li>[[Locale]] is a String value with the language tag of the locale whose localization is used by the display names.</li>
+    </ul>
+
+  </emu-clause>
 </emu-clause>
