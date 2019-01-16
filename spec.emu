@@ -64,45 +64,6 @@ contributors: Google, Ecma International
       </p>
     </emu-clause>
 
-    <emu-clause id="sec-Intl.DisplayNames.supportedLanguageCodesOf">
-      <h1>Intl.DisplayNames.supportedLanguageCodesOf ([ _type_ ])</h1>
-
-      <p>
-        When the *supportedLanguageCodesOf* method of *%DisplayNames%* is called, the following steps are taken:
-      </p>
-
-      <emu-alg>
-        1. Let TBD
-        1. Return TBD
-      </emu-alg>
-    </emu-clause>
-
-    <emu-clause id="sec-Intl.DisplayNames.supportedRegionCodesOf">
-      <h1>Intl.DisplayNames.supportedRegionCodesOf ([ _type_ ])</h1>
-
-      <p>
-        When the *supportedRegionCodesOf* method of *%DisplayNames%* is called, the following steps are taken:
-      </p>
-
-      <emu-alg>
-        1. Let TBD
-        1. Return TBD
-      </emu-alg>
-    </emu-clause>
-
-    <emu-clause id="sec-Intl.DisplayNames.supportedScriptCodes">
-      <h1>Intl.DisplayNames.supportedScriptCodes ()</h1>
-
-      <p>
-        When the *supportedScriptCodes* method of *%DisplayNames%* is called, the following steps are taken:
-      </p>
-
-      <emu-alg>
-        1. Let TBD
-        1. Return TBD
-      </emu-alg>
-    </emu-clause>
-
     <emu-clause id="sec-Intl.DisplayNames.supportedLocalesOf">
       <h1>Intl.DisplayNames.supportedLocalesOf ( _locales_ [, _options_ ])</h1>
 
@@ -158,11 +119,11 @@ contributors: Google, Ecma International
       </p>
     </emu-clause>
 
-    <emu-clause id="sec-Intl.DisplayNames.prototype.language" aoid="Intl.DisplayNames.prototype.language">
-      <h1>Intl.DisplayNames.prototype.language( _languageCode_ )</h1>
+    <emu-clause id="sec-Intl.DisplayNames.prototype.ofLanguage" aoid="Intl.DisplayNames.prototype.ofLanguage">
+      <h1>Intl.DisplayNames.prototype.ofLanguage( _localeBaseName_ )</h1>
 
       <p>
-        When the *Intl.DisplayNames.prototype.language* is called with an argument _languageCode_, the following steps are taken:
+        When the *Intl.DisplayNames.prototype.ofLanguage* is called with an argument _localeBaseName_, the following steps are taken:
       </p>
 
       <emu-alg>
@@ -171,11 +132,11 @@ contributors: Google, Ecma International
       </emu-alg>
     </emu-clause>
 
-    <emu-clause id="sec-Intl.DisplayNames.prototype.languageWithRegion" aoid="Intl.DisplayNames.prototype.languagewithregion">
-      <h1>Intl.DisplayNames.prototype.languageWithRegion( _languageCode_ , _regionCode_ )</h1>
+    <emu-clause id="sec-Intl.DisplayNames.prototype.ofRegion" aoid="Intl.DisplayNames.prototype.ofRegion">
+      <h1>Intl.DisplayNames.prototype.ofRegion( _regionCode_ )</h1>
 
       <p>
-        When the *Intl.DisplayNames.prototype.languageWithRegion* is called with two arguments _languageCode_ and _regionCode_, the following steps are taken:
+        When the *Intl.DisplayNames.prototype.ofRegion* is called with an argument _regionCode_, the following steps are taken:
       </p>
 
       <emu-alg>
@@ -184,24 +145,11 @@ contributors: Google, Ecma International
       </emu-alg>
     </emu-clause>
 
-    <emu-clause id="sec-Intl.DisplayNames.prototype.region" aoid="Intl.DisplayNames.prototype.region">
-      <h1>Intl.DisplayNames.prototype.region( _regionCode_ )</h1>
+    <emu-clause id="sec-Intl.DisplayNames.prototype.ofScript" aoid="Intl.DisplayNames.prototype.ofScript">
+      <h1>Intl.DisplayNames.prototype.ofScript( _scriptCode_ )</h1>
 
       <p>
-        When the *Intl.DisplayNames.prototype.region* is called with an argument _regionCode_, the following steps are taken:
-      </p>
-
-      <emu-alg>
-        1. Let TBD
-        1. Return TBD
-      </emu-alg>
-    </emu-clause>
-
-    <emu-clause id="sec-Intl.DisplayNames.prototype.script" aoid="Intl.DisplayNames.prototype.script">
-      <h1>Intl.DisplayNames.prototype.script( _scriptCode_ )</h1>
-
-      <p>
-        When the *Intl.DisplayNames.prototype.script* is called with an argument _scriptCode_, the following steps are taken:
+        When the *Intl.DisplayNames.prototype.ofScript* is called with an argument _scriptCode_, the following steps are taken:
       </p>
 
       <emu-alg>
