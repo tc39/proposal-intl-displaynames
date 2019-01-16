@@ -19,6 +19,11 @@
       "type": "op",
       "aoid": "SupportedLocales",
       "id": "sec-supportedlocales"
+    },
+    {
+      "type": "clause",
+      "number": "9.1",
+      "id": "sec-internal-slots"
     }
   ]
 }

@@ -30,17 +30,27 @@ contributors: Google, Ecma International
 
       <emu-alg>
         1. If NewTarget is *undefined*, throw a *TypeError* exception.
-        1. Let _displayNames_ be ? OrdinaryCreateFromConstructor(NewTarget, `"%DisplayNamesPrototype%"`, « [[InitializedDisplayNames]] »).
+        1. Let _displayNames_ be ? OrdinaryCreateFromConstructor(NewTarget, `"%DisplayNamesPrototype%"`, « [[InitializedDisplayNames]], [[Locale]], [[Style]], [[Type]], [[Capitalization]], [[Fields]] »).
         1. Let _requestedLocales_ be ? CanonicalizeLocaleList(_locales_).
         1. If _options_ is *undefined*, then
           1. Let _options_ be ObjectCreate(*null*).
         1. Else
           1. Let _options_ be ? ToObject(_options_).
         1. Let _opt_ be a new Record.
+        1. Let _localeData_ be %DisplayNames%.[[LocaleData]].
         1. Let _matcher_ be ? GetOption(_options_, `"localeMatcher"`, `"string"`, &laquo; `"lookup"`, `"best fit"` &raquo;, `"best fit"`).
         1. Set _opt_.[[localeMatcher]] to _matcher_.
         1. Let _r_ be ResolveLocale(%DisplayNames%.[[AvailableLocales]], _requestedLocales_, _opt_, %DisplayNames%.[[RelevantExtensionKeys]]).
+        1. Let _style_ be ? GetOption(_options_, `"style"`, `"string"`, &laquo; `"short"`, `"long"` &raquo;, `"long"`).
+        1. Set _displayNames_.[[Style]] to _style_.
+        1. Let _type_ be ? GetOption(_options_, `"type"`, `"string"`, &laquo; `"standard"`, `"dialect"` &raquo;, `"standard"`).
+        1. Set _displayNames_.[[Type]] to _type_.
+        1. Let _capitalization_ be ? GetOption(_options_, `"capitalization"`, `"string"`, &laquo; `"none"`, `"beginning"`, `"middle"`, `"ui"`, `"standalone"` &raquo;, `"none"`).
+        1. Set _displayNames_.[[Capitalization]] to _capitalization_.
         1. Set _displayNames_.[[Locale]] to the value of _r_.[[Locale]].
+        1. Let _fields_ be ! Get(_localeData_, _dataLocale_).
+        1. Assert: _fields_ is an object (see <emu-xref href="#sec-Intl.DisplayNames-internal-slots"></emu-xref>).
+        1. Set _displayNames_.[[Fields]] to _fields_.
         1. Return _displayNames_.
       </emu-alg>
     </emu-clause>
@@ -83,12 +93,16 @@ contributors: Google, Ecma International
       <h1>Internal slots</h1>
 
       <p>
-        The value of the [[AvailableLocales]] internal slot is implementation defined within the constraints described in <emu-xref href="#sec-displaynames-internal-slots"></emu-xref>.
+        The value of the [[AvailableLocales]] internal slot is implementation defined within the constraints described in <emu-xref href="#sec-internal-slots"></emu-xref>.
       </p>
 
       <p>
         The value of the [[RelevantExtensionKeys]] internal slot is &laquo;  &raquo;.
       </p>
+
+      <emu-note>
+        It is recommended that implementations use the locale data provided by the Common Locale Data Repository (available at <a href="http://cldr.unicode.org/">http://cldr.unicode.org/</a>).
+      </emu-note>
 
     </emu-clause>
   </emu-clause>
@@ -190,19 +204,43 @@ contributors: Google, Ecma International
             <td>[[Locale]]</td>
             <td>`"locale"`</td>
           </tr>
+          <tr>
+            <td>[[Style]]</td>
+            <td>`"style"`</td>
+          </tr>
+          <tr>
+            <td>[[Type]]</td>
+            <td>`"type"`</td>
+          </tr>
+          <tr>
+            <td>[[Capitalization]]</td>
+            <td>`"capitalization"`</td>
+          </tr>
         </table>
       </emu-table>
     </emu-clause>
+  </emu-clause>
 
-    <emu-clause id="sec-displaynames-internal-slots">
-    <h1>Internal slots of Intl.DisplayNames Instances</h1>
+  <emu-clause id="sec-properties-of-intl-displaynames-instances">
+    <h1>Properties of Intl.DisplayNames Instances</h1>
 
     <p>
-      Objects that have been successfully initialized as a DisplayNames object also have several internal slots that are computed by the constructor:
+      Intl.DisplayNames instances are ordinary objects that inherit properties from %DisplayNamesPrototype%.
+    </p>
+
+    <p>
+      Intl.DisplayNames instances have an [[InitializedDisplayNames]] internal slot.
+    </p>
+
+    <p>
+      Intl.DisplayNames instances also have several internal slots that are computed by the constructor:
     </p>
 
     <ul>
-      <li>[[Locale]] is a String value with the language tag of the locale whose localization is used by the display names.</li>
+      <li>[[Locale]] is a String value with the language tag of the locale whose localization is used for formatting.</li>
+      <li>[[Style]] is one of the String values `"long"`, or `"short"`, identifying the display names style used.</li>
+      <li>[[Type]] is one of the String values `"standard"`, or `"dialect"`, identifying the display names type used.</li>
+      <li>[[Capitalization]] is one of the String values `"none"`, `"beginning"`, `"middle"`, `"ui"`, or `"standalone"`, identifying the display names capitalization used.</li>
     </ul>
 
   </emu-clause>
