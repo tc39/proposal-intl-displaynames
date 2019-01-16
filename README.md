@@ -41,45 +41,45 @@ Mozilla already has [vendor specific implementation](https://firefox-source-docs
 To create an Intl.DisplayNames for a locale and get the display name for region, language, or script.
 ```js
 // Get display names in English 
-let dn = new Intl.DisplayNames(['en']);
+let displayNames = new Intl.DisplayNames(['en']);
 // Get region names
-console.log(dn.ofRegion('419')); // "Latin America"
-console.log(dn.ofRegion('BZ')); // "Belize"
-console.log(dn.ofRegion('US')); // "United State"
-console.log(dn.ofRegion('BA')); // "Bosnia & Herzegovina"
-console.log(dn.ofRegion('MM')); // "Myanmar (Burma)"
+console.log(displayNames.ofRegion('419')); // "Latin America"
+console.log(displayNames.ofRegion('BZ')); // "Belize"
+console.log(displayNames.ofRegion('US')); // "United State"
+console.log(displayNames.ofRegion('BA')); // "Bosnia & Herzegovina"
+console.log(displayNames.ofRegion('MM')); // "Myanmar (Burma)"
 
 // Get language names
-console.log(dn.ofLanguage('fr')); // "French"
-console.log(dn.ofLanguage('de')); // "German"
-console.log(dn.ofLanguage('yue')); // "Cantonese"
-console.log(dn.ofLanguage('fr-CA')); // "French (Canada)"
-console.log(dn.ofLanguage('zh-Hant')); // "Chinese (Traditional)"
-console.log(dn.ofLanguage('en-US')); // "English (United States)"
-console.log(dn.ofLanguage('zh-TW')); // "Chinese (Taiwan)"
+console.log(displayNames.ofLanguage('fr')); // "French"
+console.log(displayNames.ofLanguage('de')); // "German"
+console.log(displayNames.ofLanguage('yue')); // "Cantonese"
+console.log(displayNames.ofLanguage('fr-CA')); // "French (Canada)"
+console.log(displayNames.ofLanguage('zh-Hant')); // "Chinese (Traditional)"
+console.log(displayNames.ofLanguage('en-US')); // "English (United States)"
+console.log(displayNames.ofLanguage('zh-TW')); // "Chinese (Taiwan)"
 
 // Get script names
-console.log(dn.ofScript('Latn')); // "Latin"
-console.log(dn.ofScript('Arab')); // "Arabic"
-console.log(dn.ofScript('Kana')); // "Katakana"
+console.log(displayNames.ofScript('Latn')); // "Latin"
+console.log(displayNames.ofScript('Arab')); // "Arabic"
+console.log(displayNames.ofScript('Kana')); // "Katakana"
 
 
 // Get display names in Traditional Chinese
-dn = new Intl.DisplayNames(['zh-Hant']);
+displayNames = new Intl.DisplayNames(['zh-Hant']);
 // Get region names
-console.log(dn.ofRegion('419')); // "拉丁美洲"
-console.log(dn.ofRegion('BZ')); // "貝里斯"
-console.log(dn.ofRegion('US')); // "美國"
-console.log(dn.ofRegion('BA')); // "波士尼亞與赫塞哥維納"
-console.log(dn.ofRegion('MM')); // "緬甸"
+console.log(displayNames.ofRegion('419')); // "拉丁美洲"
+console.log(displayNames.ofRegion('BZ')); // "貝里斯"
+console.log(displayNames.ofRegion('US')); // "美國"
+console.log(displayNames.ofRegion('BA')); // "波士尼亞與赫塞哥維納"
+console.log(displayNames.ofRegion('MM')); // "緬甸"
 
 // Get language names
-console.log(dn.ofLanguage('fr')); // "法文"
-console.log(dn.ofLanguage('zh')); // "中文"
-console.log(dn.ofLanguage('de')); // "德文"
-console.log(dn.ofLanguage('yue')); // "粵語"
+console.log(displayNames.ofLanguage('fr')); // "法文"
+console.log(displayNames.ofLanguage('zh')); // "中文"
+console.log(displayNames.ofLanguage('de')); // "德文"
+console.log(displayNames.ofLanguage('yue')); // "粵語"
 
 // Get script names
-console.log(dn.ofScript('Latn')); // "拉丁文"
-console.log(dn.ofScript('Arab')); // "阿拉伯文"
-console.log(dn.ofScript('Kana')); // "片假名"
+console.log(displayNames.ofScript('Latn')); // "拉丁文"
+console.log(displayNames.ofScript('Arab')); // "阿拉伯文"
+console.log(displayNames.ofScript('Kana')); // "片假名"
