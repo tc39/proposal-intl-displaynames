@@ -28,6 +28,16 @@ or a [three digits UN M49 Geographic Regions](https://unstats.un.org/unsd/method
 * _scriptCode_ is a [ISO-15924 four letters script code](http://unicode.org/iso15924/iso15924-codes.html).
 * _languageCode_ is either a two letters ISO 639-1 language code or a three letters ISO 639-2 language code.
 * _localeBaseName_ is the _languageCode_ ["-" _scriptCode_] ["-" _regionCode_ ] *("-" _variant_ ) subsequence of the unicode_language_id grammar in [UTS 35's Unicode Language and Locale Identifiers grammar](http://unicode.org/reports/tr35/#Unicode_language_identifier).
+* _options_ may have "localeMatcher", "style", "type" and "capitalization" properties.
+  * The value of _style_ could be either "short" or "long" to indicate the length of the display names. For example, ofLanguage("en-US") will return "English (United States)" under "long" style, but "English (US)" under "short" style. The default is "long".
+  * The value of _type_ could be either "standard" or "dialect" to indicate the type of the name. For example, ofLanguage("en-GB") will return "English (United Kingdom)" under "standard" type, but "British English" under "dialect" type. The default is "standard".
+  * The value of _capitalization_ could be either "none", "beginning", "middle", "ui", or "standalone" to indicate how the capitization rule should perform for the context of using the return display name. 
+    * "none": The capitalization context to be used is unknown. 
+    * "beginning": The capitalization context if a display name is to be formatted with capitalization appropriate for the beginning of a sentence.
+    * "middle": The capitalization context if a  display name is to be formatted with capitalization appropriate for the middle of a sentence.
+    * "ui": The capitalization context if a display name is to be formatted with capitalization appropriate for a user-interface list or menu item.
+    * "standalone": The capitalization context if a display name is to be formatted with capitalization appropriate for stand-alone usage such as an isolated name on a page.
+
 ### Authors
 * Frank Tang (@FrankYFTang)
 * Zibi Braniecki (@zbraniecki)
