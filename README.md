@@ -16,7 +16,8 @@ Stage 0
 To get localized names of language, script or region, create a Intl.DisplayName object and call the method by passing in appropriate standard code.
 
 The parameter for Intl.DisplayNames constructor follow other Intl Objects in ECMA402 Standard.
-The first parameter is Locales, the second parameter is an option Object.
+The first parameter is *locales*, which is either a BCP 47 language tag or an array of such language tags ([more information](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_identification_and_negotiation)); the second parameter is an option Object.
+
 ```js
 Intl.DisplayNames([ locales [ , options ]])
 Intl.DisplayNames.prototype.ofLanguage( localeBaseName )
