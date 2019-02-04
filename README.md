@@ -20,24 +20,24 @@ The first parameter is *locales*, which is either a BCP 47 language tag or an ar
 
 ```js
 Intl.DisplayNames([ locales [ , options ]])
-Intl.DisplayNames.prototype.ofLanguage( localeBaseName )
-Intl.DisplayNames.prototype.ofRegion( regionCode )
-Intl.DisplayNames.prototype.ofScript( scriptCode )
+Intl.DisplayNames.prototype.of( codes )
 ```
-* _regionCode_ is either a [ISO-3166 two letters region code](https://www.iso.org/iso-3166-country-codes.html),
+* _options_ may have "localeMatcher", "style", and "type" properties.
+  * The value of _style_ could be either "narrow", "short" or "long" to indicate the length of the display names. For example, ofLanguage("en-US") will return "English (United States)" under "long" style, but "English (US)" under "short" style. The default is "long".
+  * The value of _type_ could be either "region", "script", "language", "currency", "dateField", or "dateSymbol".
+* _codes_ is either a String or an array of string.
+* Intl.DisplayNames.prototype.of( codes ) always return an Array of String, which corresponding to the display name of the _codes_ array.
+* If the type is "region", the String in _codes_ should be _regionCode_. _regionCode_ is either a [ISO-3166 two letters region code](https://www.iso.org/iso-3166-country-codes.html),
 or a [three digits UN M49 Geographic Regions](https://unstats.un.org/unsd/methodology/m49/).
-* _scriptCode_ is a [ISO-15924 four letters script code](http://unicode.org/iso15924/iso15924-codes.html).
-* _languageCode_ is either a two letters ISO 639-1 language code or a three letters ISO 639-2 language code.
-* _localeBaseName_ is the _languageCode_ ["-" _scriptCode_] ["-" _regionCode_ ] *("-" _variant_ ) subsequence of the unicode_language_id grammar in [UTS 35's Unicode Language and Locale Identifiers grammar](http://unicode.org/reports/tr35/#Unicode_language_identifier).
-* _options_ may have "localeMatcher", "style", "type" and "capitalization" properties.
-  * The value of _style_ could be either "short" or "long" to indicate the length of the display names. For example, ofLanguage("en-US") will return "English (United States)" under "long" style, but "English (US)" under "short" style. The default is "long".
-  * The value of _type_ could be either "standard" or "dialect" to indicate the type of the name. For example, ofLanguage("en-GB") will return "English (United Kingdom)" under "standard" type, but "British English" under "dialect" type. The default is "standard".
-  * The value of _capitalization_ could be either "none", "beginning", "middle", "ui", or "standalone" to indicate how the capitization rule should perform for the context of using the return display name. 
-    * "none": The capitalization context to be used is unknown. 
-    * "beginning": The capitalization context if a display name is to be formatted with capitalization appropriate for the beginning of a sentence.
-    * "middle": The capitalization context if a  display name is to be formatted with capitalization appropriate for the middle of a sentence.
-    * "ui": The capitalization context if a display name is to be formatted with capitalization appropriate for a user-interface list or menu item.
-    * "standalone": The capitalization context if a display name is to be formatted with capitalization appropriate for stand-alone usage such as an isolated name on a page.
+* If the type is "script", the String in _codes_ should be _scriptCode_. _scriptCode_ is a [ISO-15924 four letters script code](http://unicode.org/iso15924/iso15924-codes.html).
+* If the type is "language", the String in _codes_ should be _localeBaseName_. _localeBaseName_ is the _languageCode_ ["-" _scriptCode_] ["-" _regionCode_ ] *("-" _variant_ ) subsequence of the unicode_language_id grammar in [UTS 35's Unicode Language and Locale Identifiers grammar](http://unicode.org/reports/tr35/#Unicode_language_identifier). _languageCode_ is either a two letters ISO 639-1 language code or a three letters ISO 639-2 language code.
+* If the type is "currency", the String in _codes_ should be _currencyCode_. _currencyCode_ is a [3-letter ISO 4217 currency code](https://www.iso.org/iso-4217-currency-codes.html).
+* If the type is "dateField", the String in _codes_ should be one of the following: "era", "year", "quarter", "month", "weekOfYear", "weekday", "day", "dayperiod", "hour", "minute", "second", "zone".
+* If the type is "dateSymbol", the String in _codes_ should be one of the following: "sunday",   "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december", "q1", "q2", "q3", "q4", "am", "pm".
+
+  
+
+
 
 ### Authors
 * Frank Tang (@FrankYFTang)
@@ -51,46 +51,43 @@ Mozilla already has [vendor specific implementation](https://firefox-source-docs
 ### Usage
 To create an Intl.DisplayNames for a locale and get the display name for region, language, or script.
 ```js
-// Get display names in English 
-let displayNames = new Intl.DisplayNames(['en']);
+// Get display names of region in English 
+let regionDisplayNames = new Intl.DisplayNames(['en'], {type: 'region'});
 // Get region names
-console.log(displayNames.ofRegion('419')); // "Latin America"
-console.log(displayNames.ofRegion('BZ')); // "Belize"
-console.log(displayNames.ofRegion('US')); // "United State"
-console.log(displayNames.ofRegion('BA')); // "Bosnia & Herzegovina"
-console.log(displayNames.ofRegion('MM')); // "Myanmar (Burma)"
+console.log(regionDisplayNames.of('419')); // ["Latin America"]
+console.log(regionDisplayNames.of(['BZ', 'US', 'BA', 'MM'])); 
+// ["Belize", "United State", "Bosnia & Herzegovina", "Myanmar (Burma)"]
 
-// Get language names
-console.log(displayNames.ofLanguage('fr')); // "French"
-console.log(displayNames.ofLanguage('de')); // "German"
-console.log(displayNames.ofLanguage('yue')); // "Cantonese"
-console.log(displayNames.ofLanguage('fr-CA')); // "French (Canada)"
-console.log(displayNames.ofLanguage('zh-Hant')); // "Chinese (Traditional)"
-console.log(displayNames.ofLanguage('en-US')); // "English (United States)"
-console.log(displayNames.ofLanguage('zh-TW')); // "Chinese (Taiwan)"
-
-// Get script names
-console.log(displayNames.ofScript('Latn')); // "Latin"
-console.log(displayNames.ofScript('Arab')); // "Arabic"
-console.log(displayNames.ofScript('Kana')); // "Katakana"
-
-
-// Get display names in Traditional Chinese
-displayNames = new Intl.DisplayNames(['zh-Hant']);
+// Get display names of region in Traditional Chinese
+regionDisplayNames = new Intl.DisplayNames(['zh-Hant'], {type: 'region'});
 // Get region names
-console.log(displayNames.ofRegion('419')); // "拉丁美洲"
-console.log(displayNames.ofRegion('BZ')); // "貝里斯"
-console.log(displayNames.ofRegion('US')); // "美國"
-console.log(displayNames.ofRegion('BA')); // "波士尼亞與赫塞哥維納"
-console.log(displayNames.ofRegion('MM')); // "緬甸"
+console.log(regionDisplayNames.of('419')); // ["拉丁美洲"]
+console.log(regionDisplayNames.of(['BZ', 'US', 'BA', 'MM'])); 
+// ["貝里斯", "美國", "波士尼亞與赫塞哥維納", "緬甸"]
 
+// Get display names of language in English 
+let languageDisplayNames = new Intl.DisplayNames(['en'], {type: 'language'});
 // Get language names
-console.log(displayNames.ofLanguage('fr')); // "法文"
-console.log(displayNames.ofLanguage('zh')); // "中文"
-console.log(displayNames.ofLanguage('de')); // "德文"
-console.log(displayNames.ofLanguage('yue')); // "粵語"
+console.log(languageDisplayNames.of(['fr', 'de', 'yue', 'fr-CA'])); 
+// ["French", "German", "Cantonese", "French (Canada)"]
+console.log(languageDisplayNames.of(['zh-Hant', 'en-US', 'zh-TW']));
+// ["Chinese (Traditional)", "English (United States)", "Chinese (Taiwan)"]
 
+// Get display names of language in Traditional Chinese 
+languageDisplayNames = new Intl.DisplayNames(['zh-Hant'], {type: 'language'});
+// Get language names
+console.log(languageDisplayNames.of(['fr', 'zh', 'de', 'yue'])); 
+// ["法文", "中文", "德文", "粵語"]
+
+// Get display names of script in English 
+let scriptDisplayNames = new Intl.DisplayNames(['en'], {type: 'script'});
 // Get script names
-console.log(displayNames.ofScript('Latn')); // "拉丁文"
-console.log(displayNames.ofScript('Arab')); // "阿拉伯文"
-console.log(displayNames.ofScript('Kana')); // "片假名"
+console.log(scriptDisplayNames.of(['Latn', 'Arab', 'Kana'])); 
+// ["Latin", "Arabic", "Katakana"]
+
+// Get display names of script in Traditional Chinese 
+scriptDisplayNames = new Intl.DisplayNames(['zh-Hant'], {type: 'script'});
+console.log(scriptDisplayNames.of(['Latn', 'Arab', 'Kana'])); 
+// ["拉丁文", "阿拉伯文", "片假名"]
+
+
