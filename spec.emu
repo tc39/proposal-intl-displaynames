@@ -18,57 +18,10 @@ contributors: Google, Ecma International
   <emu-clause id="sec-intl-displaynames-abstracts">
     <h1>Abstract Operations for DisplayNames Objects</h1>
 
-    <emu-clause id="sec-codetolanguagename" aoid="CodeToLanguageName">
-      <h1>CodeToLanguageName ( _languageCode_ )</h1>
+    <emu-clause id="sec-isvalidcodefordatefield" aoid="IsValidCodeForDateField">
+      <h1>IsValidCodeForDateField ( _code_ )</h1>
       <p>
-        The CodeToLanguageName abstract operation is called with argument _languageCode_.
-        The following algorithm refers to <a href="https://www.unicode.org/reports/tr35/#Identifiers">UTS 35's Unicode Language and Locale Identifiers grammar</a>.
-      </p>
-      <emu-alg>
-        1. If _languageCode_ does not match the `unicode_language_id` production, throw a *RangeError* exception.
-        1. TBW
-      </emu-alg>
-    </emu-clause>
-
-    <emu-clause id="sec-codetoregionname" aoid="CodeToRegionName">
-      <h1>CodeToRegionName ( _regionCode_ )</h1>
-      <p>
-        The CodeToRegionName abstract operation is called with argument _regionCode_.
-        The following algorithm refers to <a href="https://www.unicode.org/reports/tr35/#Identifiers">UTS 35's Unicode Language and Locale Identifiers grammar</a>.
-      </p>
-      <emu-alg>
-        1. If _regionCode_ does not match the `unicode_region_subtag` production, throw a *RangeError* exception.
-        1. TBW
-      </emu-alg>
-    </emu-clause>
-
-    <emu-clause id="sec-codetoscriptname" aoid="CodeToScriptName">
-      <h1>CodeToScriptName ( _scriptCode_ )</h1>
-      <p>
-        The CodeToScriptName abstract operation is called with argument _scriptCode_.
-        The following algorithm refers to <a href="https://www.unicode.org/reports/tr35/#Identifiers">UTS 35's Unicode Language and Locale Identifiers grammar</a>.
-      </p>
-      <emu-alg>
-        1. If _scriptCode_ does not match the `unicode_script_subtag` production, throw a *RangeError* exception.
-        1. TBW
-      </emu-alg>
-    </emu-clause>
-
-    <emu-clause id="sec-codetocurrencyname" aoid="CodeToCurrencyName">
-      <h1>CodeToCurrencyName ( _currencyCode_ )</h1>
-      <p>
-        The CodeToCurrencyName abstract operation is called with argument _currencyCode_.
-      </p>
-      <emu-alg>
-        1. If the result of IsWellFormedCurrencyCode(_currencyCode_) is *false*, throw a *RangeError* exception.
-        1. TBW
-      </emu-alg>
-    </emu-clause>
-
-    <emu-clause id="sec-isvaliddatefield" aoid="IsValidDateField">
-      <h1>IsValidDateField ( _code_ )</h1>
-      <p>
-        The IsValidDateField abstract operation verifies that the given _code_ is valid.
+        The IsValidCodeForDateField abstract operation verifies that the given _code_ is valid.
       </p>
       <emu-alg>
         1. If _code_ is in the following list, return *true*.
@@ -90,21 +43,10 @@ contributors: Google, Ecma International
       </emu-alg>
     </emu-clause>
 
-    <emu-clause id="sec-codetodatefieldname" aoid="CodeToDateFieldName">
-      <h1>CodeToDateFieldName ( _code_ )</h1>
+    <emu-clause id="sec-isvalidcodefordatesymbol" aoid="IsValidCodeForDateSymbol">
+      <h1>IsValidCodeForDateSymbol ( _code_ )</h1>
       <p>
-        The CodeToDateFieldName abstract operation is called with argument _code_
-      </p>
-      <emu-alg>
-        1. If the result of IsValidDateField(_code_) is *false*, throw a *RangeError* exception.
-        1. TBW
-      </emu-alg>
-    </emu-clause>
-
-    <emu-clause id="sec-isvaliddatesymbol" aoid="IsValidDateSymbol">
-      <h1>IsValidDateSymbol ( _code_ )</h1>
-      <p>
-        The IsValidDateSymbol abstract operation verifies that the given _code_ is valid.
+        The IsValidCodeForDateSymbol abstract operation verifies that the given _code_ is valid.
       </p>
       <emu-alg>
         1. If _code_ is in the following list, return *true*.
@@ -139,35 +81,34 @@ contributors: Google, Ecma International
       </emu-alg>
     </emu-clause>
 
-    <emu-clause id="sec-codetodatesymbolname" aoid="CodeToDateSymbolName">
-      <h1>CodeToDateSymbolName ( _code_ )</h1>
+    <emu-clause id="sec-isvalidcodefordisplaynames" aoid="IsValidCodeForDisplayNames">
+      <h1>IsValidCodeForDisplayNames ( _type_,  _code_ )</h1>
       <p>
-        The CodeToDateSymbolName abstract operation is called with argument _code_
+        The IsValidCodeForDisplayNames abstract operation is called with arguments _type_, and _code_.
+        The following algorithm refers to <a href="https://www.unicode.org/reports/tr35/#Identifiers">UTS 35's Unicode Language and Locale Identifiers grammar</a>.
       </p>
       <emu-alg>
-        1. If the result of IsValidDateSymbol(_code_) is *false*, throw a *RangeError* exception.
-        1. TBW
-      </emu-alg>
-    </emu-clause>
-
-    <emu-clause id="sec-codetoname" aoid="CodeToName">
-      <h1>CodeToName ( _type_,  _code_ )</h1>
-      <p>
-        The CodeToName abstract operation is called with arguments _type_, _code_
-      </p>
-      <emu-alg>
-        1. If _type_ is `"language"`
-          1. Return ? CodeToLanguageName( _code_ ).
-        1. If _type_ is `"region"`
-          1. Return ? CodeToRegionName( _code_ ).
-        1. If _type_ is `"script"`
-          1. Return ? CodeToScriptName( _code_ ).
-        1. If _type_ is `"currency"`
-          1. Return ? CodeToCurrencyName( _code_ ).
+        1. If _type_ is `"language"`, then
+          1. If _code_ matches the `unicode_language_id` production, then
+            1. Return *true*.
+          1. Else,
+            1. Return *false*.
+        1. If _type_ is `"region"`, then
+          1. If _code_ matches the `unicode_region_subtag` production, then
+            1. Return *true*.
+          1. Else,
+            1. Return *false*.
+        1. If _type_ is `"script"`, then
+          1. If _code_ matches the `unicode_script_subtag` production, then
+            1. Return *true*.
+          1. Else,
+            1. Return *false*.
+        1. If _type_ is `"currency"`, then
+          1. Return ! IsWellFormedCurrencyCode(_code_).
         1. If _type_ is `"dateField"`
-          1. Return ? CodeToDateFieldName( _code_ ).
+          1. Return ! IsValidCodeForDateField(_code_).
         1. Assert: _type_ is `"dateSymbol"`
-        1. Return ? CodeToDateSymbolName( _code_ ).
+        1. Return IsValidCodeForDateSymbol(_code_).
       </emu-alg>
     </emu-clause>
 
@@ -204,8 +145,10 @@ contributors: Google, Ecma International
         1. Let _type_ be ? GetOption(_options_, `"type"`, `"string"`, &laquo; `"language"`, `"region"`, `"script"`, `"currency"`, `"dateField"`, `"dateSymbol"` &raquo;, `"language"`).
         1. Set _displayNames_.[[Type]] to _type_.
         1. Set _displayNames_.[[Locale]] to the value of _r_.[[Locale]].
-        1. Let _fields_ be ! Get(_localeData_, _dataLocale_).
-        1. Assert: _fields_ is an object (see <emu-xref href="#sec-Intl.DisplayNames-internal-slots"></emu-xref>).
+        1. Let _dataLocale_ be _r_.[[dataLocale]].
+        1. Let _dataLocaleData_ be _localeData_.[[_dataLocale_]].
+        1. Let _dataLocaleTypes_ be _dataLocaleData_.[[_type_]].
+        1. Let _fields_ be dataLocaleTypes.[[_style_]].
         1. Set _displayNames_.[[Fields]] to _fields_.
         1. Return _displayNames_.
       </emu-alg>
@@ -314,7 +257,9 @@ contributors: Google, Ecma International
             1. Let _kCode_ be ? Get(_O_, _Pk_).
             1. If Type(_kCode_) is not String or Object, throw a *TypeError* exception.
             1. Let _code_ be ? ToString(_kCode_).
-            1. Let _name_ be ? CodeToName( _displayNames_.[[Type]], _code_).
+            1. If the result of ! IsValidCodeForDisplayNames(_displayNames_.[[Type]], _code_) is *false*, throw a *RangeError* exception.
+            1. Let _fields_ be _displayNames_.[[Fields]].
+            1. Let _name_ be _fields_[[_code_]].
             1. Perform ! CreateDataProperty(_result_, ! ToString(_k_), _name_).
           1. Increase _k_ by 1.
         1. Return _result_.
