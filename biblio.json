@@ -12,6 +12,11 @@
     },
     {
       "type": "op",
+      "aoid": "IsWellFormedCurrencyCode",
+      "id": "sec-iswellformedcurrencycode"
+    },
+    {
+      "type": "op",
       "aoid": "CanonicalizeLocaleList",
       "id": "sec-canonicalizelocalelist"
     },

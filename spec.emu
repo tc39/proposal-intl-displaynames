@@ -6,14 +6,172 @@
 <pre class="metadata">
 title: Intl.DisplayNames Proposal
 status: proposal
-stage: 0
+stage: 1
 location: https://github.com/tc39-transfer/proposal-intl-displaynames
 copyright: true
 contributors: Google, Ecma International
 </pre>
 <emu-biblio href="./biblio.json"></emu-biblio>
-<emu-clause id="segmenter-objects">
+<emu-clause id="intl-displaynames-objects">
   <h1>DisplayNames Objects</h1>
+
+  <emu-clause id="sec-intl-displaynames-abstracts">
+    <h1>Abstract Operations for DisplayNames Objects</h1>
+
+    <emu-clause id="sec-codetolanguagename" aoid="CodeToLanguageName">
+      <h1>CodeToLanguageName ( _languageCode_ )</h1>
+      <p>
+        The CodeToLanguageName abstract operation is called with argument _languageCode_.
+        The following algorithm refers to <a href="https://www.unicode.org/reports/tr35/#Identifiers">UTS 35's Unicode Language and Locale Identifiers grammar</a>.
+      </p>
+      <emu-alg>
+        1. If _languageCode_ does not match the `unicode_language_id` production, throw a *RangeError* exception.
+        1. TBW
+      </emu-alg>
+    </emu-clause>
+
+    <emu-clause id="sec-codetoregionname" aoid="CodeToRegionName">
+      <h1>CodeToRegionName ( _regionCode_ )</h1>
+      <p>
+        The CodeToRegionName abstract operation is called with argument _regionCode_.
+        The following algorithm refers to <a href="https://www.unicode.org/reports/tr35/#Identifiers">UTS 35's Unicode Language and Locale Identifiers grammar</a>.
+      </p>
+      <emu-alg>
+        1. If _regionCode_ does not match the `unicode_region_subtag` production, throw a *RangeError* exception.
+        1. TBW
+      </emu-alg>
+    </emu-clause>
+
+    <emu-clause id="sec-codetoscriptname" aoid="CodeToScriptName">
+      <h1>CodeToScriptName ( _scriptCode_ )</h1>
+      <p>
+        The CodeToScriptName abstract operation is called with argument _scriptCode_.
+        The following algorithm refers to <a href="https://www.unicode.org/reports/tr35/#Identifiers">UTS 35's Unicode Language and Locale Identifiers grammar</a>.
+      </p>
+      <emu-alg>
+        1. If _scriptCode_ does not match the `unicode_script_subtag` production, throw a *RangeError* exception.
+        1. TBW
+      </emu-alg>
+    </emu-clause>
+
+    <emu-clause id="sec-codetocurrencyname" aoid="CodeToCurrencyName">
+      <h1>CodeToCurrencyName ( _currencyCode_ )</h1>
+      <p>
+        The CodeToCurrencyName abstract operation is called with argument _currencyCode_.
+      </p>
+      <emu-alg>
+        1. If the result of IsWellFormedCurrencyCode(_currencyCode_) is *false*, throw a *RangeError* exception.
+        1. TBW
+      </emu-alg>
+    </emu-clause>
+
+    <emu-clause id="sec-isvaliddatefield" aoid="IsValidDateField">
+      <h1>IsValidDateField ( _code_ )</h1>
+      <p>
+        The IsValidDateField abstract operation verifies that the given _code_ is valid.
+      </p>
+      <emu-alg>
+        1. If _code_ is in the following list, return *true*.
+        <ul>
+          <li>era</li>
+          <li>year</li>
+          <li>quarter</li>
+          <li>month</li>
+          <li>weekOfYear</li>
+          <li>weekday</li>
+          <li>day</li>
+          <li>dayperiod</li>
+          <li>hour</li>
+          <li>minute</li>
+          <li>second</li>
+          <li>zone</li>
+        </ul>
+        1. Return *false*.
+      </emu-alg>
+    </emu-clause>
+
+    <emu-clause id="sec-codetodatefieldname" aoid="CodeToDateFieldName">
+      <h1>CodeToDateFieldName ( _code_ )</h1>
+      <p>
+        The CodeToDateFieldName abstract operation is called with argument _code_
+      </p>
+      <emu-alg>
+        1. If the result of IsValidDateField(_code_) is *false*, throw a *RangeError* exception.
+        1. TBW
+      </emu-alg>
+    </emu-clause>
+
+    <emu-clause id="sec-isvaliddatesymbol" aoid="IsValidDateSymbol">
+      <h1>IsValidDateSymbol ( _code_ )</h1>
+      <p>
+        The IsValidDateSymbol abstract operation verifies that the given _code_ is valid.
+      </p>
+      <emu-alg>
+        1. If _code_ is in the following list, return *true*.
+        <ul>
+          <li>sunday</li>
+          <li>monday</li>
+          <li>tuesday</li>
+          <li>wednesday</li>
+          <li>thursday</li>
+          <li>friday</li>
+          <li>saturday</li>
+          <li>january</li>
+          <li>february</li>
+          <li>march</li>
+          <li>april</li>
+          <li>may</li>
+          <li>june</li>
+          <li>july</li>
+          <li>august</li>
+          <li>september</li>
+          <li>october</li>
+          <li>november</li>
+          <li>december</li>
+          <li>q1</li>
+          <li>q2</li>
+          <li>q3</li>
+          <li>q4</li>
+          <li>am</li>
+          <li>pm</li>
+        </ul>
+        1. Return *false*.
+      </emu-alg>
+    </emu-clause>
+
+    <emu-clause id="sec-codetodatesymbolname" aoid="CodeToDateSymbolName">
+      <h1>CodeToDateSymbolName ( _code_ )</h1>
+      <p>
+        The CodeToDateSymbolName abstract operation is called with argument _code_
+      </p>
+      <emu-alg>
+        1. If the result of IsValidDateSymbol(_code_) is *false*, throw a *RangeError* exception.
+        1. TBW
+      </emu-alg>
+    </emu-clause>
+
+    <emu-clause id="sec-codetoname" aoid="CodeToName">
+      <h1>CodeToName ( _type_,  _code_ )</h1>
+      <p>
+        The CodeToName abstract operation is called with arguments _type_, _code_
+      </p>
+      <emu-alg>
+        1. If _type_ is `"language"`
+          1. Return ? CodeToLanguageName( _code_ ).
+        1. If _type_ is `"region"`
+          1. Return ? CodeToRegionName( _code_ ).
+        1. If _type_ is `"script"`
+          1. Return ? CodeToScriptName( _code_ ).
+        1. If _type_ is `"currency"`
+          1. Return ? CodeToCurrencyName( _code_ ).
+        1. If _type_ is `"dateField"`
+          1. Return ? CodeToDateFieldName( _code_ ).
+        1. Assert: _type_ is `"dateSymbol"`
+        1. Return ? CodeToDateSymbolName( _code_ ).
+      </emu-alg>
+    </emu-clause>
+
+  </emu-clause>
 
   <emu-clause id="sec-intl-displaynames-constructor">
     <h1>The Intl.DisplayNames Constructor</h1>
@@ -30,7 +188,7 @@ contributors: Google, Ecma International
 
       <emu-alg>
         1. If NewTarget is *undefined*, throw a *TypeError* exception.
-        1. Let _displayNames_ be ? OrdinaryCreateFromConstructor(NewTarget, `"%DisplayNamesPrototype%"`, « [[InitializedDisplayNames]], [[Locale]], [[Style]], [[Type]], [[Capitalization]], [[Fields]] »).
+        1. Let _displayNames_ be ? OrdinaryCreateFromConstructor(NewTarget, `"%DisplayNamesPrototype%"`, « [[InitializedDisplayNames]], [[Locale]], [[Style]], [[Type]], [[Fields]] »).
         1. Let _requestedLocales_ be ? CanonicalizeLocaleList(_locales_).
         1. If _options_ is *undefined*, then
           1. Let _options_ be ObjectCreate(*null*).
@@ -41,12 +199,10 @@ contributors: Google, Ecma International
         1. Let _matcher_ be ? GetOption(_options_, `"localeMatcher"`, `"string"`, &laquo; `"lookup"`, `"best fit"` &raquo;, `"best fit"`).
         1. Set _opt_.[[localeMatcher]] to _matcher_.
         1. Let _r_ be ResolveLocale(%DisplayNames%.[[AvailableLocales]], _requestedLocales_, _opt_, %DisplayNames%.[[RelevantExtensionKeys]]).
-        1. Let _style_ be ? GetOption(_options_, `"style"`, `"string"`, &laquo; `"short"`, `"long"` &raquo;, `"long"`).
+        1. Let _style_ be ? GetOption(_options_, `"style"`, `"string"`, &laquo; `"narrow"`, `"short"`, `"long"` &raquo;, `"long"`).
         1. Set _displayNames_.[[Style]] to _style_.
-        1. Let _type_ be ? GetOption(_options_, `"type"`, `"string"`, &laquo; `"standard"`, `"dialect"` &raquo;, `"standard"`).
+        1. Let _type_ be ? GetOption(_options_, `"type"`, `"string"`, &laquo; `"language"`, `"region"`, `"script"`, `"currency"`, `"dateField"`, `"dateSymbol"` &raquo;, `"language"`).
         1. Set _displayNames_.[[Type]] to _type_.
-        1. Let _capitalization_ be ? GetOption(_options_, `"capitalization"`, `"string"`, &laquo; `"none"`, `"beginning"`, `"middle"`, `"ui"`, `"standalone"` &raquo;, `"none"`).
-        1. Set _displayNames_.[[Capitalization]] to _capitalization_.
         1. Set _displayNames_.[[Locale]] to the value of _r_.[[Locale]].
         1. Let _fields_ be ! Get(_localeData_, _dataLocale_).
         1. Assert: _fields_ is an object (see <emu-xref href="#sec-Intl.DisplayNames-internal-slots"></emu-xref>).
@@ -133,42 +289,35 @@ contributors: Google, Ecma International
       </p>
     </emu-clause>
 
-    <emu-clause id="sec-Intl.DisplayNames.prototype.ofLanguage" aoid="Intl.DisplayNames.prototype.ofLanguage">
-      <h1>Intl.DisplayNames.prototype.ofLanguage( _localeBaseName_ )</h1>
+    <emu-clause id="sec-Intl.DisplayNames.prototype.of" aoid="Intl.DisplayNames.prototype.of">
+      <h1>Intl.DisplayNames.prototype.of( _codes_ )</h1>
 
       <p>
-        When the *Intl.DisplayNames.prototype.ofLanguage* is called with an argument _localeBaseName_, the following steps are taken:
+        When the *Intl.DisplayNames.prototype.of* is called with an argument _codes_, the following steps are taken:
       </p>
 
       <emu-alg>
-        1. Let TBD
-        1. Return TBD
-      </emu-alg>
-    </emu-clause>
-
-    <emu-clause id="sec-Intl.DisplayNames.prototype.ofRegion" aoid="Intl.DisplayNames.prototype.ofRegion">
-      <h1>Intl.DisplayNames.prototype.ofRegion( _regionCode_ )</h1>
-
-      <p>
-        When the *Intl.DisplayNames.prototype.ofRegion* is called with an argument _regionCode_, the following steps are taken:
-      </p>
-
-      <emu-alg>
-        1. Let TBD
-        1. Return TBD
-      </emu-alg>
-    </emu-clause>
-
-    <emu-clause id="sec-Intl.DisplayNames.prototype.ofScript" aoid="Intl.DisplayNames.prototype.ofScript">
-      <h1>Intl.DisplayNames.prototype.ofScript( _scriptCode_ )</h1>
-
-      <p>
-        When the *Intl.DisplayNames.prototype.ofScript* is called with an argument _scriptCode_, the following steps are taken:
-      </p>
-
-      <emu-alg>
-        1. Let TBD
-        1. Return TBD
+        1. Let _displayNames_ be *this* value.
+        1. If Type(_displayNames_) is not Object, throw a *TypeError* exception.
+        1. If _displayNames_ does not have an [[InitializedDisplayNames]] internal slot, throw a *TypeError* exception.
+        1. Let _result_ be ArrayCreate(0).
+        1. If Type(_codes_) is String, then
+          1. Let _O_ be CreateArrayFromList(&laquo; _codes_ &raquo;).
+        1. Else,
+          1. Let _O_ be ? ToObject(_codes_).
+        1. Let _len_ be ? ToLength(? Get(_O_, `"length"`)).
+        1. Let _k_ be 0.
+        1. Repeat, while _k_ &lt; _len_
+          1. Let _Pk_ be ToString(_k_).
+          1. Let _kPresent_ be ? HasProperty(_O_, _Pk_).
+          1. If _kPresent_ is *true*, then
+            1. Let _kCode_ be ? Get(_O_, _Pk_).
+            1. If Type(_kCode_) is not String or Object, throw a *TypeError* exception.
+            1. Let _code_ be ? ToString(_kCode_).
+            1. Let _name_ be ? CodeToName( _displayNames_.[[Type]], _code_).
+            1. Perform ! CreateDataProperty(_result_, ! ToString(_k_), _name_).
+          1. Increase _k_ by 1.
+        1. Return _result_.
       </emu-alg>
     </emu-clause>
 
@@ -212,10 +361,6 @@ contributors: Google, Ecma International
             <td>[[Type]]</td>
             <td>`"type"`</td>
           </tr>
-          <tr>
-            <td>[[Capitalization]]</td>
-            <td>`"capitalization"`</td>
-          </tr>
         </table>
       </emu-table>
     </emu-clause>
@@ -238,9 +383,8 @@ contributors: Google, Ecma International
 
     <ul>
       <li>[[Locale]] is a String value with the language tag of the locale whose localization is used for formatting.</li>
-      <li>[[Style]] is one of the String values `"long"`, or `"short"`, identifying the display names style used.</li>
-      <li>[[Type]] is one of the String values `"standard"`, or `"dialect"`, identifying the display names type used.</li>
-      <li>[[Capitalization]] is one of the String values `"none"`, `"beginning"`, `"middle"`, `"ui"`, or `"standalone"`, identifying the display names capitalization used.</li>
+      <li>[[Style]] is one of the String values `"narrow"`, `"short"`, or `"long"`, identifying the display names style used.</li>
+      <li>[[Type]] is one of the String values `"language"`, `"region"`, `"script"`, `"currency"`, `"dateField"`, or `"dateSymbol"`, identifying the type of the display names requested.</li>
     </ul>
 
   </emu-clause>
