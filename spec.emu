@@ -18,7 +18,7 @@ contributors: Google, Ecma International
   <emu-clause id="sec-intl-displaynames-abstracts">
     <h1>Abstract Operations for DisplayNames Objects</h1>
 
-    <emu-clause id="sec-code-to-language-name" aoid="CodeToLanguageName">
+    <emu-clause id="sec-codetolanguagename" aoid="CodeToLanguageName">
       <h1>CodeToLanguageName ( _languageCode_ )</h1>
       <p>
         The CodeToLanguageName abstract operation is called with argument _languageCode_.
@@ -30,7 +30,7 @@ contributors: Google, Ecma International
       </emu-alg>
     </emu-clause>
 
-    <emu-clause id="sec-code-to-region-name" aoid="CodeToRegionName">
+    <emu-clause id="sec-codetoregionname" aoid="CodeToRegionName">
       <h1>CodeToRegionName ( _regionCode_ )</h1>
       <p>
         The CodeToRegionName abstract operation is called with argument _regionCode_.
@@ -42,7 +42,7 @@ contributors: Google, Ecma International
       </emu-alg>
     </emu-clause>
 
-    <emu-clause id="sec-code-to-script-name" aoid="CodeToScriptName">
+    <emu-clause id="sec-codetoscriptname" aoid="CodeToScriptName">
       <h1>CodeToScriptName ( _scriptCode_ )</h1>
       <p>
         The CodeToScriptName abstract operation is called with argument _scriptCode_.
@@ -54,7 +54,7 @@ contributors: Google, Ecma International
       </emu-alg>
     </emu-clause>
 
-    <emu-clause id="sec-code-to-currency-name" aoid="CodeToCurrencyName">
+    <emu-clause id="sec-codetocurrencyname" aoid="CodeToCurrencyName">
       <h1>CodeToCurrencyName ( _currencyCode_ )</h1>
       <p>
         The CodeToCurrencyName abstract operation is called with argument _currencyCode_.
@@ -65,7 +65,7 @@ contributors: Google, Ecma International
       </emu-alg>
     </emu-clause>
 
-    <emu-clause id="sec-is-valid-date-field" aoid="IsValidDateField">
+    <emu-clause id="sec-isvaliddatefield" aoid="IsValidDateField">
       <h1>IsValidDateField ( _code_ )</h1>
       <p>
         The IsValidDateField abstract operation verifies that the given _code_ is valid.
@@ -90,7 +90,7 @@ contributors: Google, Ecma International
       </emu-alg>
     </emu-clause>
 
-    <emu-clause id="sec-code-to-date-field-name" aoid="CodeToDateFieldName">
+    <emu-clause id="sec-codetodatefieldname" aoid="CodeToDateFieldName">
       <h1>CodeToDateFieldName ( _code_ )</h1>
       <p>
         The CodeToDateFieldName abstract operation is called with argument _code_
@@ -101,7 +101,7 @@ contributors: Google, Ecma International
       </emu-alg>
     </emu-clause>
 
-    <emu-clause id="sec-is-valid-date-symbol" aoid="IsValidDateSymbol">
+    <emu-clause id="sec-isvaliddatesymbol" aoid="IsValidDateSymbol">
       <h1>IsValidDateSymbol ( _code_ )</h1>
       <p>
         The IsValidDateSymbol abstract operation verifies that the given _code_ is valid.
@@ -139,7 +139,7 @@ contributors: Google, Ecma International
       </emu-alg>
     </emu-clause>
 
-    <emu-clause id="sec-code-to-date-symbol-name" aoid="CodeToDateSymbolName">
+    <emu-clause id="sec-codetodatesymbolname" aoid="CodeToDateSymbolName">
       <h1>CodeToDateSymbolName ( _code_ )</h1>
       <p>
         The CodeToDateSymbolName abstract operation is called with argument _code_
@@ -150,7 +150,7 @@ contributors: Google, Ecma International
       </emu-alg>
     </emu-clause>
 
-    <emu-clause id="sec-code-to-meta-zone-name" aoid="CodeToMetaZoneName">
+    <emu-clause id="sec-codetometazonename" aoid="CodeToMetaZoneName">
       <h1>CodeToMetaZoneName ( _code_ )</h1>
       <p>
         The CodeToMetaZoneName abstract operation is called with argument _code_
@@ -160,7 +160,7 @@ contributors: Google, Ecma International
       </emu-alg>
     </emu-clause>
 
-    <emu-clause id="sec-code-to-name" aoid="CodeToName">
+    <emu-clause id="sec-codetoname" aoid="CodeToName">
       <h1>CodeToName ( _type_,  _code_ )</h1>
       <p>
         The CodeToName abstract operation is called with arguments _type_, _code_
