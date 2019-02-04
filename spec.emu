@@ -150,16 +150,6 @@ contributors: Google, Ecma International
       </emu-alg>
     </emu-clause>
 
-    <emu-clause id="sec-codetometazonename" aoid="CodeToMetaZoneName">
-      <h1>CodeToMetaZoneName ( _code_ )</h1>
-      <p>
-        The CodeToMetaZoneName abstract operation is called with argument _code_
-      </p>
-      <emu-alg>
-        1. TBW
-      </emu-alg>
-    </emu-clause>
-
     <emu-clause id="sec-codetoname" aoid="CodeToName">
       <h1>CodeToName ( _type_,  _code_ )</h1>
       <p>
@@ -176,10 +166,8 @@ contributors: Google, Ecma International
           1. Return ? CodeToCurrencyName( _code_ ).
         1. If _type_ is `"dateField"`
           1. Return ? CodeToDateFieldName( _code_ ).
-        1. If _type_ is `"dateSymbol"`
-          1. Return ? CodeToDateSymbolName( _code_ ).
-        1. Assert: _type_ is `"metaZone"`
-        1. Return ? CodeToMetaZoneName( _code_ ).
+        1. Assert: _type_ is `"dateSymbol"`
+        1. Return ? CodeToDateSymbolName( _code_ ).
       </emu-alg>
     </emu-clause>
 
@@ -213,7 +201,7 @@ contributors: Google, Ecma International
         1. Let _r_ be ResolveLocale(%DisplayNames%.[[AvailableLocales]], _requestedLocales_, _opt_, %DisplayNames%.[[RelevantExtensionKeys]]).
         1. Let _style_ be ? GetOption(_options_, `"style"`, `"string"`, &laquo; `"narrow"`, `"short"`, `"long"` &raquo;, `"long"`).
         1. Set _displayNames_.[[Style]] to _style_.
-        1. Let _type_ be ? GetOption(_options_, `"type"`, `"string"`, &laquo; `"language"`, `"region"`, `"script"`, `"currency"`, `"dateField"`, `"dateSymbol"`, `"metaZone"` &raquo;, `"language"`).
+        1. Let _type_ be ? GetOption(_options_, `"type"`, `"string"`, &laquo; `"language"`, `"region"`, `"script"`, `"currency"`, `"dateField"`, `"dateSymbol"` &raquo;, `"language"`).
         1. Set _displayNames_.[[Type]] to _type_.
         1. Set _displayNames_.[[Locale]] to the value of _r_.[[Locale]].
         1. Let _fields_ be ! Get(_localeData_, _dataLocale_).
@@ -396,7 +384,7 @@ contributors: Google, Ecma International
     <ul>
       <li>[[Locale]] is a String value with the language tag of the locale whose localization is used for formatting.</li>
       <li>[[Style]] is one of the String values `"narrow"`, `"short"`, or `"long"`, identifying the display names style used.</li>
-      <li>[[Type]] is one of the String values `"language"`, `"region"`, `"script"`, `"currency"`, `"dateField"`, `"dateSymbol"`, or `"metaZone"`, identifying the type of the display names requested.</li>
+      <li>[[Type]] is one of the String values `"language"`, `"region"`, `"script"`, `"currency"`, `"dateField"`, or `"dateSymbol"`, identifying the type of the display names requested.</li>
     </ul>
 
   </emu-clause>
