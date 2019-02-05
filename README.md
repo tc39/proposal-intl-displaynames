@@ -26,18 +26,16 @@ Intl.DisplayNames.prototype.of( codes )
   * The value of _style_ could be either "narrow", "short" or "long" to indicate the length of the display names. For example, ofLanguage("en-US") will return "English (United States)" under "long" style, but "English (US)" under "short" style. The default is "long".
   * The value of _type_ could be either "region", "script", "language", "currency", "dateField", or "dateSymbol".
 * _codes_ is either a String or an array of string.
-* Intl.DisplayNames.prototype.of( codes ) always return an Array of String, which corresponding to the display name of the _codes_ array.
-* If the type is "region", the String in _codes_ should be _regionCode_. _regionCode_ is either a [ISO-3166 two letters region code](https://www.iso.org/iso-3166-country-codes.html),
+* Intl.DisplayNames.prototype.of( codes ) function take either a String or an array of String as input and always return an Array of String, which corresponding to the display name of the _codes_ array.
+  * If the type is "region", the String in _codes_ should either [ISO-3166 two letters region code](https://www.iso.org/iso-3166-country-codes.html),
 or a [three digits UN M49 Geographic Regions](https://unstats.un.org/unsd/methodology/m49/).
-* If the type is "script", the String in _codes_ should be _scriptCode_. _scriptCode_ is a [ISO-15924 four letters script code](http://unicode.org/iso15924/iso15924-codes.html).
-* If the type is "language", the String in _codes_ should be _localeBaseName_. _localeBaseName_ is the _languageCode_ ["-" _scriptCode_] ["-" _regionCode_ ] *("-" _variant_ ) subsequence of the unicode_language_id grammar in [UTS 35's Unicode Language and Locale Identifiers grammar](http://unicode.org/reports/tr35/#Unicode_language_identifier). _languageCode_ is either a two letters ISO 639-1 language code or a three letters ISO 639-2 language code.
-* If the type is "currency", the String in _codes_ should be _currencyCode_. _currencyCode_ is a [3-letter ISO 4217 currency code](https://www.iso.org/iso-4217-currency-codes.html).
-* If the type is "dateField", the String in _codes_ should be one of the following: "era", "year", "quarter", "month", "weekOfYear", "weekday", "day", "dayperiod", "hour", "minute", "second", "zone".
-* If the type is "dateSymbol", the String in _codes_ should be one of the following: "sunday",   "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december", "q1", "q2", "q3", "q4", "am", "pm".
-
-  
-
-
+  * If the type is "script", the String in _codes_ should be [ISO-15924 four letters script code](http://unicode.org/iso15924/iso15924-codes.html).
+  * If the type is "language", the String in _codes_ should be  _languageCode_ ["-" _scriptCode_] ["-" _regionCode_ ] *("-" _variant_ ) subsequence of the unicode_language_id grammar in [UTS 35's Unicode Language and Locale Identifiers grammar](http://unicode.org/reports/tr35/#Unicode_language_identifier). _languageCode_ is either a two letters ISO 639-1 language code or a three letters ISO 639-2 language code.
+  * If the type is "currency", the String in _codes_ should be [3-letter ISO 4217 currency code](https://www.iso.org/iso-4217-currency-codes.html).
+  * If the type is "dateField", the String in _codes_ should be one of the following: 
+    * "era", "year", "quarter", "month", "weekOfYear", "weekday", "day", "dayperiod", "hour", "minute", "second", "zone".
+  * If the type is "dateSymbol", the String in _codes_ should be one of the following: 
+    * "sunday",   "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december", "q1", "q2", "q3", "q4", "am", "pm".
 
 ### Authors
 * Frank Tang (@FrankYFTang)
@@ -90,4 +88,10 @@ scriptDisplayNames = new Intl.DisplayNames(['zh-Hant'], {type: 'script'});
 console.log(scriptDisplayNames.of(['Latn', 'Arab', 'Kana'])); 
 // ["拉丁文", "阿拉伯文", "片假名"]
 
+```
+
+### Supporting Materials:
+* [Slide for promoting from Stage 0 to Stage 1 for TC39 2019 Janurary meeting.](https://goo.gl/qzQK8A)
+* Slide for promoting from Stage 1 to Stage 2 for TC39 2019 March meeting. ([Work in Progress](https://goo.gl/ZAaVds
+))
 
