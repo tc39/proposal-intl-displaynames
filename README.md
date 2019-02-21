@@ -54,7 +54,7 @@ let regionDisplayNames = new Intl.DisplayNames(['en'], {type: 'region'});
 // Get region names
 console.log(regionDisplayNames.of('419')); // ["Latin America"]
 console.log(regionDisplayNames.of(['BZ', 'US', 'BA', 'MM'])); 
-// ["Belize", "United State", "Bosnia & Herzegovina", "Myanmar (Burma)"]
+// ["Belize", "United States", "Bosnia & Herzegovina", "Myanmar (Burma)"]
 
 // Get display names of region in Traditional Chinese
 regionDisplayNames = new Intl.DisplayNames(['zh-Hant'], {type: 'region'});
