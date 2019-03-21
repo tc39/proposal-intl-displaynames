@@ -233,36 +233,22 @@ contributors: Google, Ecma International
     </emu-clause>
 
     <emu-clause id="sec-Intl.DisplayNames.prototype.of" aoid="Intl.DisplayNames.prototype.of">
-      <h1>Intl.DisplayNames.prototype.of( _codes_ )</h1>
+      <h1>Intl.DisplayNames.prototype.of( _code_ )</h1>
 
       <p>
-        When the *Intl.DisplayNames.prototype.of* is called with an argument _codes_, the following steps are taken:
+        When the *Intl.DisplayNames.prototype.of* is called with an argument _code_, the following steps are taken:
       </p>
 
       <emu-alg>
         1. Let _displayNames_ be *this* value.
         1. If Type(_displayNames_) is not Object, throw a *TypeError* exception.
         1. If _displayNames_ does not have an [[InitializedDisplayNames]] internal slot, throw a *TypeError* exception.
-        1. Let _result_ be ArrayCreate(0).
-        1. If Type(_codes_) is String, then
-          1. Let _O_ be CreateArrayFromList(&laquo; _codes_ &raquo;).
-        1. Else,
-          1. Let _O_ be ? ToObject(_codes_).
-        1. Let _len_ be ? ToLength(? Get(_O_, `"length"`)).
-        1. Let _k_ be 0.
-        1. Repeat, while _k_ &lt; _len_
-          1. Let _Pk_ be ToString(_k_).
-          1. Let _kPresent_ be ? HasProperty(_O_, _Pk_).
-          1. If _kPresent_ is *true*, then
-            1. Let _kCode_ be ? Get(_O_, _Pk_).
-            1. If Type(_kCode_) is not String or Object, throw a *TypeError* exception.
-            1. Let _code_ be ? ToString(_kCode_).
-            1. If the result of ! IsValidCodeForDisplayNames(_displayNames_.[[Type]], _code_) is *false*, throw a *RangeError* exception.
-            1. Let _fields_ be _displayNames_.[[Fields]].
-            1. Let _name_ be _fields_[[_code_]].
-            1. Perform ! CreateDataProperty(_result_, ! ToString(_k_), _name_).
-          1. Increase _k_ by 1.
-        1. Return _result_.
+        1. If Type(_code_) is not String or Object, throw a *TypeError* exception.
+        1. Let _code_ be ? ToString(_code_).
+        1. If the result of ! IsValidCodeForDisplayNames(_displayNames_.[[Type]], _code_) is *false*, throw a *RangeError* exception.
+        1. Let _fields_ be _displayNames_.[[Fields]].
+        1. Let _name_ be _fields_[[_code_]].
+        1. Return _name_.
       </emu-alg>
     </emu-clause>
 
