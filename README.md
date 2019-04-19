@@ -55,7 +55,7 @@ region code.
 var regionDisplayNames = new Intl.DisplayNames(['en'], {type: 'region'});
 // Get region names
 console.log(regionDisplayNames.of('419')); // "Latin America"
-console.log(regionDisplayNames.of('BZ'])); // "Belize"
+console.log(regionDisplayNames.of('BZ')); // "Belize"
 console.log(regionDisplayNames.of('US')); // "United States"
 console.log(regionDisplayNames.of('BA')); // "Bosnia & Herzegovina"
 console.log(regionDisplayNames.of('MM')); // "Myanmar (Burma)"
