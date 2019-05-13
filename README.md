@@ -33,7 +33,7 @@ or a [three digits UN M49 Geographic Regions](https://unstats.un.org/unsd/method
   * If the type is "language", the _code_ should be a _languageCode_ ["-" _scriptCode_] ["-" _regionCode_ ] *("-" _variant_ ) subsequence of the unicode_language_id grammar in [UTS 35's Unicode Language and Locale Identifiers grammar](http://unicode.org/reports/tr35/#Unicode_language_identifier). _languageCode_ is either a two letters ISO 639-1 language code or a three letters ISO 639-2 language code.
   * If the type is "currency", the _code_ should be a [3-letter ISO 4217 currency code](https://www.iso.org/iso-4217-currency-codes.html).
   * If the type is "dateField", the _code_ should be one of the following: 
-    * "era", "year", "quarter", "month", "weekOfYear", "weekday", "day", "dayperiod", "hour", "minute", "second", "zone".
+    * "era", "year", "quarter", "month", "weekOfYear", "weekday", "day", "dayPeriod", "hour", "minute", "second", "zone".
   * If the type is "dateSymbol", the _code_ should be one of the following: 
     * "sunday",   "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december", "q1", "q2", "q3", "q4", "am", "pm".
 
