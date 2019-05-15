@@ -129,7 +129,7 @@ contributors: Google, Ecma International
 
       <emu-alg>
         1. If NewTarget is *undefined*, throw a *TypeError* exception.
-        1. Let _displayNames_ be ? OrdinaryCreateFromConstructor(NewTarget, `"%DisplayNamesPrototype%"`, « [[InitializedDisplayNames]], [[Locale]], [[Style]], [[Type]], [[Substitute]], [[Fields]] »).
+        1. Let _displayNames_ be ? OrdinaryCreateFromConstructor(NewTarget, `"%DisplayNamesPrototype%"`, « [[InitializedDisplayNames]], [[Locale]], [[Style]], [[Type]], [[Fallback]], [[Fields]] »).
         1. Let _requestedLocales_ be ? CanonicalizeLocaleList(_locales_).
         1. If _options_ is *undefined*, then
           1. Let _options_ be ObjectCreate(*null*).
@@ -144,8 +144,8 @@ contributors: Google, Ecma International
         1. Set _displayNames_.[[Style]] to _style_.
         1. Let _type_ be ? GetOption(_options_, `"type"`, `"string"`, &laquo; `"language"`, `"region"`, `"script"`, `"currency"`, `"dateField"`, `"dateSymbol"` &raquo;, `"language"`).
         1. Set _displayNames_.[[Type]] to _type_.
-        1. Let _substitute_ be ? GetOption(_options_, `"substitute"`, `"string"`, &laquo; `"fallback"`, `"none"` &raquo;, `"fallback"`).
-        1. Set _displayNames_.[[Substitute]] to _substitute_.
+        1. Let _fallback_ be ? GetOption(_options_, `"fallback"`, `"string"`, &laquo; `"code"`, `"none"` &raquo;, `"fallback"`).
+        1. Set _displayNames_.[[Fallback]] to _fallback_.
         1. Set _displayNames_.[[Locale]] to the value of _r_.[[Locale]].
         1. Let _dataLocale_ be _r_.[[dataLocale]].
         1. Let _dataLocaleData_ be _localeData_.[[_dataLocale_]].
@@ -252,8 +252,8 @@ contributors: Google, Ecma International
         1. Let _name_ be _fields_[[_code_]].
         1. If _name_ is not *undefined*, then
           1. Return _name_.
-        1. Let _substitute_ be _displayNames_.[[Substitute]].
-        1. If _substitute_ is `"fallback"`, then
+        1. Let _fallback_ be _displayNames_.[[Fallback]].
+        1. If _fallback_ is `"code"`, then
           1. Return _code_.
         1. Return *undefined*.
       </emu-alg>
@@ -300,8 +300,8 @@ contributors: Google, Ecma International
             <td>`"type"`</td>
           </tr>
           <tr>
-            <td>[[Substitute]]</td>
-            <td>`"substitute"`</td>
+            <td>[[Fallback]]</td>
+            <td>`"fallback"`</td>
           </tr>
         </table>
       </emu-table>
@@ -327,7 +327,7 @@ contributors: Google, Ecma International
       <li>[[Locale]] is a String value with the language tag of the locale whose localization is used for formatting.</li>
       <li>[[Style]] is one of the String values `"narrow"`, `"short"`, or `"long"`, identifying the display names style used.</li>
       <li>[[Type]] is one of the String values `"language"`, `"region"`, `"script"`, `"currency"`, `"dateField"`, or `"dateSymbol"`, identifying the type of the display names requested.</li>
-      <li>[[Substitute]] is one of the String values `"fallback"`, or `"none"`, identifying what to return while the system does not have the requested display name.</li>
+      <li>[[Fallback]] is one of the String values `"fallback"`, or `"none"`, identifying the fallback return while the system does not have the requested display name.</li>
     </ul>
 
   </emu-clause>
