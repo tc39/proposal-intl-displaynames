@@ -144,7 +144,7 @@ contributors: Google, Ecma International
         1. Set _displayNames_.[[Style]] to _style_.
         1. Let _type_ be ? GetOption(_options_, `"type"`, `"string"`, &laquo; `"language"`, `"region"`, `"script"`, `"currency"`, `"dateField"`, `"dateSymbol"` &raquo;, `"language"`).
         1. Set _displayNames_.[[Type]] to _type_.
-        1. Let _fallback_ be ? GetOption(_options_, `"fallback"`, `"string"`, &laquo; `"code"`, `"none"` &raquo;, `"fallback"`).
+        1. Let _fallback_ be ? GetOption(_options_, `"fallback"`, `"string"`, &laquo; `"code"`, `"none"` &raquo;, `"code"`).
         1. Set _displayNames_.[[Fallback]] to _fallback_.
         1. Set _displayNames_.[[Locale]] to the value of _r_.[[Locale]].
         1. Let _dataLocale_ be _r_.[[dataLocale]].
@@ -327,7 +327,7 @@ contributors: Google, Ecma International
       <li>[[Locale]] is a String value with the language tag of the locale whose localization is used for formatting.</li>
       <li>[[Style]] is one of the String values `"narrow"`, `"short"`, or `"long"`, identifying the display names style used.</li>
       <li>[[Type]] is one of the String values `"language"`, `"region"`, `"script"`, `"currency"`, `"dateField"`, or `"dateSymbol"`, identifying the type of the display names requested.</li>
-      <li>[[Fallback]] is one of the String values `"fallback"`, or `"none"`, identifying the fallback return while the system does not have the requested display name.</li>
+      <li>[[Fallback]] is one of the String values `"code"`, or `"none"`, identifying the fallback return while the system does not have the requested display name.</li>
     </ul>
 
   </emu-clause>
