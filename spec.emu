@@ -252,8 +252,7 @@ contributors: Google, Ecma International
         1. Let _name_ be _fields_[[_code_]].
         1. If _name_ is not *undefined*, then
           1. Return _name_.
-        1. Let _fallback_ be _displayNames_.[[Fallback]].
-        1. If _fallback_ is `"code"`, then
+        1. If _displayNames_.[[Fallback]] is `"code"`, then
           1. Return _code_.
         1. Return *undefined*.
       </emu-alg>
@@ -327,7 +326,7 @@ contributors: Google, Ecma International
       <li>[[Locale]] is a String value with the language tag of the locale whose localization is used for formatting.</li>
       <li>[[Style]] is one of the String values `"narrow"`, `"short"`, or `"long"`, identifying the display names style used.</li>
       <li>[[Type]] is one of the String values `"language"`, `"region"`, `"script"`, `"currency"`, `"dateField"`, or `"dateSymbol"`, identifying the type of the display names requested.</li>
-      <li>[[Fallback]] is one of the String values `"code"`, or `"none"`, identifying the fallback return while the system does not have the requested display name.</li>
+      <li>[[Fallback]] is one of the String values `"code"`, or `"none"`, identifying the fallback return when the system does not have the requested display name.</li>
     </ul>
 
   </emu-clause>
