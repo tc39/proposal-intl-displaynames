@@ -12,6 +12,23 @@ Main motivation for Intl.DisplayNames project was to enable developers to get tr
 * Reduce translation cost for developers.
 * Consistent translation of language, region and script display name on the web.
 
+### Scope
+This proposal is not intended to provide a translation for all strings, but rather focus on particular items which are applcation-independent. There are two classes of strings we're considering here:
+
+- Strings that are already available because they're needed for other APIs. For example, names for the days of the week are necessary to provide Intl.DateTimeFormat capabilities. In the absense of a direct API, we see programs parsing the output of Intl.DateTimeFormat to find these names, which is an unreliable/unstable technique.
+- Strings that are universally standardized and are likely necessary for any multilingual JavaScript application. For example language/region names.
+
+For example, for language/region names, W3C recommends users to use a locale selector when handling multilingual content, and currently that means shipping a long list of translated language/region names with every such website.
+Such data may potentially be time and politically sensitive and is unlikely to be specific to any particular website (i.e., it's unlikely that website A will want a different translation of any language name from website B).
+For that reason, providing this data in the engine lowers the cost of shipping multilingual websites with locale selectors and move the responsibility for keeping the mapping of BCP47 language/region codes to display names with the engine which is in a better position to keep it up to date.
+
+The set of strings included may grow over time, but we expect to restrict the growth according to pragmatic requirements, including:
+- Strings which are included should be generically useful across multiple application types.
+- The inclusion of strings should not be too much of a burden on implementations in terms of data size.
+- There should be an open data source that implementations can use for the string values, e.g., CLDR.
+
+Additional strings included in Intl.DisplayNames would be added to the specification through a future ECMA-402 proposal, to be presented in the ECMA-402 Task Group and TC39 as part of its standardization through TC39 processes.
+
 ### Syntax
 To get localized names of language, script or region, create a Intl.DisplayName object and call the method by passing in appropriate standard code.
 
