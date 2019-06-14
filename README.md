@@ -17,8 +17,8 @@ Main motivation for Intl.DisplayNames project was to enable developers to get tr
 * Consistent translation of language, region and script display name on the web.
 
 ### Scope
-This proposal is not intended to provide a translation for all strings, but rather focus on particular items which are application-independent. There are two classes of strings we're considering here:
-
+This proposal is intended to provide translation for strings of particular items which are application-independent, rather than translation for all kinds of strings. There are two classes of strings we're considering here:
+ 
 - Strings that are already available because they're needed for other APIs. For example, names for the days of the week are necessary to provide Intl.DateTimeFormat capabilities. In the absence of a direct API, we see programs parsing the output of Intl.DateTimeFormat to find these names, which is an unreliable/unstable technique.
 - Strings that are universally standardized and are likely necessary for any multilingual JavaScript application. For example language/region names.
 
