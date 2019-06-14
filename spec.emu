@@ -6,7 +6,7 @@
 <pre class="metadata">
 title: Intl.DisplayNames Proposal
 status: proposal
-stage: 1
+stage: 2
 location: https://github.com/tc39-transfer/proposal-intl-displaynames
 copyright: true
 contributors: Google, Ecma International
@@ -14,7 +14,42 @@ contributors: Google, Ecma International
 <emu-biblio href="./biblio.json"></emu-biblio>
 <emu-clause id="intl-displaynames-objects">
   <h1>DisplayNames Objects</h1>
-
+  <p>
+    This proposal is intended to provide translation for strings of particular items which are application-independent, rather than translation for all kinds of strings. There are two classes of strings we're considering here:
+    <ul>
+      <li>
+        Strings that are already available because they're needed for other APIs. For example, names for the days of the week are necessary to provide Intl.DateTimeFormat capabilities. In the absence of a direct API, we see programs parsing the output of Intl.DateTimeFormat to find these names, which is an unreliable/unstable technique.
+      </li>
+      <li>
+        Strings that are universally standardized and are likely necessary for any multilingual JavaScript application. For example language/region names.
+      </li>
+    </ul>
+  </p>
+  <p>
+    For example, for language/region names, W3C recommends users to use a locale selector when handling multilingual content, and currently that means shipping a long list of translated language/region names with every such website.
+  </p>
+  <p>
+  Such data may potentially be time and politically sensitive and is unlikely to be specific to any particular website (i.e., it's unlikely that website A will want a different translation of any language name from website B).
+  </p>
+  <p>
+  For that reason, providing this data in the engine lowers the cost of shipping multilingual websites with locale selectors and move the responsibility for keeping the mapping of BCP47 language/region codes to display names with the engine which is in a better position to keep it up to date.
+  </p>
+  <p>
+  The set of strings included may grow over time, but we expect to restrict the growth according to pragmatic requirements, including:
+    <ul>
+      <li>
+        Strings which are included should be generically useful across multiple application types.
+      </li>
+      <li>
+        The inclusion of strings should not be too much of a burden on implementations in terms of data size.
+      </li>
+      <li>
+        There should be an open data source that implementations can use for the string values, e.g., CLDR.
+    </ul>
+  </p>
+  <p>
+  Additional strings included in Intl.DisplayNames would be added to the specification through a future ECMA-402 proposal, to be presented in the ECMA-402 Task Group and TC39 as part of its standardization through TC39 processes.
+  </p>
   <emu-clause id="sec-intl-displaynames-abstracts">
     <h1>Abstract Operations for DisplayNames Objects</h1>
 
