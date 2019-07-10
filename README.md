@@ -30,8 +30,13 @@ The set of strings included may grow over time, but we expect to restrict the gr
 - Strings which are included should be generically useful across multiple application types.
 - The inclusion of strings should not be too much of a burden on implementations in terms of data size.
 - There should be an open data source that implementations can use for the string values, e.g., CLDR.
+- Strings that rarely (never) change, and thus don't need to be dynamically
+  generated.
+- Sets of strings that have so few items that it's more of a burden to expose
+  Web API and maintain it forever than it would be for a website to just include
+  those strings directly.
 
-Additional strings included in Intl.DisplayNames would be added to the specification through a future ECMA-402 proposal, to be presented in the ECMA-402 Task Group and TC39 as part of its standardization through TC39 processes.
+Additional strings included in Intl.DisplayNames should be added to the specification through a future ECMA-402 proposal, to be presented in the ECMA-402 Task Group and TC39 as part of its standardization through TC39 processes.
 
 ### Syntax
 To get localized names of language, script or region, create a Intl.DisplayName object and call the method by passing in appropriate standard code.
