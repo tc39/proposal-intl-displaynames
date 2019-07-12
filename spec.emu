@@ -278,10 +278,14 @@ contributors: Google, Ecma International
         1. Set _displayNames_.[[Fallback]] to _fallback_.
         1. Set _displayNames_.[[Locale]] to the value of _r_.[[Locale]].
         1. Let _dataLocale_ be _r_.[[dataLocale]].
-        1. Let _dataLocaleData_ be _localeData_.[[_dataLocale_]].
-        1. Let _dataLocaleTypes_ be _dataLocaleData_.[[_type_]].
-        1. Let _fields_ be dataLocaleTypes.[[_style_]].
-        1. Set _displayNames_.[[Fields]] to _fields_.
+        1. Let _dataLocaleData_ be _localeData_.[[<_dataLocale_>]].
+        1. Let _types_ be _dataLocaleData_.[[types]].
+        1. Assert: _types_ is a record (see <emu-xref href="#sec-Intl.DisplayNames-internal-slots"></emu-xref>).
+        1. Let _typeFields_ be _types_.[[<_type_>]].
+        1. Assert: _typeFields_ is a record (see <emu-xref href="#sec-Intl.DisplayNames-internal-slots"></emu-xref>).
+        1. Let _styleFields_ be _typeFields_.[[<_style_>]].
+        1. Assert: _styleFields_ is a record (see <emu-xref href="#sec-Intl.DisplayNames-internal-slots"></emu-xref>).
+        1. Set _displayNames_.[[Fields]] to _styleFields_.
         1. Return _displayNames_.
       </emu-alg>
     </emu-clause>
@@ -331,6 +335,22 @@ contributors: Google, Ecma International
         The value of the [[RelevantExtensionKeys]] internal slot is &laquo;  &raquo;.
       </p>
 
+      <p>
+        The value of the [[LocaleData]] internal slot is implementation defined within the constraints described in <emu-xref href="#sec-internal-slots"></emu-xref> and the following additional constraints:
+      </p>
+
+      <ul>
+        <li>
+        [[LocaleData]].[[&lt;_locale_&gt;]] must have a types field for all locale values _locale_.
+        The value of this field must be a record, which must have fields with the names of the six display name types:
+        `"language"`, `"region"`, `"script"`, `"currency"`, `"dateField"`, and `"dateSymbol"`.
+        Each of these fields in turn must be a record, which must have fields with the names of the three display name styles:
+        `"narrow"`, `"short"`, and `"long"`.
+        The value of these fields in turn must be a record.
+        The values corresponding to the property keys are String values.
+        </li>
+      </ul>
+
       <emu-note>
         It is recommended that implementations use the locale data provided by the Common Locale Data Repository (available at <a href="http://cldr.unicode.org/">http://cldr.unicode.org/</a>).
       </emu-note>
@@ -379,7 +399,7 @@ contributors: Google, Ecma International
         1. Let _code_ be ? ToString(_code_).
         1. If the result of ! IsValidCodeForDisplayNames(_displayNames_.[[Type]], _code_) is *false*, throw a *RangeError* exception.
         1. Let _fields_ be _displayNames_.[[Fields]].
-        1. Let _name_ be _fields_[[_code_]].
+        1. Let _name_ be _fields_[[<_code_>]].
         1. If _name_ is not *undefined*, then
           1. Return _name_.
         1. If _displayNames_.[[Fallback]] is `"code"`, then
