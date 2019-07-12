@@ -56,10 +56,10 @@ contributors: Google, Ecma International
   <emu-clause id="sec-intl-displaynames-abstracts">
     <h1>Abstract Operations for DisplayNames Objects</h1>
 
-    <emu-clause id="sec-isvalidcodefordatefield" aoid="IsValidCodeForDateField">
-      <h1>IsValidCodeForDateField ( _code_ )</h1>
+    <emu-clause id="sec-isvalidcodefordatetimefield" aoid="IsValidCodeForDateTimeField">
+      <h1>IsValidCodeForDateTimeField ( _code_ )</h1>
       <p>
-        The IsValidCodeForDateField abstract operation verifies that the given _code_ is valid.
+        The IsValidCodeForDateTimeField abstract operation verifies that the given _code_ is valid.
       </p>
       <emu-alg>
         1. If _code_ is in the following list, return *true*.
@@ -75,16 +75,16 @@ contributors: Google, Ecma International
           <li>hour</li>
           <li>minute</li>
           <li>second</li>
-          <li>zone</li>
+          <li>timeZoneName</li>
         </ul>
         1. Return *false*.
       </emu-alg>
     </emu-clause>
 
-    <emu-clause id="sec-isvalidcodefordatesymbol" aoid="IsValidCodeForDateSymbol">
-      <h1>IsValidCodeForDateSymbol ( _code_ )</h1>
+    <emu-clause id="sec-isvalidcodefordatetime" aoid="IsValidCodeForDateTime">
+      <h1>IsValidCodeForDateTime ( _code_ )</h1>
       <p>
-        The IsValidCodeForDateSymbol abstract operation verifies that the given _code_ is valid.
+        The IsValidCodeForDateTime abstract operation verifies that the given _code_ is valid.
       </p>
       <emu-alg>
         1. If _code_ is in the following list, return *true*.
@@ -143,10 +143,10 @@ contributors: Google, Ecma International
             1. Return *false*.
         1. If _type_ is `"currency"`, then
           1. Return ! IsWellFormedCurrencyCode(_code_).
-        1. If _type_ is `"dateField"`
-          1. Return ! IsValidCodeForDateField(_code_).
-        1. Assert: _type_ is `"dateSymbol"`
-        1. Return IsValidCodeForDateSymbol(_code_).
+        1. If _type_ is `"dateTime"`
+          1. Return ! IsValidCodeForDateTime(_code_).
+        1. Assert: _type_ is `"dateTimeField"`
+        1. Return IsValidCodeForDateTimeField(_code_).
       </emu-alg>
     </emu-clause>
 
@@ -180,7 +180,7 @@ contributors: Google, Ecma International
         1. Let _r_ be ResolveLocale(%DisplayNames%.[[AvailableLocales]], _requestedLocales_, _opt_, %DisplayNames%.[[RelevantExtensionKeys]]).
         1. Let _style_ be ? GetOption(_options_, `"style"`, `"string"`, &laquo; `"narrow"`, `"short"`, `"long"` &raquo;, `"long"`).
         1. Set _displayNames_.[[Style]] to _style_.
-        1. Let _type_ be ? GetOption(_options_, `"type"`, `"string"`, &laquo; `"language"`, `"region"`, `"script"`, `"currency"`, `"dateField"`, `"dateSymbol"` &raquo;, `"language"`).
+        1. Let _type_ be ? GetOption(_options_, `"type"`, `"string"`, &laquo; `"language"`, `"region"`, `"script"`, `"currency"`, `"dateTime"`, `"dateTimeField"` &raquo;, `"language"`).
         1. Set _displayNames_.[[Type]] to _type_.
         1. Let _fallback_ be ? GetOption(_options_, `"fallback"`, `"string"`, &laquo; `"code"`, `"none"` &raquo;, `"code"`).
         1. Set _displayNames_.[[Fallback]] to _fallback_.
@@ -363,7 +363,7 @@ contributors: Google, Ecma International
     <ul>
       <li>[[Locale]] is a String value with the language tag of the locale whose localization is used for formatting.</li>
       <li>[[Style]] is one of the String values `"narrow"`, `"short"`, or `"long"`, identifying the display names style used.</li>
-      <li>[[Type]] is one of the String values `"language"`, `"region"`, `"script"`, `"currency"`, `"dateField"`, or `"dateSymbol"`, identifying the type of the display names requested.</li>
+      <li>[[Type]] is one of the String values `"language"`, `"region"`, `"script"`, `"currency"`, `"dateTime"`, or `"dateTimeField"`, identifying the type of the display names requested.</li>
       <li>[[Fallback]] is one of the String values `"code"`, or `"none"`, identifying the fallback return when the system does not have the requested display name.</li>
     </ul>
 
