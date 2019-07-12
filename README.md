@@ -191,5 +191,5 @@ console.log(dateFieldDisplayNames.of('pm')); // "下午"
 ### Supporting Materials:
 * [Slide for promoting from Stage 0 to Stage 1 for TC39 2019 January meeting.](https://goo.gl/qzQK8A)
 * [Slide for promoting from Stage 1 to Stage 2 for TC39 2019 June meeting.](https://goo.gl/ZAaVds)
-* Slide for promoting from Stage 2 to Stage 3 for TC39 2019 July meeting. TBW
+* [Slide for promoting from Stage 2 to Stage 3 for TC39 2019 July meeting.] (http://shorturl.at/yPSZ1)
 
