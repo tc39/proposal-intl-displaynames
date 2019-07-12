@@ -15,6 +15,9 @@ contributors: Google, Ecma International
 <emu-clause id="intl-displaynames-objects">
   <h1>DisplayNames Objects</h1>
   <p>
+    For motivation and a high-level introduction, see <a href="https://github.com/tc39/proposal-intl-displaynames/blob/master/README.md">the explainer document</a>.
+  </p>
+  <p>
     This proposal is intended to provide translation for strings of particular items which are application-independent, rather than translation for all kinds of strings. There are two classes of strings we're considering here:
     <ul>
       <li>
