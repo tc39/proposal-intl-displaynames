@@ -278,13 +278,13 @@ contributors: Google, Ecma International
         1. Set _displayNames_.[[Fallback]] to _fallback_.
         1. Set _displayNames_.[[Locale]] to the value of _r_.[[Locale]].
         1. Let _dataLocale_ be _r_.[[dataLocale]].
-        1. Let _dataLocaleData_ be _localeData_.[[<_dataLocale_>]].
+        1. Let _dataLocaleData_ be _localeData_.[[&lt;_dataLocale_&gt;]].
         1. Let _types_ be _dataLocaleData_.[[types]].
-        1. Assert: _types_ is a record (see <emu-xref href="#sec-Intl.DisplayNames-internal-slots"></emu-xref>).
-        1. Let _typeFields_ be _types_.[[<_type_>]].
-        1. Assert: _typeFields_ is a record (see <emu-xref href="#sec-Intl.DisplayNames-internal-slots"></emu-xref>).
-        1. Let _styleFields_ be _typeFields_.[[<_style_>]].
-        1. Assert: _styleFields_ is a record (see <emu-xref href="#sec-Intl.DisplayNames-internal-slots"></emu-xref>).
+        1. Assert: _types_ is a Record (see <emu-xref href="#sec-Intl.DisplayNames-internal-slots"></emu-xref>).
+        1. Let _typeFields_ be _types_.[[&lt;_type_&gt;]].
+        1. Assert: _typeFields_ is a Record (see <emu-xref href="#sec-Intl.DisplayNames-internal-slots"></emu-xref>).
+        1. Let _styleFields_ be _typeFields_.[[&lt;_style_&gt;]].
+        1. Assert: _styleFields_ is a Record (see <emu-xref href="#sec-Intl.DisplayNames-internal-slots"></emu-xref>).
         1. Set _displayNames_.[[Fields]] to _styleFields_.
         1. Return _displayNames_.
       </emu-alg>
@@ -342,12 +342,37 @@ contributors: Google, Ecma International
       <ul>
         <li>
         [[LocaleData]].[[&lt;_locale_&gt;]] must have a types field for all locale values _locale_.
-        The value of this field must be a record, which must have fields with the names of the six display name types:
-        `"language"`, `"region"`, `"script"`, `"currency"`, `"dateField"`, and `"dateSymbol"`.
-        Each of these fields in turn must be a record, which must have fields with the names of the three display name styles:
-        `"narrow"`, `"short"`, and `"long"`.
-        The value of these fields in turn must be a record.
-        The values corresponding to the property keys are String values.
+        The value of this field must be a Record, which must have fields with the names of the six display name types:
+        `"language"`, `"region"`, `"script"`, `"currency"`, `"dateTime"`, and `"dateTimeField"`.
+        </li>
+        <li>The field `"language"` noted above must be Records which must have fields with the names of the three display name styles:
+        `"narrow"`, `"short"`, and `"long"`. The value of these fields in turn must be a Record, which must have fields with keys
+        corresponding to language codes according to. The value of these fields
+        must be string values.
+        </li>
+        <li>The field `"region"` noted above must be Records which must have fields with the names of the three display name styles:
+        `"narrow"`, `"short"`, and `"long"`. The value of these fields in turn must be a Record, which must have fields with keys
+        corresponding to region codes according to. The value of these fields must be string values.
+        </li>
+        <li>The field `"script"` noted above must be Records which must have fields with the names of the three display name styles:
+        `"narrow"`, `"short"`, and `"long"`. The value of these fields in turn must be a Record, which must have fields with keys
+        corresponding to script codes according to. The value of these fields must be string values.
+        </li>
+        <li>The field `"currency"` noted above must be Records which must have fields with the names of the three display name styles:
+        `"narrow"`, `"short"`, and `"long"`. The value of these fields in turn must be a Record, which must have fields with keys
+        corresponding to currency codes according to. The value of these fields must be string values.
+        </li>
+        <li>The field `"dateTime"` noted above must be Records which must have fields with the names of the three display name styles:
+        `"narrow"`, `"short"`, and `"long"`. The value of these fields in turn must be a Record, which must have fields with keys
+        corresponding to the possible code values: `"sunday"`, `"monday"`, `"tuesday"`, `"wednesday"`, `"thursday"`, `"friday"`,
+        `"saturday"`, `"january"`, `"february"`, `"march"`, `"april"`, `"may"`, `"june"`, `"july"`, `"august"`, `"september"`,
+        `"october"`, `"november"`, `"december"`, `"q1"`, `"q2"`, `"q3"`, `"q4"`, `"am"`, and `"pm"`. The value of these
+        fields must be string values.
+        </li>
+        <li>The field `"dateTimeField"` noted above must be Records which must have fields with the names of the three display name styles:
+        `"narrow"`, `"short"`, and `"long"`. The value of these fields in turn must be a Record, which must have fields with keys
+        corresponding to the possible code values: `"era"`, `"year"`, `"quarter"`, `"month"`, `"weekOfYear"`, `"weekday"`, `"day"`,
+        `"dayPeriod"`, `"hour"`, `"minute"`, `"second"`, and `"timeZoneName"`. The value of these fields must be string values.
         </li>
       </ul>
 
@@ -399,7 +424,7 @@ contributors: Google, Ecma International
         1. Let _code_ be ? ToString(_code_).
         1. If the result of ! IsValidCodeForDisplayNames(_displayNames_.[[Type]], _code_) is *false*, throw a *RangeError* exception.
         1. Let _fields_ be _displayNames_.[[Fields]].
-        1. Let _name_ be _fields_[[<_code_>]].
+        1. Let _name_ be _fields_[[&lt;_code_&gt;]].
         1. If _name_ is not *undefined*, then
           1. Return _name_.
         1. If _displayNames_.[[Fallback]] is `"code"`, then
@@ -477,6 +502,8 @@ contributors: Google, Ecma International
       <li>[[Style]] is one of the String values `"narrow"`, `"short"`, or `"long"`, identifying the display names style used.</li>
       <li>[[Type]] is one of the String values `"language"`, `"region"`, `"script"`, `"currency"`, `"dateTime"`, or `"dateTimeField"`, identifying the type of the display names requested.</li>
       <li>[[Fallback]] is one of the String values `"code"`, or `"none"`, identifying the fallback return when the system does not have the requested display name.</li>
+      <li>[[Fields]] is a Record (see <emu-xref href="#sec-Intl.DisplayNames-internal-slots"></emu-xref>) which
+        must have fields with keys corresponding to codes according to [[Style]] and [[Type]].</li>
     </ul>
 
   </emu-clause>
