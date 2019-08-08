@@ -56,161 +56,6 @@ contributors: Google, Ecma International
   <emu-clause id="sec-intl-displaynames-abstracts">
     <h1>Abstract Operations for DisplayNames Objects</h1>
 
-    <emu-clause id="sec-isvalidcodefordatetimefield" aoid="IsValidCodeForDateTimeField">
-      <h1>IsValidCodeForDateTimeField ( _code_ )</h1>
-      <p>
-        The IsValidCodeForDateTimeField abstract operation verifies that the given _code_ is valid.
-      </p>
-      <emu-alg>
-        1. If _code_ is listed in <emu-xref href="#table-validcodefordatetimefield"></emu-xref>, return *true*.
-        1. Return *false*.
-      </emu-alg>
-
-      <emu-table id="table-validcodefordatetimefield">
-        <emu-caption>Codes For Date Time Field of DisplayNames</emu-caption>
-        <table class="real-table">
-          <thead>
-            <tr>
-              <th>Code</th>
-            </tr>
-          </thead>
-          <tr>
-            <td>`"era"`</td>
-          </tr>
-          <tr>
-            <td>`"year"`</td>
-          </tr>
-          <tr>
-            <td>`"quarter"`</td>
-          </tr>
-          <tr>
-            <td>`"month"`</td>
-          </tr>
-          <tr>
-            <td>`"weekOfYear"`</td>
-          </tr>
-          <tr>
-            <td>`"weekday"`</td>
-          </tr>
-          <tr>
-            <td>`"day"`</td>
-          </tr>
-          <tr>
-            <td>`"dayPeriod"`</td>
-          </tr>
-          <tr>
-            <td>`"hour"`</td>
-          </tr>
-          <tr>
-            <td>`"minute"`</td>
-          </tr>
-          <tr>
-            <td>`"second"`</td>
-          </tr>
-          <tr>
-            <td>`"timeZoneName"`</td>
-          </tr>
-        </table>
-      </emu-table>
-    </emu-clause>
-
-    <emu-clause id="sec-isvalidcodefordatetime" aoid="IsValidCodeForDateTime">
-      <h1>IsValidCodeForDateTime ( _code_ )</h1>
-      <p>
-        The IsValidCodeForDateTime abstract operation verifies that the given _code_ is valid.
-      </p>
-      <emu-alg>
-        1. If _code_ is listed in <emu-xref href="#table-validcodefordatetime"></emu-xref>, return *true*.
-        1. Return *false*.
-      </emu-alg>
-
-      <emu-table id="table-validcodefordatetime">
-        <emu-caption>Codes For Date Time of DisplayNames</emu-caption>
-        <table class="real-table">
-          <thead>
-            <tr>
-              <th>Code</th>
-            </tr>
-          </thead>
-          <tr>
-            <td>`"sunday"`</td>
-          </tr>
-          <tr>
-            <td>`"monday"`</td>
-          </tr>
-          <tr>
-            <td>`"tuesday"`</td>
-          </tr>
-          <tr>
-            <td>`"wednesday"`</td>
-          </tr>
-          <tr>
-            <td>`"thursday"`</td>
-          </tr>
-          <tr>
-            <td>`"friday"`</td>
-          </tr>
-          <tr>
-            <td>`"saturday"`</td>
-          </tr>
-          <tr>
-            <td>`"january"`</td>
-          </tr>
-          <tr>
-            <td>`"february"`</td>
-          </tr>
-          <tr>
-            <td>`"march"`</td>
-          </tr>
-          <tr>
-            <td>`"april"`</td>
-          </tr>
-          <tr>
-            <td>`"may"`</td>
-          </tr>
-          <tr>
-            <td>`"june"`</td>
-          </tr>
-          <tr>
-            <td>`"july"`</td>
-          </tr>
-          <tr>
-            <td>`"august"`</td>
-          </tr>
-          <tr>
-            <td>`"september"`</td>
-          </tr>
-          <tr>
-            <td>`"october"`</td>
-          </tr>
-          <tr>
-            <td>`"november"`</td>
-          </tr>
-          <tr>
-            <td>`"december"`</td>
-          </tr>
-          <tr>
-            <td>`"q1"`</td>
-          </tr>
-          <tr>
-            <td>`"q2"`</td>
-          </tr>
-          <tr>
-            <td>`"q3"`</td>
-          </tr>
-          <tr>
-            <td>`"q4"`</td>
-          </tr>
-          <tr>
-            <td>`"am"`</td>
-          </tr>
-          <tr>
-            <td>`"pm"`</td>
-          </tr>
-        </table>
-      </emu-table>
-    </emu-clause>
-
     <emu-clause id="sec-isvalidcodefordisplaynames" aoid="IsValidCodeForDisplayNames">
       <h1>IsValidCodeForDisplayNames ( _type_,  _code_ )</h1>
       <p>
@@ -236,10 +81,189 @@ contributors: Google, Ecma International
         1. If _type_ is `"currency"`, then
           1. Return ! IsWellFormedCurrencyCode(_code_).
         1. If _type_ is `"dateTime"`
-          1. Return ! IsValidCodeForDateTime(_code_).
+          1. If _code_ is listed in <emu-xref href="#table-validcodefordatetime"></emu-xref>, then
+            1. Return *true*.
+          1. Else,
+            1. Return *false*.
         1. Assert: _type_ is `"dateTimeField"`
-        1. Return IsValidCodeForDateTimeField(_code_).
+        1. If _code_ is listed in <emu-xref href="#table-validcodefordatetimefield"></emu-xref>, then
+          1. Return *true*.
+        1. Else,
+          1. Return *false*.
       </emu-alg>
+
+      <emu-table id="table-validcodefordatetime">
+        <emu-caption>Codes For Date Time of DisplayNames</emu-caption>
+        <table class="real-table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tr>
+            <td>`"sunday"`</td>
+            <td>Name indicating Sunday, e.g. Su, Sun, Sunday, etc.</td>
+          </tr>
+          <tr>
+            <td>`"monday"`</td>
+            <td>Name indicating Monday, e.g. M, Mon, Monday, etc.</td>
+          </tr>
+          <tr>
+            <td>`"tuesday"`</td>
+            <td>Name indicating Tuesday, e.g. Tu, Tue, Tuesday, etc.</td>
+          </tr>
+          <tr>
+            <td>`"wednesday"`</td>
+            <td>Name indicating Wednesday, e.g. W, Wed, Wednesday, etc.</td>
+          </tr>
+          <tr>
+            <td>`"thursday"`</td>
+            <td>Name indicating Thursday, e.g. Th, Thur, Thursday, etc.</td>
+          </tr>
+          <tr>
+            <td>`"friday"`</td>
+            <td>Name indicating Friday, e.g. F, Fri, Friday, etc.</td>
+          </tr>
+          <tr>
+            <td>`"saturday"`</td>
+            <td>Name indicating Saturday, e.g. Sa, Sat, Saturday, etc.</td>
+          </tr>
+          <tr>
+            <td>`"january"`</td>
+            <td>Name indicating January, e.g. Jan, January, etc.</td>
+          </tr>
+          <tr>
+            <td>`"february"`</td>
+            <td>Name indicating February, e.g. Feb, February, etc.</td>
+          </tr>
+          <tr>
+            <td>`"march"`</td>
+            <td>Name indicating March, e.g. Mar, March, etc.</td>
+          </tr>
+          <tr>
+            <td>`"april"`</td>
+            <td>Name indicating April, e.g. Apr, April, etc.</td>
+          </tr>
+          <tr>
+            <td>`"may"`</td>
+            <td>Name indicating May, e.g. May, etc.</td>
+          </tr>
+          <tr>
+            <td>`"june"`</td>
+            <td>Name indicating June, e.g. Jun, June, etc.</td>
+          </tr>
+          <tr>
+            <td>`"july"`</td>
+            <td>Name indicating July, e.g. Jul, July, etc.</td>
+          </tr>
+          <tr>
+            <td>`"august"`</td>
+            <td>Name indicating August, e.g. Aug, August, etc.</td>
+          </tr>
+          <tr>
+            <td>`"september"`</td>
+            <td>Name indicating September, e.g. Sep, September, etc.</td>
+          </tr>
+          <tr>
+            <td>`"october"`</td>
+            <td>Name indicating October, e.g. Oct, October, etc.</td>
+          </tr>
+          <tr>
+            <td>`"november"`</td>
+            <td>Name indicating November, e.g. Nov, November, etc.</td>
+          </tr>
+          <tr>
+            <td>`"december"`</td>
+            <td>Name indicating December, e.g. Dec, December, etc.</td>
+          </tr>
+          <tr>
+            <td>`"q1"`</td>
+            <td>Name indicating the first quarter in year, e.g. Q1, first quarter, 1st quarter, etc.</td>
+          </tr>
+          <tr>
+            <td>`"q2"`</td>
+            <td>Name indicating the second quarter in year, e.g. Q2, second quarter, 2nd quarter, etc.</td>
+          </tr>
+          <tr>
+            <td>`"q3"`</td>
+            <td>Name indicating the third quarter in year, e.g. Q3, third quarter, 3rd quarter, etc.</td>
+          </tr>
+          <tr>
+            <td>`"q4"`</td>
+            <td>Name indicating the fourth quarter in year, e.g. Q4, fourth quarter, 4th quarter, etc.</td>
+          </tr>
+          <tr>
+            <td>`"am"`</td>
+            <td>Name indicating ante meridiem, e.g. AM, a.m., etc.</td>
+          </tr>
+          <tr>
+            <td>`"pm"`</td>
+            <td>Name indicating post meridiem, e.g. PM, p.m., etc.</td>
+          </tr>
+        </table>
+      </emu-table>
+
+      <emu-table id="table-validcodefordatetimefield">
+        <emu-caption>Codes For Date Time Field of DisplayNames</emu-caption>
+        <table class="real-table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tr>
+            <td>`"era"`</td>
+            <td>The field indicating the era, e.g., AD or BC in the Gregorian (Julian) calendar.</td>
+          </tr>
+          <tr>
+            <td>`"year"`</td>
+            <td>The field indicating the year.</td>
+          </tr>
+          <tr>
+            <td>`"quarter"`</td>
+            <td>The field indicating the quarter, e.g., Q2, 2nd quarter, etc.</td>
+          </tr>
+          <tr>
+            <td>`"month"`</td>
+            <td>The field indicating the month, e.g. Sep, September, etc.</td>
+          </tr>
+          <tr>
+            <td>`"weekOfYear"`</td>
+            <td>The field indicating the week number within the current year.</td>
+          </tr>
+          <tr>
+            <td>`"weekday"`</td>
+            <td>The field indicating the day of week, e.g. Tue, Tuesday, etc.</td>
+          </tr>
+          <tr>
+            <td>`"day"`</td>
+            <td>The field indicating the day in month.</td>
+          </tr>
+          <tr>
+            <td>`"dayPeriod"`</td>
+            <td>The field indicating the day period, either am/pm marker or others, e.g. noon, evening.</td>
+          </tr>
+          <tr>
+            <td>`"hour"`</td>
+            <td>The field indicating the hour in day.</td>
+          </tr>
+          <tr>
+            <td>`"minute"`</td>
+            <td>The field indicating the minute in hour.</td>
+          </tr>
+          <tr>
+            <td>`"second"`</td>
+            <td>The field indicating the second in minute.</td>
+          </tr>
+          <tr>
+            <td>`"timeZoneName"`</td>
+            <td>The field indicating the timezone name, e.g. PDT, Pacific Daylight Time, etc.</td>
+          </tr>
+        </table>
+      </emu-table>
+
     </emu-clause>
 
   </emu-clause>
@@ -278,10 +302,14 @@ contributors: Google, Ecma International
         1. Set _displayNames_.[[Fallback]] to _fallback_.
         1. Set _displayNames_.[[Locale]] to the value of _r_.[[Locale]].
         1. Let _dataLocale_ be _r_.[[dataLocale]].
-        1. Let _dataLocaleData_ be _localeData_.[[_dataLocale_]].
-        1. Let _dataLocaleTypes_ be _dataLocaleData_.[[_type_]].
-        1. Let _fields_ be dataLocaleTypes.[[_style_]].
-        1. Set _displayNames_.[[Fields]] to _fields_.
+        1. Let _dataLocaleData_ be _localeData_.[[&lt;_dataLocale_&gt;]].
+        1. Let _types_ be _dataLocaleData_.[[types]].
+        1. Assert: _types_ is a Record (see <emu-xref href="#sec-Intl.DisplayNames-internal-slots"></emu-xref>).
+        1. Let _typeFields_ be _types_.[[&lt;_type_&gt;]].
+        1. Assert: _typeFields_ is a Record (see <emu-xref href="#sec-Intl.DisplayNames-internal-slots"></emu-xref>).
+        1. Let _styleFields_ be _typeFields_.[[&lt;_style_&gt;]].
+        1. Assert: _styleFields_ is a Record (see <emu-xref href="#sec-Intl.DisplayNames-internal-slots"></emu-xref>).
+        1. Set _displayNames_.[[Fields]] to _styleFields_.
         1. Return _displayNames_.
       </emu-alg>
     </emu-clause>
@@ -331,6 +359,21 @@ contributors: Google, Ecma International
         The value of the [[RelevantExtensionKeys]] internal slot is &laquo;  &raquo;.
       </p>
 
+      <p>
+        The value of the [[LocaleData]] internal slot is implementation defined within the constraints described in <emu-xref href="#sec-internal-slots"></emu-xref> and the following additional constraints:
+      </p>
+
+      <ul>
+        <li>[[LocaleData]].[[&lt;_locale_&gt;]] must have a [[types]] field for all locale values _locale_.  The value of this field must be a Record, which must have fields with the names of the six display name types: `"language"`, `"region"`, `"script"`, `"currency"`, `"dateTime"`, and `"dateTimeField"`.</li>
+        <li>The value of each of those fields in turn must be a Records which must have fields with the names of the three display name styles: `"narrow"`, `"short"`, and `"long"`.</li>
+        <li>The three display name styles fields under display name type `"language"` should contain Records, with keys corresponding to language codes according to `unicode_language_id` production. The value of these fields must be string values.</li>
+        <li>The three display name styles fields under display name type `"region"` should contain Records, with keys corresponding to region codes. The value of these fields must be string values.</li>
+        <li>The three display name styles fields under display name type `"script"` should contain Records, with keys corresponding to script codes. The value of these fields must be string values.</li>
+        <li>The three display name styles fields under display name type `"currency"` should contain Records, with keys corresponding to currency codes. The value of these fields must be string values.</li>
+        <li>The three display name styles fields under display name type `"dateTime"` should contain Records, with keys corresponding to codes listed in <emu-xref href="#table-validcodefordatetime"></emu-xref>. The value of these fields must be string values.</li>
+        <li>The three display name styles fields under display name type `"dateTimeField"` should contain Records, with keys corresponding to codes listed in <emu-xref href="#table-validcodefordatetimefield"></emu-xref>. The value of these fields must be string values.</li>
+      </ul>
+
       <emu-note>
         It is recommended that implementations use the locale data provided by the Common Locale Data Repository (available at <a href="http://cldr.unicode.org/">http://cldr.unicode.org/</a>).
       </emu-note>
@@ -379,7 +422,7 @@ contributors: Google, Ecma International
         1. Let _code_ be ? ToString(_code_).
         1. If the result of ! IsValidCodeForDisplayNames(_displayNames_.[[Type]], _code_) is *false*, throw a *RangeError* exception.
         1. Let _fields_ be _displayNames_.[[Fields]].
-        1. Let _name_ be _fields_[[_code_]].
+        1. Let _name_ be _fields_[[&lt;_code_&gt;]].
         1. If _name_ is not *undefined*, then
           1. Return _name_.
         1. If _displayNames_.[[Fallback]] is `"code"`, then
@@ -457,6 +500,8 @@ contributors: Google, Ecma International
       <li>[[Style]] is one of the String values `"narrow"`, `"short"`, or `"long"`, identifying the display names style used.</li>
       <li>[[Type]] is one of the String values `"language"`, `"region"`, `"script"`, `"currency"`, `"dateTime"`, or `"dateTimeField"`, identifying the type of the display names requested.</li>
       <li>[[Fallback]] is one of the String values `"code"`, or `"none"`, identifying the fallback return when the system does not have the requested display name.</li>
+      <li>[[Fields]] is a Record (see <emu-xref href="#sec-Intl.DisplayNames-internal-slots"></emu-xref>) which
+        must have fields with keys corresponding to codes according to [[Style]] and [[Type]].</li>
     </ul>
 
   </emu-clause>
