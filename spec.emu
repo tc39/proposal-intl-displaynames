@@ -364,7 +364,7 @@ contributors: Google, Ecma International
       </p>
 
       <ul>
-        <li>[[LocaleData]].[[&lt;_locale_&gt;]] must have a types field for all locale values _locale_.  The value of this field must be a Record, which must have fields with the names of the six display name types: `"language"`, `"region"`, `"script"`, `"currency"`, `"dateTime"`, and `"dateTimeField"`.</li>
+        <li>[[LocaleData]].[[&lt;_locale_&gt;]] must have a [[types]] field for all locale values _locale_.  The value of this field must be a Record, which must have fields with the names of the six display name types: `"language"`, `"region"`, `"script"`, `"currency"`, `"dateTime"`, and `"dateTimeField"`.</li>
         <li>The value of each of those fields in turn must be a Records which must have fields with the names of the three display name styles: `"narrow"`, `"short"`, and `"long"`.</li>
         <li>The three display name styles fields under display name type `"language"` should contain Records, with keys corresponding to language codes according to `unicode_language_id` production. The value of these fields must be string values.</li>
         <li>The three display name styles fields under display name type `"region"` should contain Records, with keys corresponding to region codes. The value of these fields must be string values.</li>
