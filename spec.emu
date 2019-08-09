@@ -210,6 +210,10 @@ contributors: Google, Ecma International
             <td>`"12"`</td>
             <td>Name indicating December, e.g. Dec, December, etc.</td>
           </tr>
+          <tr>
+            <td>`"13"`</td>
+            <td>Name indicating the thirteen month in some non-Gregorian calendar.</td>
+          </tr>
         </table>
       </emu-table>
 
@@ -511,7 +515,7 @@ contributors: Google, Ecma International
         1. Let _displayNames_ be *this* value.
         1. If Type(_displayNames_) is not Object, throw a *TypeError* exception.
         1. If _displayNames_ does not have an [[InitializedDisplayNames]] internal slot, throw a *TypeError* exception.
-        1. If Type(_code_) is not String or Object, throw a *TypeError* exception.
+        1. If Type(_code_) is not String, Number or Object, throw a *TypeError* exception.
         1. Let _code_ be ? ToString(_code_).
         1. If the result of ! IsValidCodeForDisplayNames(_displayNames_.[[Type]], _code_) is *false*, throw a *RangeError* exception.
         1. Let _fields_ be _displayNames_.[[Fields]].
