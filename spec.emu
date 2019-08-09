@@ -59,47 +59,37 @@ contributors: Google, Ecma International
     <emu-clause id="sec-isvalidcodefordisplaynames" aoid="IsValidCodeForDisplayNames">
       <h1>IsValidCodeForDisplayNames ( _type_,  _code_ )</h1>
       <p>
-        The IsValidCodeForDisplayNames abstract operation is called with arguments _type_, and _code_.
-        The following algorithm refers to <a href="https://www.unicode.org/reports/tr35/#Identifiers">UTS 35's Unicode Language and Locale Identifiers grammar</a>.
+        The IsValidCodeForDisplayNames abstract operation is called with arguments _type_, and _code_. It verifies that the _code_ argument represents a well-formed code according to the _type_ argument. The algorithm refers to <a href="https://www.unicode.org/reports/tr35/#Identifiers">UTS 35's Unicode Language and Locale Identifiers grammar</a>. The following steps are taken:
       </p>
       <emu-alg>
         1. If _type_ is `"language"`, then
-          1. If _code_ matches the `unicode_language_id` production, then
-            1. Return *true*.
-          1. Else,
-            1. Return *false*.
+          1. If _code_ matches the `unicode_language_id` production, return *true*.
+          1. Return *false*.
         1. If _type_ is `"region"`, then
-          1. If _code_ matches the `unicode_region_subtag` production, then
-            1. Return *true*.
-          1. Else,
-            1. Return *false*.
+          1. If _code_ matches the `unicode_region_subtag` production, return *true*.
+          1. Return *false*.
         1. If _type_ is `"script"`, then
-          1. If _code_ matches the `unicode_script_subtag` production, then
-            1. Return *true*.
-          1. Else,
-            1. Return *false*.
-        1. If _type_ is `"currency"`, then
-          1. Return ! IsWellFormedCurrencyCode(_code_).
-        1. If _type_ is `"weekday"`
-          1. Return ! IsValidWeekdayCode(_code_).
-        1. If _type_ is `"month"`
-          1. Return ! IsValidMonthCode(_code_).
-        1. If _type_ is `"quarter"`
-          1. Return ! IsValidQuarterCode(_code_).
-        1. If _type_ is `"dayPeriod"`
-          1. Return ! IsValidDayPeriodCode(_code_).
+          1. If _code_ matches the `unicode_script_subtag` production, return *true*.
+          1. Return *false*.
+        1. If _type_ is `"currency"`, return ! IsWellFormedCurrencyCode(_code_).
+        1. If _type_ is `"weekday"`, return ! IsValidWeekdayCode(_code_).
+        1. If _type_ is `"month"`, return ! IsValidMonthCode(_code_).
+        1. If _type_ is `"quarter"`,  return ! IsValidQuarterCode(_code_).
+        1. If _type_ is `"dayPeriod"`, return ! IsValidDayPeriodCode(_code_).
         1. Assert: _type_ is `"dateTimeField"`
         1. Return ! IsValidDateTimeFieldCode(_code_).
       </emu-alg>
     </emu-clause>
 
     <emu-clause id="sec-isvalidweekdaycode" aoid="IsValidWeekdayCode">
-      <h1>IsValidWeekdayCode ( _code_ )</h1>
+      <h1>IsValidWeekdayCode ( _weekday_ )</h1>
+      <p>
+        The IsValidWeekdayCode abstract operation is called with arguments _weekday_. It verifies that the _weekday_ argument represents a valid weekday code. The following steps are taken:
+      </p>
       <emu-alg>
-        1. If _code_ is listed in <emu-xref href="#table-validcodeforweekday"></emu-xref>, then
-          1. Return *true*.
-        1. Else,
-          1. Return *false*.
+        1. Let _weekday_ be ? ToNumber(_weekday_).
+        1. If _weekday_ is listed in <emu-xref href="#table-validcodeforweekday"></emu-xref>, return *true*.
+        1. Return *false*.
       </emu-alg>
 
       <emu-table id="table-validcodeforweekday">
@@ -112,32 +102,32 @@ contributors: Google, Ecma International
             </tr>
           </thead>
           <tr>
-            <td>`"1"`</td>
-            <td>Name indicating Monday, e.g. M, Mon, Monday, etc.</td>
+            <td>`1`</td>
+            <td>Monday, e.g. M, Mon, Monday, etc.</td>
           </tr>
           <tr>
-            <td>`"2"`</td>
-            <td>Name indicating Tuesday, e.g. Tu, Tue, Tuesday, etc.</td>
+            <td>`2`</td>
+            <td>Tuesday, e.g. Tu, Tue, Tuesday, etc.</td>
           </tr>
           <tr>
-            <td>`"3"`</td>
-            <td>Name indicating Wednesday, e.g. W, Wed, Wednesday, etc.</td>
+            <td>`3`</td>
+            <td>Wednesday, e.g. W, Wed, Wednesday, etc.</td>
           </tr>
           <tr>
-            <td>`"4"`</td>
-            <td>Name indicating Thursday, e.g. Th, Thur, Thursday, etc.</td>
+            <td>`4`</td>
+            <td>Thursday, e.g. Th, Thur, Thursday, etc.</td>
           </tr>
           <tr>
-            <td>`"5"`</td>
-            <td>Name indicating Friday, e.g. F, Fri, Friday, etc.</td>
+            <td>`5`</td>
+            <td>Friday, e.g. F, Fri, Friday, etc.</td>
           </tr>
           <tr>
-            <td>`"6"`</td>
-            <td>Name indicating Saturday, e.g. Sa, Sat, Saturday, etc.</td>
+            <td>`6`</td>
+            <td>Saturday, e.g. Sa, Sat, Saturday, etc.</td>
           </tr>
           <tr>
-            <td>`"7"`</td>
-            <td>Name indicating Sunday, e.g. Su, Sun, Sunday, etc.</td>
+            <td>`7`</td>
+            <td>Sunday, e.g. Su, Sun, Sunday, etc.</td>
           </tr>
         </table>
       </emu-table>
@@ -145,12 +135,14 @@ contributors: Google, Ecma International
     </emu-clause>
 
     <emu-clause id="sec-isvalidmonthcode" aoid="IsValidMonthCode">
-      <h1>IsValidMonthCode ( _code_ )</h1>
+      <h1>IsValidMonthCode ( _month_ )</h1>
+      <p>
+        The IsValidMonthCode abstract operation is called with arguments _month_. It verifies that the _month_ argument represents a valid month code. The following steps are taken:
+      </p>
       <emu-alg>
-        1. If _code_ is listed in <emu-xref href="#table-validcodeformonth"></emu-xref>, then
-          1. Return *true*.
-        1. Else,
-          1. Return *false*.
+        1. Let _month_ be ? ToNumber(_month_).
+        1. If _month_ is listed in <emu-xref href="#table-validcodeformonth"></emu-xref>, return *true*.
+        1. Return *false*.
       </emu-alg>
 
       <emu-table id="table-validcodeformonth">
@@ -163,56 +155,56 @@ contributors: Google, Ecma International
             </tr>
           </thead>
           <tr>
-            <td>`"1"`</td>
-            <td>Name indicating January, e.g. Jan, January, etc.</td>
+            <td>`1`</td>
+            <td>The first month of the year, e.g. Jan, January.</td>
           </tr>
           <tr>
-            <td>`"2"`</td>
-            <td>Name indicating February, e.g. Feb, February, etc.</td>
+            <td>`2`</td>
+            <td>The second month of the year, e.g. Feb, February.</td>
           </tr>
           <tr>
-            <td>`"3"`</td>
-            <td>Name indicating March, e.g. Mar, March, etc.</td>
+            <td>`3`</td>
+            <td>The third month of the year, e.g. Mar, March.</td>
           </tr>
           <tr>
-            <td>`"4"`</td>
-            <td>Name indicating April, e.g. Apr, April, etc.</td>
+            <td>`4`</td>
+            <td>The fourth month of the year, e.g. Apr, April.</td>
           </tr>
           <tr>
-            <td>`"5"`</td>
-            <td>Name indicating May, e.g. May, etc.</td>
+            <td>`5`</td>
+            <td>The fifth month of the year, e.g. May.</td>
           </tr>
           <tr>
-            <td>`"6"`</td>
-            <td>Name indicating June, e.g. Jun, June, etc.</td>
+            <td>`6`</td>
+            <td>The sixth month of the year, e.g. Jun, June.</td>
           </tr>
           <tr>
-            <td>`"7"`</td>
-            <td>Name indicating July, e.g. Jul, July, etc.</td>
+            <td>`7`</td>
+            <td>The seventh month of the year, e.g. Jul, July.</td>
           </tr>
           <tr>
-            <td>`"8"`</td>
-            <td>Name indicating August, e.g. Aug, August, etc.</td>
+            <td>`8`</td>
+            <td>The eigth month of the year, e.g. Aug, August.</td>
           </tr>
           <tr>
-            <td>`"9"`</td>
-            <td>Name indicating September, e.g. Sep, September, etc.</td>
+            <td>`9`</td>
+            <td>The ninth month of the year, e.g. Sep, September.</td>
           </tr>
           <tr>
-            <td>`"10"`</td>
-            <td>Name indicating October, e.g. Oct, October, etc.</td>
+            <td>`10`</td>
+            <td>The tenth month of the year, e.g. Oct, October.</td>
           </tr>
           <tr>
-            <td>`"11"`</td>
-            <td>Name indicating November, e.g. Nov, November, etc.</td>
+            <td>`11`</td>
+            <td>The eleventh month of the year, e.g. Nov, November.</td>
           </tr>
           <tr>
-            <td>`"12"`</td>
-            <td>Name indicating December, e.g. Dec, December, etc.</td>
+            <td>`12`</td>
+            <td>The twelfth month of the year, e.g. Dec, December.</td>
           </tr>
           <tr>
-            <td>`"13"`</td>
-            <td>Name indicating the thirteen month in some non-Gregorian calendar.</td>
+            <td>`13`</td>
+            <td>The thirteenth month, in some non-Gregorian calendar.</td>
           </tr>
         </table>
       </emu-table>
@@ -220,12 +212,14 @@ contributors: Google, Ecma International
     </emu-clause>
 
     <emu-clause id="sec-isvalidquartercode" aoid="IsValidQuarterCode">
-      <h1>IsValidQuarterCode ( _code_ )</h1>
+      <h1>IsValidQuarterCode ( _quarter_ )</h1>
+      <p>
+        The IsValidQuarterCode abstract operation is called with arguments _quarter_. It verifies that the _quarter_ argument represents a valid month code. The following steps are taken:
+      </p>
       <emu-alg>
-        1. If _code_ is listed in <emu-xref href="#table-validcodeforquarter"></emu-xref>, then
-          1. Return *true*.
-        1. Else,
-          1. Return *false*.
+        1. Let _quarter_ be ? ToNumber(_quarter_).
+        1. If _quarter_ is listed in <emu-xref href="#table-validcodeforquarter"></emu-xref>, return *true*.
+        1. Return *false*.
       </emu-alg>
 
       <emu-table id="table-validcodeforquarter">
@@ -238,20 +232,20 @@ contributors: Google, Ecma International
             </tr>
           </thead>
           <tr>
-            <td>`"1"`</td>
-            <td>Name indicating the first quarter in year, e.g. Q1, first quarter, 1st quarter, etc.</td>
+            <td>`1`</td>
+            <td>The first quarter in year, e.g. Q1, first quarter, 1st quarter.</td>
           </tr>
           <tr>
-            <td>`"2"`</td>
-            <td>Name indicating the second quarter in year, e.g. Q2, second quarter, 2nd quarter, etc.</td>
+            <td>`2`</td>
+            <td>The second quarter in year, e.g. Q2, second quarter, 2nd quarter.</td>
           </tr>
           <tr>
-            <td>`"3"`</td>
-            <td>Name indicating the third quarter in year, e.g. Q3, third quarter, 3rd quarter, etc.</td>
+            <td>`3`</td>
+            <td>The third quarter in year, e.g. Q3, third quarter, 3rd quarter.</td>
           </tr>
           <tr>
-            <td>`"4"`</td>
-            <td>Name indicating the fourth quarter in year, e.g. Q4, fourth quarter, 4th quarter, etc.</td>
+            <td>`4`</td>
+            <td>The fourth quarter in year, e.g. Q4, fourth quarter, 4th quarter.</td>
           </tr>
         </table>
       </emu-table>
@@ -259,12 +253,13 @@ contributors: Google, Ecma International
     </emu-clause>
 
     <emu-clause id="sec-isvaliddayperiodcode" aoid="IsValidDayPeriodCode">
-      <h1>IsValidDayPeriodCode ( _code_ )</h1>
+      <h1>IsValidDayPeriodCode ( _dayperiod_ )</h1>
+      <p>
+        The IsValidDayPeriodCode abstract operation is called with arguments _dayperiod_. It verifies that the _dayperiod_ argument represents a valid day period code. The following steps are taken:
+      </p>
       <emu-alg>
-        1. If _code_ is listed in <emu-xref href="#table-validcodefordayperiod"></emu-xref>, then
-          1. Return *true*.
-        1. Else,
-          1. Return *false*.
+        1. If _dayperiod_ is listed in <emu-xref href="#table-validcodefordayperiod"></emu-xref>, return *true*.
+        1. Return *false*.
       </emu-alg>
 
       <emu-table id="table-validcodefordayperiod">
@@ -278,11 +273,11 @@ contributors: Google, Ecma International
           </thead>
           <tr>
             <td>`"am"`</td>
-            <td>Name indicating ante meridiem, e.g. AM, a.m., etc.</td>
+            <td>Ante meridiem, e.g. AM, a.m.</td>
           </tr>
           <tr>
             <td>`"pm"`</td>
-            <td>Name indicating post meridiem, e.g. PM, p.m., etc.</td>
+            <td>Post meridiem, e.g. PM, p.m.</td>
           </tr>
         </table>
       </emu-table>
@@ -290,12 +285,13 @@ contributors: Google, Ecma International
     </emu-clause>
 
     <emu-clause id="sec-isvaliddatetimefieldcode" aoid="IsValidDateTimeFieldCode">
-      <h1>IsValidDateTimeFieldCode ( _code_ )</h1>
+      <h1>IsValidDateTimeFieldCode ( _field_ )</h1>
+      <p>
+        The IsValidDateTimeFieldCode abstract operation is called with arguments _field_. It verifies that the __field_ argument represents a valid date time field code. The following steps are taken:
+      </p>
       <emu-alg>
-        1. If _code_ is listed in <emu-xref href="#table-validcodefordatetimefield"></emu-xref>, then
-          1. Return *true*.
-        1. Else,
-          1. Return *false*.
+        1. If _field_ is listed in <emu-xref href="#table-validcodefordatetimefield"></emu-xref>, return *true*.
+        1. Return *false*.
       </emu-alg>
 
       <emu-table id="table-validcodefordatetimefield">
@@ -516,14 +512,13 @@ contributors: Google, Ecma International
         1. If Type(_displayNames_) is not Object, throw a *TypeError* exception.
         1. If _displayNames_ does not have an [[InitializedDisplayNames]] internal slot, throw a *TypeError* exception.
         1. If Type(_code_) is not String, Number or Object, throw a *TypeError* exception.
-        1. Let _code_ be ? ToString(_code_).
+        1. If Type(_code_) is Object, then
+          1. Let _code_ be ? ToString(_code_).
         1. If the result of ! IsValidCodeForDisplayNames(_displayNames_.[[Type]], _code_) is *false*, throw a *RangeError* exception.
         1. Let _fields_ be _displayNames_.[[Fields]].
         1. Let _name_ be _fields_[[&lt;_code_&gt;]].
-        1. If _name_ is not *undefined*, then
-          1. Return _name_.
-        1. If _displayNames_.[[Fallback]] is `"code"`, then
-          1. Return _code_.
+        1. If _name_ is not *undefined*, return _name_.
+        1. If _displayNames_.[[Fallback]] is `"code"`, return _code_.
         1. Return *undefined*.
       </emu-alg>
     </emu-clause>
