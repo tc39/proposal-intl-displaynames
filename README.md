@@ -199,11 +199,11 @@ quarter.
 ```js
 // Get display names of quarter in English
 var quarterNames = new Intl.DisplayNames(['en'], {type: 'dateTime'});
-console.log(quarterNames.of('q3')); // "3rd quarter"
+console.log(quarterNames.of('3')); // "3rd quarter"
 
 // Get display names of quarter in Traditional Chinese
 quarterNames = new Intl.DisplayNames(['zh-Hant'], {type: 'dateTime'});
-console.log(quarterNames.of('q3')); // "第3季"
+console.log(quarterNames.of('3')); // "第3季"
 ```
 #### Day Period Display Names
 To create an Intl.DisplayNames for a locale and get the display name for
