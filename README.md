@@ -45,7 +45,7 @@ Intl.DisplayNames.prototype.of( code )
 ```
 * _options_ may have "localeMatcher", "style", and "type" properties.
   * The value of _style_ could be either "narrow", "short" or "long" to indicate the length of the display names. For example, ofLanguage("en-US") will return "English (United States)" under "long" style, but "English (US)" under "short" style. The default is "long".
-  * The value of _type_ could be either "region", "script", "language", "currency", "dateTime", or "dateTimeField".
+  * The value of _type_ could be either "region", "script", "language", "currency", "month", "weekday", "quarter", "dayPeriod", or "dateTimeField".
 * _code_ is a String.
 * Intl.DisplayNames.prototype.of( code ) function take a String as input and return a String, the display name of the _code_.
   * If the type is "region", the _code_ should be either an [ISO-3166 two letters region code](https://www.iso.org/iso-3166-country-codes.html),
@@ -55,8 +55,14 @@ or a [three digits UN M49 Geographic Regions](https://unstats.un.org/unsd/method
   * If the type is "currency", the _code_ should be a [3-letter ISO 4217 currency code](https://www.iso.org/iso-4217-currency-codes.html).
   * If the type is "dateTimeField", the _code_ should be one of the following:
     * "era", "year", "quarter", "month", "weekOfYear", "weekday", "day", "dayPeriod", "hour", "minute", "second", "timeZoneName".
-  * If the type is "dateTime", the _code_ should be one of the following:
-    * "sunday",   "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december", "q1", "q2", "q3", "q4", "am", "pm".
+  * If the type is "month", the _code_ should be one of the following:
+    * "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13".
+  * If the type is "weekday", the _code_ should be one of the following:
+    * "1", "2", "3", "4", "5", "6", "7".
+  * If the type is "quarter", the _code_ should be one of the following:
+    * "1", "2", "3", "4".
+  * If the type is "dayPeriod", the _code_ should be one of the following:
+    * "am", "pm".
 
 ### Authors
 * Frank Tang (@FrankYFTang)
@@ -163,24 +169,55 @@ console.log(dateTimeFieldNames.of('quarter')); // "季"
 console.log(dateTimeFieldNames.of('weekOfYear')); // "週"
 console.log(dateTimeFieldNames.of('hour')); // "小時"
 ```
-#### Date Time Display Names
+#### Month Display Names
 To create an Intl.DisplayNames for a locale and get the display name for
-date time.
+month.
 ```js
-// Get display names of date time in English
-var dateTimeNames = new Intl.DisplayNames(['en'], {type: 'dateTime'});
-console.log(dateTimeNames.of('monday')); // "Monday"
-console.log(dateTimeNames.of('april')); // "April"
-console.log(dateTimeNames.of('q3')); // "3rd quarter"
-console.log(dateTimeNames.of('pm')); // "PM"
+// Get display names of month in English
+var monthNames = new Intl.DisplayNames(['en'], {type: 'dateTime'});
+console.log(monthNames.of('4')); // "April"
 
-// Get display names of date time in Traditional Chinese
-dateTimeNames = new Intl.DisplayNames(['zh-Hant'], {type: 'dateTime'});
-console.log(dateTimeNames.of('monday')); // "星期一"
-console.log(dateTimeNames.of('april')); // "4月"
-console.log(dateTimeNames.of('q3')); // "第3季"
-console.log(dateTimeNames.of('pm')); // "下午"
+// Get display names of month in Traditional Chinese
+monthNames = new Intl.DisplayNames(['zh-Hant'], {type: 'dateTime'});
+console.log(monthNames.of('4')); // "4月"
 ```
+#### Weekday Display Names
+To create an Intl.DisplayNames for a locale and get the display name for
+weekday.
+```js
+// Get display names of weekday in English
+var weekdayNames = new Intl.DisplayNames(['en'], {type: 'dateTime'});
+console.log(dateTimeNames.of('1')); // "Monday"
+
+// Get display names of weekday in Traditional Chinese
+weekdayNames = new Intl.DisplayNames(['zh-Hant'], {type: 'dateTime'});
+console.log(weekdayNames.of('1')); // "星期一"
+```
+#### Quarter Display Names
+To create an Intl.DisplayNames for a locale and get the display name for
+quarter.
+```js
+// Get display names of quarter in English
+var quarterNames = new Intl.DisplayNames(['en'], {type: 'dateTime'});
+console.log(quarterNames.of('q3')); // "3rd quarter"
+
+// Get display names of quarter in Traditional Chinese
+quarterNames = new Intl.DisplayNames(['zh-Hant'], {type: 'dateTime'});
+console.log(quarterNames.of('q3')); // "第3季"
+```
+#### Day Period Display Names
+To create an Intl.DisplayNames for a locale and get the display name for
+day period.
+```js
+// Get display names of day period in English
+var dayPeriodNames = new Intl.DisplayNames(['en'], {type: 'dateTime'});
+console.log(dayPeriodNames.of('pm')); // "PM"
+
+// Get display names of day period in Traditional Chinese
+dayPeriodNames = new Intl.DisplayNames(['zh-Hant'], {type: 'dateTime'});
+console.log(dayPeriodNames.of('pm')); // "下午"
+```
+
 
 ### Supporting Materials:
 * [Slide for promoting from Stage 0 to Stage 1 for TC39 2019 January meeting.](https://goo.gl/qzQK8A)
