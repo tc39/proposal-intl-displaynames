@@ -395,14 +395,18 @@ contributors: Google, Ecma International
         1. Let _fallback_ be ? GetOption(_options_, `"fallback"`, `"string"`, &laquo; `"code"`, `"none"` &raquo;, `"code"`).
         1. Set _displayNames_.[[Fallback]] to _fallback_.
         1. Set _displayNames_.[[Locale]] to the value of _r_.[[Locale]].
-        1. Set _displayNames_.[[Calendar]] to _r_.[[ca]].
+        1. Let _calendar_ be _r_.[[ca]].
+        1. Set _displayNames_.[[Calendar]] to _calendar_.
         1. Let _dataLocale_ be _r_.[[dataLocale]].
         1. Let _dataLocaleData_ be _localeData_.[[&lt;_dataLocale_&gt;]].
         1. Let _types_ be _dataLocaleData_.[[types]].
         1. Assert: _types_ is a Record (see <emu-xref href="#sec-Intl.DisplayNames-internal-slots"></emu-xref>).
         1. Let _typeFields_ be _types_.[[&lt;_type_&gt;]].
         1. Assert: _typeFields_ is a Record (see <emu-xref href="#sec-Intl.DisplayNames-internal-slots"></emu-xref>).
-        1. Let _styleFields_ be _typeFields_.[[&lt;_style_&gt;]].
+        1. If _type_ is `"weekday"`, `"month"`, `"quarter"`, or `"dayPeriod"`, then
+          1. Let _styleFields_ be _typeFields_.[[&lt;_calendar_&gt;]].[[&lt;_style_&gt;]].
+        1. Else,
+          1. Let _styleFields_ be _typeFields_.[[&lt;_style_&gt;]].
         1. Assert: _styleFields_ is a Record (see <emu-xref href="#sec-Intl.DisplayNames-internal-slots"></emu-xref>).
         1. Set _displayNames_.[[Fields]] to _styleFields_.
         1. Return _displayNames_.
@@ -459,8 +463,9 @@ contributors: Google, Ecma International
       </p>
 
       <ul>
-        <li>[[LocaleData]].[[&lt;_locale_&gt;]] must have a [[types]] field for all locale values _locale_.  The value of this field must be a Record, which must have fields with the names of the six display name types: `"language"`, `"region"`, `"script"`, `"currency"`, `"weekday"`, `"month"`, `"quarter"`, `"dayPeriod"`, and `"dateTimeField"`.</li>
-        <li>The value of each of those fields in turn must be a Records which must have fields with the names of the three display name styles: `"narrow"`, `"short"`, and `"long"`.</li>
+        <li>[[LocaleData]].[[&lt;_locale_&gt;]] must have a [[types]] field for all locale values _locale_.  The value of this field must be a Record, which must have fields with the names of the nine display name types: `"language"`, `"region"`, `"script"`, `"currency"`, `"weekday"`, `"month"`, `"quarter"`, `"dayPeriod"`, and `"dateTimeField"`.</li>
+        <li>The value of fields `"language"`, `"region"`, `"script"`, `"currency"`, and  `"dateTimeField"` must be a Records which must have fields with the names of the three display name styles: `"narrow"`, `"short"`, and `"long"`.</li>
+        <li>The value of fields `"weekday"`, `"month"`, `"quarter"`, and `"dayPeriod"` must have a [[&lt;_calendar_&gt;]] field for all calendar values _calendar_. The value of each of those fields in turn must be a Records which must have fields with the names of the three display name styles: `"narrow"`, `"short"`, and `"long"`.</li>
         <li>The three display name styles fields under display name type `"language"` should contain Records, with keys corresponding to language codes according to `unicode_language_id` production. The value of these fields must be string values.</li>
         <li>The three display name styles fields under display name type `"region"` should contain Records, with keys corresponding to region codes. The value of these fields must be string values.</li>
         <li>The three display name styles fields under display name type `"script"` should contain Records, with keys corresponding to script codes. The value of these fields must be string values.</li>
