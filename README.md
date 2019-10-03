@@ -77,7 +77,7 @@ or a [three digits UN M49 Geographic Regions](https://unstats.un.org/unsd/method
   * Bradley Farias (@mbeck)
 * Editors
   * Jordan Harband (@ljharb)
-  * Kevin Smith @(zenparsing)
+  * Kevin Smith (@zenparsing)
 
 ### Prior art
 Mozilla already has [vendor specific implementation](https://firefox-source-docs.mozilla.org/intl/dataintl.html#mozintl-getlanguagedisplaynames-locales-langcodes).
