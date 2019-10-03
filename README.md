@@ -1,7 +1,8 @@
 ## Proposal: Intl.DisplayNames
 
 ### Stage
-Stage 2
+Stage 3
+* Advanced into Stage 3 in TC39 2019-10-2.
 * Advanced into Stage 2 in TC39 2019-6-5.
 * Advanced into Stage 1 in TC39 2019-1-31.
 * Discussed within ECMA402 members since July 2017. 
@@ -69,6 +70,14 @@ or a [three digits UN M49 Geographic Regions](https://unstats.un.org/unsd/method
 * Zibi Braniecki (@zbraniecki)
 * Sascha Brawer (@brawer)
 * Nebojša Ćirić (@nciric)
+
+### Stage 3 Reviewers
+* Reviewers
+  * Daniel Ehrenberg (@littledan)
+  * Bradley Farias (@mbeck)
+* Editors
+  * Jordan Harband (@ljharb)
+  * Kevin Smith @(zenparsing)
 
 ### Prior art
 Mozilla already has [vendor specific implementation](https://firefox-source-docs.mozilla.org/intl/dataintl.html#mozintl-getlanguagedisplaynames-locales-langcodes).
@@ -222,5 +231,5 @@ console.log(dayPeriodNames.of('pm')); // "下午"
 ### Supporting Materials:
 * [Slide for promoting from Stage 0 to Stage 1 for TC39 2019 January meeting.](https://goo.gl/qzQK8A)
 * [Slide for promoting from Stage 1 to Stage 2 for TC39 2019 June meeting.](https://goo.gl/ZAaVds)
-* [Slide for promoting from Stage 2 to Stage 3 for TC39 2019 July meeting.](http://shorturl.at/yPSZ1)
+* [Slide for promoting from Stage 2 to Stage 3 for TC39 2019 October meeting.](http://shorturl.at/yPSZ1)
 
