@@ -6,7 +6,7 @@
 <pre class="metadata">
 title: Intl.DisplayNames Proposal
 status: proposal
-stage: 2
+stage: 3
 location: https://github.com/tc39-transfer/proposal-intl-displaynames
 copyright: true
 contributors: Google, Ecma International
@@ -373,7 +373,7 @@ contributors: Google, Ecma International
 
       <emu-alg>
         1. If NewTarget is *undefined*, throw a *TypeError* exception.
-        1. Let _displayNames_ be ? OrdinaryCreateFromConstructor(NewTarget, `"%DisplayNamesPrototype%"`, « [[InitializedDisplayNames]], [[Locale]], [[Style]], [[Type]], [[Fallback]], [[Fields]] »).
+        1. Let _displayNames_ be ? OrdinaryCreateFromConstructor(NewTarget, `"%DisplayNamesPrototype%"`, « [[InitializedDisplayNames]], [[Locale]], [[Calendar]], [[Style]], [[Type]], [[Fallback]], [[Fields]] »).
         1. Let _requestedLocales_ be ? CanonicalizeLocaleList(_locales_).
         1. If _options_ is *undefined*, then
           1. Let _options_ be ObjectCreate(*null*).
@@ -383,6 +383,10 @@ contributors: Google, Ecma International
         1. Let _localeData_ be %DisplayNames%.[[LocaleData]].
         1. Let _matcher_ be ? GetOption(_options_, `"localeMatcher"`, `"string"`, &laquo; `"lookup"`, `"best fit"` &raquo;, `"best fit"`).
         1. Set _opt_.[[localeMatcher]] to _matcher_.
+        1. Let _calendar_ be ? GetOption(_options_, `"calendar"`, `"string"`, *undefined*, *undefined*).
+        1. If _calendar_ is not *undefined*, then
+          1. If _calendar_ does not match the `(3*8alphanum) *("-" (3*8alphanum))` sequence, throw a *RangeError* exception.
+        1. Set _opt_.[[ca]] to _calendar_.
         1. Let _r_ be ResolveLocale(%DisplayNames%.[[AvailableLocales]], _requestedLocales_, _opt_, %DisplayNames%.[[RelevantExtensionKeys]]).
         1. Let _style_ be ? GetOption(_options_, `"style"`, `"string"`, &laquo; `"narrow"`, `"short"`, `"long"` &raquo;, `"long"`).
         1. Set _displayNames_.[[Style]] to _style_.
@@ -391,13 +395,18 @@ contributors: Google, Ecma International
         1. Let _fallback_ be ? GetOption(_options_, `"fallback"`, `"string"`, &laquo; `"code"`, `"none"` &raquo;, `"code"`).
         1. Set _displayNames_.[[Fallback]] to _fallback_.
         1. Set _displayNames_.[[Locale]] to the value of _r_.[[Locale]].
+        1. Let _calendar_ be _r_.[[ca]].
+        1. Set _displayNames_.[[Calendar]] to _calendar_.
         1. Let _dataLocale_ be _r_.[[dataLocale]].
         1. Let _dataLocaleData_ be _localeData_.[[&lt;_dataLocale_&gt;]].
         1. Let _types_ be _dataLocaleData_.[[types]].
         1. Assert: _types_ is a Record (see <emu-xref href="#sec-Intl.DisplayNames-internal-slots"></emu-xref>).
         1. Let _typeFields_ be _types_.[[&lt;_type_&gt;]].
         1. Assert: _typeFields_ is a Record (see <emu-xref href="#sec-Intl.DisplayNames-internal-slots"></emu-xref>).
-        1. Let _styleFields_ be _typeFields_.[[&lt;_style_&gt;]].
+        1. If _type_ is `"weekday"`, `"month"`, `"quarter"`, or `"dayPeriod"`, then
+          1. Let _styleFields_ be _typeFields_.[[&lt;_calendar_&gt;]].[[&lt;_style_&gt;]].
+        1. Else,
+          1. Let _styleFields_ be _typeFields_.[[&lt;_style_&gt;]].
         1. Assert: _styleFields_ is a Record (see <emu-xref href="#sec-Intl.DisplayNames-internal-slots"></emu-xref>).
         1. Set _displayNames_.[[Fields]] to _styleFields_.
         1. Return _displayNames_.
@@ -446,7 +455,7 @@ contributors: Google, Ecma International
       </p>
 
       <p>
-        The value of the [[RelevantExtensionKeys]] internal slot is &laquo;  &raquo;.
+        The value of the [[RelevantExtensionKeys]] internal slot is &laquo; `"ca"` &raquo;.
       </p>
 
       <p>
@@ -454,17 +463,18 @@ contributors: Google, Ecma International
       </p>
 
       <ul>
-        <li>[[LocaleData]].[[&lt;_locale_&gt;]] must have a [[types]] field for all locale values _locale_.  The value of this field must be a Record, which must have fields with the names of the six display name types: `"language"`, `"region"`, `"script"`, `"currency"`, `"weekday"`, `"month"`, `"quarter"`, `"dayPeriod"`, and `"dateTimeField"`.</li>
-        <li>The value of each of those fields in turn must be a Records which must have fields with the names of the three display name styles: `"narrow"`, `"short"`, and `"long"`.</li>
-        <li>The three display name styles fields under display name type `"language"` should contain Records, with keys corresponding to language codes according to `unicode_language_id` production. The value of these fields must be string values.</li>
-        <li>The three display name styles fields under display name type `"region"` should contain Records, with keys corresponding to region codes. The value of these fields must be string values.</li>
-        <li>The three display name styles fields under display name type `"script"` should contain Records, with keys corresponding to script codes. The value of these fields must be string values.</li>
-        <li>The three display name styles fields under display name type `"currency"` should contain Records, with keys corresponding to currency codes. The value of these fields must be string values.</li>
-        <li>The three display name styles fields under display name type `"weekday"` should contain Records, with keys corresponding to codes listed in <emu-xref href="#table-validcodeforweekday"></emu-xref>. The value of these fields must be string values.</li>
-        <li>The three display name styles fields under display name type `"month"` should contain Records, with keys corresponding to codes listed in <emu-xref href="#table-validcodeformonth"></emu-xref>. The value of these fields must be string values.</li>
-        <li>The three display name styles fields under display name type `"quarter"` should contain Records, with keys corresponding to codes listed in <emu-xref href="#table-validcodeforquarter"></emu-xref>. The value of these fields must be string values.</li>
-        <li>The three display name styles fields under display name type `"dayPeriod"` should contain Records, with keys corresponding to codes listed in <emu-xref href="#table-validcodefordayperiod"></emu-xref>. The value of these fields must be string values.</li>
-        <li>The three display name styles fields under display name type `"dateTimeField"` should contain Records, with keys corresponding to codes listed in <emu-xref href="#table-validcodefordatetimefield"></emu-xref>. The value of these fields must be string values.</li>
+        <li>[[LocaleData]].[[&lt;_locale_&gt;]] must have a [[types]] field for all locale values _locale_.  The value of this field must be a Record, which must have fields with the names of one of the valid display name types: `"language"`, `"region"`, `"script"`, `"currency"`, `"weekday"`, `"month"`, `"quarter"`, `"dayPeriod"`, and `"dateTimeField"`.</li>
+        <li>The value of fields `"language"`, `"region"`, `"script"`, `"currency"`, and `"dateTimeField"` must be a Records which must have fields with the names of one of the valid display name styles: `"narrow"`, `"short"`, and `"long"`.</li>
+        <li>The value of fields `"weekday"`, `"month"`, `"quarter"`, and `"dayPeriod"` must have a [[&lt;_calendar_&gt;]] field for all calendar values _calendar_. The value of each of those fields in turn must be a Records which must have fields with the names of one of the valid display name styles: `"narrow"`, `"short"`, and `"long"`.</li>
+        <li>The display name styles fields under display name type `"language"` should contain Records, with keys corresponding to language codes according to `unicode_language_id` production. The value of these fields must be string values.</li>
+        <li>The display name styles fields under display name type `"region"` should contain Records, with keys corresponding to region codes. The value of these fields must be string values.</li>
+        <li>The display name styles fields under display name type `"script"` should contain Records, with keys corresponding to script codes. The value of these fields must be string values.</li>
+        <li>The display name styles fields under display name type `"currency"` should contain Records, with keys corresponding to currency codes. The value of these fields must be string values.</li>
+        <li>The display name styles fields under display name type `"weekday"` should contain Records, with keys corresponding to codes listed in <emu-xref href="#table-validcodeforweekday"></emu-xref>. The value of these fields must be string values.</li>
+        <li>The display name styles fields under display name type `"month"` should contain Records, with keys corresponding to codes listed in <emu-xref href="#table-validcodeformonth"></emu-xref>. The value of these fields must be string values.</li>
+        <li>The display name styles fields under display name type `"quarter"` should contain Records, with keys corresponding to codes listed in <emu-xref href="#table-validcodeforquarter"></emu-xref>. The value of these fields must be string values.</li>
+        <li>The display name styles fields under display name type `"dayPeriod"` should contain Records, with keys corresponding to codes listed in <emu-xref href="#table-validcodefordayperiod"></emu-xref>. The value of these fields must be string values.</li>
+        <li>The display name styles fields under display name type `"dateTimeField"` should contain Records, with keys corresponding to codes listed in <emu-xref href="#table-validcodefordatetimefield"></emu-xref>. The value of these fields must be string values.</li>
       </ul>
 
       <emu-note>
@@ -556,6 +566,10 @@ contributors: Google, Ecma International
             <td>`"locale"`</td>
           </tr>
           <tr>
+            <td>[[Calendar]]</td>
+            <td>`"calendar"`</td>
+          </tr>
+          <tr>
             <td>[[Style]]</td>
             <td>`"style"`</td>
           </tr>
@@ -589,6 +603,7 @@ contributors: Google, Ecma International
 
     <ul>
       <li>[[Locale]] is a String value with the language tag of the locale whose localization is used for formatting.</li>
+      <li>[[Calendar]] is a String value with the `"type"` given in Unicode Technical Standard 35 for the calendar used for formatting.</li>
       <li>[[Style]] is one of the String values `"narrow"`, `"short"`, or `"long"`, identifying the display names style used.</li>
       <li>[[Type]] is one of the String values `"language"`, `"region"`, `"script"`, `"currency"`, `"weekday"`, `"month"`, `"quarter"`, `"dayPeriod"`, or `"dateTimeField"`, identifying the type of the display names requested.</li>
       <li>[[Fallback]] is one of the String values `"code"`, or `"none"`, identifying the fallback return when the system does not have the requested display name.</li>
