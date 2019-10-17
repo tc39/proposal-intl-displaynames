@@ -48,10 +48,17 @@ contributors: Google, Ecma International
       </li>
       <li>
         There should be an open data source that implementations can use for the string values, e.g., CLDR.
+      </li>
+      <li>
+        Strings that rarely (never) change, and thus don't need to be dynamically generated.
+      </li>
+      <li>
+        Sets of strings that have so few items that it's more of a burden to expose Web API and maintain it forever than it would be for a website to just include those strings directly.
+      </li>
     </ul>
   </p>
   <p>
-  Additional strings included in Intl.DisplayNames would be added to the specification through a future ECMA-402 proposal, to be presented in the ECMA-402 Task Group and TC39 as part of its standardization through TC39 processes.
+  Additional strings included in Intl.DisplayNames should be added to the specification through a future ECMA-402 proposal, to be presented in the ECMA-402 Task Group and TC39 as part of its standardization through TC39 processes.
   </p>
   <emu-clause id="sec-intl-displaynames-abstracts">
     <h1>Abstract Operations for DisplayNames Objects</h1>
