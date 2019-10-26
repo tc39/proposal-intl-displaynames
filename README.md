@@ -188,11 +188,11 @@ To create an Intl.DisplayNames for a locale and get the display name for
 month.
 ```js
 // Get display names of month in English
-var monthNames = new Intl.DisplayNames(['en'], {type: 'dateTime'});
+var monthNames = new Intl.DisplayNames(['en'], {type: 'month'});
 console.log(monthNames.of('4')); // "April"
 
 // Get display names of month in Traditional Chinese
-monthNames = new Intl.DisplayNames(['zh-Hant'], {type: 'dateTime'});
+monthNames = new Intl.DisplayNames(['zh-Hant'], {type: 'month'});
 console.log(monthNames.of('4')); // "4月"
 ```
 #### Weekday Display Names
@@ -200,11 +200,11 @@ To create an Intl.DisplayNames for a locale and get the display name for
 weekday.
 ```js
 // Get display names of weekday in English
-var weekdayNames = new Intl.DisplayNames(['en'], {type: 'dateTime'});
+var weekdayNames = new Intl.DisplayNames(['en'], {type: 'weekday'});
 console.log(dateTimeNames.of('1')); // "Monday"
 
 // Get display names of weekday in Traditional Chinese
-weekdayNames = new Intl.DisplayNames(['zh-Hant'], {type: 'dateTime'});
+weekdayNames = new Intl.DisplayNames(['zh-Hant'], {type: 'weekday'});
 console.log(weekdayNames.of('1')); // "星期一"
 ```
 #### Quarter Display Names
@@ -212,11 +212,11 @@ To create an Intl.DisplayNames for a locale and get the display name for
 quarter.
 ```js
 // Get display names of quarter in English
-var quarterNames = new Intl.DisplayNames(['en'], {type: 'dateTime'});
+var quarterNames = new Intl.DisplayNames(['en'], {type: 'quarter'});
 console.log(quarterNames.of('3')); // "3rd quarter"
 
 // Get display names of quarter in Traditional Chinese
-quarterNames = new Intl.DisplayNames(['zh-Hant'], {type: 'dateTime'});
+quarterNames = new Intl.DisplayNames(['zh-Hant'], {type: 'quarter'});
 console.log(quarterNames.of('3')); // "第3季"
 ```
 #### Day Period Display Names
@@ -224,11 +224,11 @@ To create an Intl.DisplayNames for a locale and get the display name for
 day period.
 ```js
 // Get display names of day period in English
-var dayPeriodNames = new Intl.DisplayNames(['en'], {type: 'dateTime'});
+var dayPeriodNames = new Intl.DisplayNames(['en'], {type: 'dayPeriod'});
 console.log(dayPeriodNames.of('pm')); // "PM"
 
 // Get display names of day period in Traditional Chinese
-dayPeriodNames = new Intl.DisplayNames(['zh-Hant'], {type: 'dateTime'});
+dayPeriodNames = new Intl.DisplayNames(['zh-Hant'], {type: 'dayPeriod'});
 console.log(dayPeriodNames.of('pm')); // "下午"
 ```
 
