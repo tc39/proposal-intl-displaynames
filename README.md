@@ -5,7 +5,7 @@ Stage 3
 * Advanced into Stage 3 in TC39 2019-10-2.
 * Advanced into Stage 2 in TC39 2019-6-5.
 * Advanced into Stage 1 in TC39 2019-1-31.
-* Discussed within ECMA402 members since July 2017. 
+* Discussed within ECMA402 members since July 2017.
 
 
 ### Motivation
@@ -50,8 +50,8 @@ Intl.DisplayNames([ locales [ , options ]])
 Intl.DisplayNames.prototype.of( code )
 ```
 * _options_ may have "localeMatcher", "style", and "type" properties.
-  * The value of _style_ could be either "narrow", "short" or "long" to indicate the length of the display names. For example, ofLanguage("en-US") will return "English (United States)" under "long" style, but "English (US)" under "short" style. The default is "long".
-  * The value of _type_ could be either "region", "script", "language", "currency", "month", "weekday", "quarter", "dayPeriod", or "dateTimeField".
+  * The value of _style_ could be either "narrow", "short" or "long" to indicate the length of the display names. For example, for type of "language", of("en-US") will return "English (United States)" under "long" style, but "English (US)" under "short" style. The default is "long".
+  * The value of _type_ could be either "region", "script", "language", or "currency". 
 * _code_ is a String.
 * Intl.DisplayNames.prototype.of( code ) function take a String as input and return a String, the display name of the _code_.
   * If the type is "region", the _code_ should be either an [ISO-3166 two letters region code](https://www.iso.org/iso-3166-country-codes.html),
@@ -59,16 +59,6 @@ or a [three digits UN M49 Geographic Regions](https://unstats.un.org/unsd/method
   * If the type is "script", the _code_ should be an [ISO-15924 four letters script code](http://unicode.org/iso15924/iso15924-codes.html).
   * If the type is "language", the _code_ should be a _languageCode_ ["-" _scriptCode_] ["-" _regionCode_ ] *("-" _variant_ ) subsequence of the unicode_language_id grammar in [UTS 35's Unicode Language and Locale Identifiers grammar](http://unicode.org/reports/tr35/#Unicode_language_identifier). _languageCode_ is either a two letters ISO 639-1 language code or a three letters ISO 639-2 language code.
   * If the type is "currency", the _code_ should be a [3-letter ISO 4217 currency code](https://www.iso.org/iso-4217-currency-codes.html).
-  * If the type is "dateTimeField", the _code_ should be one of the following:
-    * "era", "year", "quarter", "month", "weekOfYear", "weekday", "day", "dayPeriod", "hour", "minute", "second", "timeZoneName".
-  * If the type is "month", the _code_ should be one of the following:
-    * "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13".
-  * If the type is "weekday", the _code_ should be one of the following:
-    * "1", "2", "3", "4", "5", "6", "7".
-  * If the type is "quarter", the _code_ should be one of the following:
-    * "1", "2", "3", "4".
-  * If the type is "dayPeriod", the _code_ should be one of the following:
-    * "am", "pm".
 
 ### Authors
 * Frank Tang (@FrankYFTang)
@@ -165,73 +155,6 @@ console.log(currencyNames.of('EUR')); // "歐元"
 console.log(currencyNames.of('TWD')); // "新台幣"
 console.log(currencyNames.of('CNY')); // "人民幣"
 ```
-#### Date Time Field Display Names
-To create an Intl.DisplayNames for a locale and get the display name for
-date time field.
-```js
-// Get display names of date time field in English
-var dateTimeFieldNames = new Intl.DisplayNames(['en'], {type: 'dateTimeField'});
-console.log(dateTimeFieldNames.of('year')); // "year"
-console.log(dateTimeFieldNames.of('quarter')); // "quarter"
-console.log(dateTimeFieldNames.of('weekOfYear')); // "weekOfYear"
-console.log(dateTimeFieldNames.of('hour')); // "hour"
-
-// Get display names of date time field in Traditional Chinese
-dateTimeFieldNames = new Intl.DisplayNames(['zh-Hant'], {type: 'dateTimeField'});
-console.log(dateTimeFieldNames.of('year')); // "年"
-console.log(dateTimeFieldNames.of('quarter')); // "季"
-console.log(dateTimeFieldNames.of('weekOfYear')); // "週"
-console.log(dateTimeFieldNames.of('hour')); // "小時"
-```
-#### Month Display Names
-To create an Intl.DisplayNames for a locale and get the display name for
-month.
-```js
-// Get display names of month in English
-var monthNames = new Intl.DisplayNames(['en'], {type: 'dateTime'});
-console.log(monthNames.of('4')); // "April"
-
-// Get display names of month in Traditional Chinese
-monthNames = new Intl.DisplayNames(['zh-Hant'], {type: 'dateTime'});
-console.log(monthNames.of('4')); // "4月"
-```
-#### Weekday Display Names
-To create an Intl.DisplayNames for a locale and get the display name for
-weekday.
-```js
-// Get display names of weekday in English
-var weekdayNames = new Intl.DisplayNames(['en'], {type: 'dateTime'});
-console.log(dateTimeNames.of('1')); // "Monday"
-
-// Get display names of weekday in Traditional Chinese
-weekdayNames = new Intl.DisplayNames(['zh-Hant'], {type: 'dateTime'});
-console.log(weekdayNames.of('1')); // "星期一"
-```
-#### Quarter Display Names
-To create an Intl.DisplayNames for a locale and get the display name for
-quarter.
-```js
-// Get display names of quarter in English
-var quarterNames = new Intl.DisplayNames(['en'], {type: 'dateTime'});
-console.log(quarterNames.of('3')); // "3rd quarter"
-
-// Get display names of quarter in Traditional Chinese
-quarterNames = new Intl.DisplayNames(['zh-Hant'], {type: 'dateTime'});
-console.log(quarterNames.of('3')); // "第3季"
-```
-#### Day Period Display Names
-To create an Intl.DisplayNames for a locale and get the display name for
-day period.
-```js
-// Get display names of day period in English
-var dayPeriodNames = new Intl.DisplayNames(['en'], {type: 'dateTime'});
-console.log(dayPeriodNames.of('pm')); // "PM"
-
-// Get display names of day period in Traditional Chinese
-dayPeriodNames = new Intl.DisplayNames(['zh-Hant'], {type: 'dateTime'});
-console.log(dayPeriodNames.of('pm')); // "下午"
-```
-
 
 ### Supporting Materials:
 * [Slide for promoting from Stage 0 to Stage 1 for TC39 2019 January meeting.](https://goo.gl/qzQK8A)
