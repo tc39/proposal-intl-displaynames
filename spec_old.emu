@@ -1,0 +1,616 @@
+<!doctype html>
+<meta charset="utf8">
+<link rel="stylesheet" href="./spec.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+<script src="./spec.js"></script>
+<pre class="metadata">
+title: Intl.DisplayNames Proposal
+status: proposal
+stage: 3
+location: https://github.com/tc39-transfer/proposal-intl-displaynames
+copyright: true
+contributors: Google, Ecma International
+</pre>
+<emu-biblio href="./biblio.json"></emu-biblio>
+<emu-clause id="intl-displaynames-objects">
+  <h1>DisplayNames Objects</h1>
+  <p>
+    For motivation and a high-level introduction, see <a href="https://github.com/tc39/proposal-intl-displaynames/blob/master/README.md">the explainer document</a>.
+  </p>
+  <p>
+    This proposal is intended to provide translation for strings of particular items which are application-independent, rather than translation for all kinds of strings. There are two classes of strings we're considering here:
+    <ul>
+      <li>
+        Strings that are already available because they're needed for other APIs. For example, names for the days of the week are necessary to provide Intl.DateTimeFormat capabilities. In the absence of a direct API, we see programs parsing the output of Intl.DateTimeFormat to find these names, which is an unreliable/unstable technique.
+      </li>
+      <li>
+        Strings that are universally standardized and are likely necessary for any multilingual JavaScript application. For example language/region names.
+      </li>
+    </ul>
+  </p>
+  <p>
+    For example, for language/region names, W3C recommends users to use a locale selector when handling multilingual content, and currently that means shipping a long list of translated language/region names with every such website.
+  </p>
+  <p>
+  Such data may potentially be time and politically sensitive and is unlikely to be specific to any particular website (i.e., it's unlikely that website A will want a different translation of any language name from website B).
+  </p>
+  <p>
+  For that reason, providing this data in the engine lowers the cost of shipping multilingual websites with locale selectors and move the responsibility for keeping the mapping of BCP47 language/region codes to display names with the engine which is in a better position to keep it up to date.
+  </p>
+  <p>
+  The set of strings included may grow over time, but we expect to restrict the growth according to pragmatic requirements, including:
+    <ul>
+      <li>
+        Strings which are included should be generically useful across multiple application types.
+      </li>
+      <li>
+        The inclusion of strings should not be too much of a burden on implementations in terms of data size.
+      </li>
+      <li>
+        There should be an open data source that implementations can use for the string values, e.g., CLDR.
+    </ul>
+  </p>
+  <p>
+  Additional strings included in Intl.DisplayNames would be added to the specification through a future ECMA-402 proposal, to be presented in the ECMA-402 Task Group and TC39 as part of its standardization through TC39 processes.
+  </p>
+  <emu-clause id="sec-intl-displaynames-abstracts">
+    <h1>Abstract Operations for DisplayNames Objects</h1>
+
+    <emu-clause id="sec-isvalidcodefordisplaynames" aoid="IsValidCodeForDisplayNames">
+      <h1>IsValidCodeForDisplayNames ( _type_,  _code_ )</h1>
+      <p>
+        The IsValidCodeForDisplayNames abstract operation is called with arguments _type_, and _code_. It verifies that the _code_ argument represents a well-formed code according to the _type_ argument. The algorithm refers to <a href="https://www.unicode.org/reports/tr35/#Identifiers">UTS 35's Unicode Language and Locale Identifiers grammar</a>. The following steps are taken:
+      </p>
+      <emu-alg>
+        1. If _type_ is `"language"`, then
+          1. If _code_ matches the `unicode_language_id` production, return *true*.
+          1. Return *false*.
+        1. If _type_ is `"region"`, then
+          1. If _code_ matches the `unicode_region_subtag` production, return *true*.
+          1. Return *false*.
+        1. If _type_ is `"script"`, then
+          1. If _code_ matches the `unicode_script_subtag` production, return *true*.
+          1. Return *false*.
+        1. If _type_ is `"currency"`, return ! IsWellFormedCurrencyCode(_code_).
+        1. If _type_ is `"weekday"`, return ! IsValidWeekdayCode(_code_).
+        1. If _type_ is `"month"`, return ! IsValidMonthCode(_code_).
+        1. If _type_ is `"quarter"`,  return ! IsValidQuarterCode(_code_).
+        1. If _type_ is `"dayPeriod"`, return ! IsValidDayPeriodCode(_code_).
+        1. Assert: _type_ is `"dateTimeField"`
+        1. Return ! IsValidDateTimeFieldCode(_code_).
+      </emu-alg>
+    </emu-clause>
+
+    <emu-clause id="sec-isvalidweekdaycode" aoid="IsValidWeekdayCode">
+      <h1>IsValidWeekdayCode ( _weekday_ )</h1>
+      <p>
+        The IsValidWeekdayCode abstract operation is called with arguments _weekday_. It verifies that the _weekday_ argument represents a valid weekday code. The following steps are taken:
+      </p>
+      <emu-alg>
+        1. Let _weekday_ be ? ToNumber(_weekday_).
+        1. If _weekday_ is listed in <emu-xref href="#table-validcodeforweekday"></emu-xref>, return *true*.
+        1. Return *false*.
+      </emu-alg>
+
+      <emu-table id="table-validcodeforweekday">
+        <emu-caption>Codes For Date Time of DisplayNames</emu-caption>
+        <table class="real-table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tr>
+            <td>`1`</td>
+            <td>Monday, e.g. M, Mon, Monday, etc.</td>
+          </tr>
+          <tr>
+            <td>`2`</td>
+            <td>Tuesday, e.g. Tu, Tue, Tuesday, etc.</td>
+          </tr>
+          <tr>
+            <td>`3`</td>
+            <td>Wednesday, e.g. W, Wed, Wednesday, etc.</td>
+          </tr>
+          <tr>
+            <td>`4`</td>
+            <td>Thursday, e.g. Th, Thur, Thursday, etc.</td>
+          </tr>
+          <tr>
+            <td>`5`</td>
+            <td>Friday, e.g. F, Fri, Friday, etc.</td>
+          </tr>
+          <tr>
+            <td>`6`</td>
+            <td>Saturday, e.g. Sa, Sat, Saturday, etc.</td>
+          </tr>
+          <tr>
+            <td>`7`</td>
+            <td>Sunday, e.g. Su, Sun, Sunday, etc.</td>
+          </tr>
+        </table>
+      </emu-table>
+
+    </emu-clause>
+
+    <emu-clause id="sec-isvalidmonthcode" aoid="IsValidMonthCode">
+      <h1>IsValidMonthCode ( _month_ )</h1>
+      <p>
+        The IsValidMonthCode abstract operation is called with arguments _month_. It verifies that the _month_ argument represents a valid month code. The following steps are taken:
+      </p>
+      <emu-alg>
+        1. Let _month_ be ? ToNumber(_month_).
+        1. If _month_ is listed in <emu-xref href="#table-validcodeformonth"></emu-xref>, return *true*.
+        1. Return *false*.
+      </emu-alg>
+
+      <emu-table id="table-validcodeformonth">
+        <emu-caption>Codes For Month of DisplayNames</emu-caption>
+        <table class="real-table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tr>
+            <td>`1`</td>
+            <td>The first month of the year, e.g. Jan, January.</td>
+          </tr>
+          <tr>
+            <td>`2`</td>
+            <td>The second month of the year, e.g. Feb, February.</td>
+          </tr>
+          <tr>
+            <td>`3`</td>
+            <td>The third month of the year, e.g. Mar, March.</td>
+          </tr>
+          <tr>
+            <td>`4`</td>
+            <td>The fourth month of the year, e.g. Apr, April.</td>
+          </tr>
+          <tr>
+            <td>`5`</td>
+            <td>The fifth month of the year, e.g. May.</td>
+          </tr>
+          <tr>
+            <td>`6`</td>
+            <td>The sixth month of the year, e.g. Jun, June.</td>
+          </tr>
+          <tr>
+            <td>`7`</td>
+            <td>The seventh month of the year, e.g. Jul, July.</td>
+          </tr>
+          <tr>
+            <td>`8`</td>
+            <td>The eigth month of the year, e.g. Aug, August.</td>
+          </tr>
+          <tr>
+            <td>`9`</td>
+            <td>The ninth month of the year, e.g. Sep, September.</td>
+          </tr>
+          <tr>
+            <td>`10`</td>
+            <td>The tenth month of the year, e.g. Oct, October.</td>
+          </tr>
+          <tr>
+            <td>`11`</td>
+            <td>The eleventh month of the year, e.g. Nov, November.</td>
+          </tr>
+          <tr>
+            <td>`12`</td>
+            <td>The twelfth month of the year, e.g. Dec, December.</td>
+          </tr>
+          <tr>
+            <td>`13`</td>
+            <td>The thirteenth month, for relevant calendar systems.</td>
+          </tr>
+        </table>
+      </emu-table>
+
+    </emu-clause>
+
+    <emu-clause id="sec-isvalidquartercode" aoid="IsValidQuarterCode">
+      <h1>IsValidQuarterCode ( _quarter_ )</h1>
+      <p>
+        The IsValidQuarterCode abstract operation is called with arguments _quarter_. It verifies that the _quarter_ argument represents a valid month code. The following steps are taken:
+      </p>
+      <emu-alg>
+        1. Let _quarter_ be ? ToNumber(_quarter_).
+        1. If _quarter_ is listed in <emu-xref href="#table-validcodeforquarter"></emu-xref>, return *true*.
+        1. Return *false*.
+      </emu-alg>
+
+      <emu-table id="table-validcodeforquarter">
+        <emu-caption>Codes For Quarter of DisplayNames</emu-caption>
+        <table class="real-table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tr>
+            <td>`1`</td>
+            <td>The first quarter in year, e.g. Q1, first quarter, 1st quarter.</td>
+          </tr>
+          <tr>
+            <td>`2`</td>
+            <td>The second quarter in year, e.g. Q2, second quarter, 2nd quarter.</td>
+          </tr>
+          <tr>
+            <td>`3`</td>
+            <td>The third quarter in year, e.g. Q3, third quarter, 3rd quarter.</td>
+          </tr>
+          <tr>
+            <td>`4`</td>
+            <td>The fourth quarter in year, e.g. Q4, fourth quarter, 4th quarter.</td>
+          </tr>
+        </table>
+      </emu-table>
+
+    </emu-clause>
+
+    <emu-clause id="sec-isvaliddayperiodcode" aoid="IsValidDayPeriodCode">
+      <h1>IsValidDayPeriodCode ( _dayperiod_ )</h1>
+      <p>
+        The IsValidDayPeriodCode abstract operation is called with arguments _dayperiod_. It verifies that the _dayperiod_ argument represents a valid day period code. The following steps are taken:
+      </p>
+      <emu-alg>
+        1. If _dayperiod_ is listed in <emu-xref href="#table-validcodefordayperiod"></emu-xref>, return *true*.
+        1. Return *false*.
+      </emu-alg>
+
+      <emu-table id="table-validcodefordayperiod">
+        <emu-caption>Codes For Day Period of DisplayNames</emu-caption>
+        <table class="real-table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tr>
+            <td>`"am"`</td>
+            <td>Ante meridiem, e.g. AM, a.m.</td>
+          </tr>
+          <tr>
+            <td>`"pm"`</td>
+            <td>Post meridiem, e.g. PM, p.m.</td>
+          </tr>
+        </table>
+      </emu-table>
+
+    </emu-clause>
+
+    <emu-clause id="sec-isvaliddatetimefieldcode" aoid="IsValidDateTimeFieldCode">
+      <h1>IsValidDateTimeFieldCode ( _field_ )</h1>
+      <p>
+        The IsValidDateTimeFieldCode abstract operation is called with arguments _field_. It verifies that the __field_ argument represents a valid date time field code. The following steps are taken:
+      </p>
+      <emu-alg>
+        1. If _field_ is listed in <emu-xref href="#table-validcodefordatetimefield"></emu-xref>, return *true*.
+        1. Return *false*.
+      </emu-alg>
+
+      <emu-table id="table-validcodefordatetimefield">
+        <emu-caption>Codes For Date Time Field of DisplayNames</emu-caption>
+        <table class="real-table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tr>
+            <td>`"era"`</td>
+            <td>The field indicating the era, e.g., AD or BC in the Gregorian (Julian) calendar.</td>
+          </tr>
+          <tr>
+            <td>`"year"`</td>
+            <td>The field indicating the year.</td>
+          </tr>
+          <tr>
+            <td>`"quarter"`</td>
+            <td>The field indicating the quarter, e.g., Q2, 2nd quarter, etc.</td>
+          </tr>
+          <tr>
+            <td>`"month"`</td>
+            <td>The field indicating the month, e.g. Sep, September, etc.</td>
+          </tr>
+          <tr>
+            <td>`"weekOfYear"`</td>
+            <td>The field indicating the week number within the current year.</td>
+          </tr>
+          <tr>
+            <td>`"weekday"`</td>
+            <td>The field indicating the day of week, e.g. Tue, Tuesday, etc.</td>
+          </tr>
+          <tr>
+            <td>`"day"`</td>
+            <td>The field indicating the day in month.</td>
+          </tr>
+          <tr>
+            <td>`"dayPeriod"`</td>
+            <td>The field indicating the day period, either am/pm marker or others, e.g. noon, evening.</td>
+          </tr>
+          <tr>
+            <td>`"hour"`</td>
+            <td>The field indicating the hour in day.</td>
+          </tr>
+          <tr>
+            <td>`"minute"`</td>
+            <td>The field indicating the minute in hour.</td>
+          </tr>
+          <tr>
+            <td>`"second"`</td>
+            <td>The field indicating the second in minute.</td>
+          </tr>
+          <tr>
+            <td>`"timeZoneName"`</td>
+            <td>The field indicating the timezone name, e.g. PDT, Pacific Daylight Time, etc.</td>
+          </tr>
+        </table>
+      </emu-table>
+
+    </emu-clause>
+
+  </emu-clause>
+
+  <emu-clause id="sec-intl-displaynames-constructor">
+    <h1>The Intl.DisplayNames Constructor</h1>
+
+    <p>
+      The DisplayNames constructor is a standard built-in property of the Intl object.</p>
+
+    <emu-clause id="sec-Intl.DisplayNames">
+      <h1>Intl.DisplayNames ([ _locales_ [ , _options_ ]])</h1>
+
+      <p>
+        When the *Intl.DisplayNames* function is called with optional arguments the following steps are taken:
+      </p>
+
+      <emu-alg>
+        1. If NewTarget is *undefined*, throw a *TypeError* exception.
+        1. Let _displayNames_ be ? OrdinaryCreateFromConstructor(NewTarget, `"%DisplayNamesPrototype%"`, « [[InitializedDisplayNames]], [[Locale]], [[Calendar]], [[Style]], [[Type]], [[Fallback]], [[Fields]] »).
+        1. Let _requestedLocales_ be ? CanonicalizeLocaleList(_locales_).
+        1. If _options_ is *undefined*, then
+          1. Let _options_ be ObjectCreate(*null*).
+        1. Else
+          1. Let _options_ be ? ToObject(_options_).
+        1. Let _opt_ be a new Record.
+        1. Let _localeData_ be %DisplayNames%.[[LocaleData]].
+        1. Let _matcher_ be ? GetOption(_options_, `"localeMatcher"`, `"string"`, &laquo; `"lookup"`, `"best fit"` &raquo;, `"best fit"`).
+        1. Set _opt_.[[localeMatcher]] to _matcher_.
+        1. Let _calendar_ be ? GetOption(_options_, `"calendar"`, `"string"`, *undefined*, *undefined*).
+        1. If _calendar_ is not *undefined*, then
+          1. If _calendar_ does not match the `(3*8alphanum) *("-" (3*8alphanum))` sequence, throw a *RangeError* exception.
+        1. Set _opt_.[[ca]] to _calendar_.
+        1. Let _r_ be ResolveLocale(%DisplayNames%.[[AvailableLocales]], _requestedLocales_, _opt_, %DisplayNames%.[[RelevantExtensionKeys]]).
+        1. Let _style_ be ? GetOption(_options_, `"style"`, `"string"`, &laquo; `"narrow"`, `"short"`, `"long"` &raquo;, `"long"`).
+        1. Set _displayNames_.[[Style]] to _style_.
+        1. Let _type_ be ? GetOption(_options_, `"type"`, `"string"`, &laquo; `"language"`, `"region"`, `"script"`, `"currency"`, `"weekday"`, `"month"`, `"quarter"`, `"dayPeriod"`, `"dateTimeField"` &raquo;, `"language"`).
+        1. Set _displayNames_.[[Type]] to _type_.
+        1. Let _fallback_ be ? GetOption(_options_, `"fallback"`, `"string"`, &laquo; `"code"`, `"none"` &raquo;, `"code"`).
+        1. Set _displayNames_.[[Fallback]] to _fallback_.
+        1. Set _displayNames_.[[Locale]] to the value of _r_.[[Locale]].
+        1. Let _calendar_ be _r_.[[ca]].
+        1. Set _displayNames_.[[Calendar]] to _calendar_.
+        1. Let _dataLocale_ be _r_.[[dataLocale]].
+        1. Let _dataLocaleData_ be _localeData_.[[&lt;_dataLocale_&gt;]].
+        1. Let _types_ be _dataLocaleData_.[[types]].
+        1. Assert: _types_ is a Record (see <emu-xref href="#sec-Intl.DisplayNames-internal-slots"></emu-xref>).
+        1. Let _typeFields_ be _types_.[[&lt;_type_&gt;]].
+        1. Assert: _typeFields_ is a Record (see <emu-xref href="#sec-Intl.DisplayNames-internal-slots"></emu-xref>).
+        1. If _type_ is `"weekday"`, `"month"`, `"quarter"`, or `"dayPeriod"`, then
+          1. Let _styleFields_ be _typeFields_.[[&lt;_calendar_&gt;]].[[&lt;_style_&gt;]].
+        1. Else,
+          1. Let _styleFields_ be _typeFields_.[[&lt;_style_&gt;]].
+        1. Assert: _styleFields_ is a Record (see <emu-xref href="#sec-Intl.DisplayNames-internal-slots"></emu-xref>).
+        1. Set _displayNames_.[[Fields]] to _styleFields_.
+        1. Return _displayNames_.
+      </emu-alg>
+    </emu-clause>
+  </emu-clause>
+
+  <emu-clause id="sec-properties-of-intl-displaynames-constructor">
+    <h1>Properties of the Intl.DisplayNames Constructor</h1>
+
+    <p>
+      The Intl.DisplayNames constructor has the following properties:
+    </p>
+
+    <emu-clause id="sec-Intl.DisplayNames.prototype">
+      <h1>Intl.DisplayNames.prototype</h1>
+
+      <p>
+        The value of *Intl.DisplayNames.prototype* is *%DisplayNamesPrototype%*.
+      </p>
+      <p>
+        This property has the attributes { [[Writable]]: *false*, [[Enumerable]]: *false*, [[Configurable]]: *false* }.
+      </p>
+    </emu-clause>
+
+    <emu-clause id="sec-Intl.DisplayNames.supportedLocalesOf">
+      <h1>Intl.DisplayNames.supportedLocalesOf ( _locales_ [, _options_ ])</h1>
+
+      <p>
+        When the *supportedLocalesOf* method of *%DisplayNames%* is called, the following steps are taken:
+      </p>
+
+      <emu-alg>
+        1. Let _availableLocales_ be *%DisplayNames%*.[[AvailableLocales]].
+        1. Let _requestedLocales_ be ? CanonicalizeLocaleList(_locales_).
+        1. Return ? SupportedLocales(_availableLocales_, _requestedLocales_, _options_).
+      </emu-alg>
+
+    </emu-clause>
+
+    <emu-clause id="sec-Intl.DisplayNames-internal-slots">
+      <h1>Internal slots</h1>
+
+      <p>
+        The value of the [[AvailableLocales]] internal slot is implementation defined within the constraints described in <emu-xref href="#sec-internal-slots"></emu-xref>.
+      </p>
+
+      <p>
+        The value of the [[RelevantExtensionKeys]] internal slot is &laquo; `"ca"` &raquo;.
+      </p>
+
+      <p>
+        The value of the [[LocaleData]] internal slot is implementation defined within the constraints described in <emu-xref href="#sec-internal-slots"></emu-xref> and the following additional constraints:
+      </p>
+
+      <ul>
+        <li>[[LocaleData]].[[&lt;_locale_&gt;]] must have a [[types]] field for all locale values _locale_.  The value of this field must be a Record, which must have fields with the names of one of the valid display name types: `"language"`, `"region"`, `"script"`, `"currency"`, `"weekday"`, `"month"`, `"quarter"`, `"dayPeriod"`, and `"dateTimeField"`.</li>
+        <li>The value of fields `"language"`, `"region"`, `"script"`, `"currency"`, and `"dateTimeField"` must be a Records which must have fields with the names of one of the valid display name styles: `"narrow"`, `"short"`, and `"long"`.</li>
+        <li>The value of fields `"weekday"`, `"month"`, `"quarter"`, and `"dayPeriod"` must have a [[&lt;_calendar_&gt;]] field for all calendar values _calendar_. The value of each of those fields in turn must be a Records which must have fields with the names of one of the valid display name styles: `"narrow"`, `"short"`, and `"long"`.</li>
+        <li>The display name styles fields under display name type `"language"` should contain Records, with keys corresponding to language codes according to `unicode_language_id` production. The value of these fields must be string values.</li>
+        <li>The display name styles fields under display name type `"region"` should contain Records, with keys corresponding to region codes. The value of these fields must be string values.</li>
+        <li>The display name styles fields under display name type `"script"` should contain Records, with keys corresponding to script codes. The value of these fields must be string values.</li>
+        <li>The display name styles fields under display name type `"currency"` should contain Records, with keys corresponding to currency codes. The value of these fields must be string values.</li>
+        <li>The display name styles fields under display name type `"weekday"` should contain Records, with keys corresponding to codes listed in <emu-xref href="#table-validcodeforweekday"></emu-xref>. The value of these fields must be string values.</li>
+        <li>The display name styles fields under display name type `"month"` should contain Records, with keys corresponding to codes listed in <emu-xref href="#table-validcodeformonth"></emu-xref>. The value of these fields must be string values.</li>
+        <li>The display name styles fields under display name type `"quarter"` should contain Records, with keys corresponding to codes listed in <emu-xref href="#table-validcodeforquarter"></emu-xref>. The value of these fields must be string values.</li>
+        <li>The display name styles fields under display name type `"dayPeriod"` should contain Records, with keys corresponding to codes listed in <emu-xref href="#table-validcodefordayperiod"></emu-xref>. The value of these fields must be string values.</li>
+        <li>The display name styles fields under display name type `"dateTimeField"` should contain Records, with keys corresponding to codes listed in <emu-xref href="#table-validcodefordatetimefield"></emu-xref>. The value of these fields must be string values.</li>
+      </ul>
+
+      <emu-note>
+        It is recommended that implementations use the locale data provided by the Common Locale Data Repository (available at <a href="http://cldr.unicode.org/">http://cldr.unicode.org/</a>).
+      </emu-note>
+
+    </emu-clause>
+  </emu-clause>
+
+  <emu-clause id="sec-properties-of-intl-displaynames-prototype-object">
+    <h1>Properties of the Intl.DisplayNames Prototype Object</h1>
+
+    <p>
+      The Intl.DisplayNames prototype object, referred to as *%DisplayNamesPrototype%*, is itself an ordinary object. It is not a Intl.DisplayNames instance, does not have an [[InitializedDisplayNames]] internal slot or any of the other internal slots of Intl.DisplayNames instance objects.
+    </p>
+
+    <emu-clause id="sec-Intl.DisplayNames.prototype.constructor">
+      <h1>Intl.DisplayNames.prototype.constructor</h1>
+
+      <p>
+        The initial value of *Intl.DisplayNames.prototype.constructor* is the intrinsic object *%DisplayNames%*.
+      </p>
+    </emu-clause>
+
+    <emu-clause id="sec-Intl.DisplayNames.prototype-@@tostringtag">
+      <h1>Intl.DisplayNames.prototype[ @@toStringTag ]</h1>
+
+      <p>
+        The initial value of the @@toStringTag property is the string value `"Intl.DisplayNames"`.
+      </p>
+      <p>
+        This property has the attributes { [[Writable]]: *false*, [[Enumerable]]: *false*, [[Configurable]]: *true* }.
+      </p>
+    </emu-clause>
+
+    <emu-clause id="sec-Intl.DisplayNames.prototype.of" aoid="Intl.DisplayNames.prototype.of">
+      <h1>Intl.DisplayNames.prototype.of( _code_ )</h1>
+
+      <p>
+        When the *Intl.DisplayNames.prototype.of* is called with an argument _code_, the following steps are taken:
+      </p>
+
+      <emu-alg>
+        1. Let _displayNames_ be *this* value.
+        1. If Type(_displayNames_) is not Object, throw a *TypeError* exception.
+        1. If _displayNames_ does not have an [[InitializedDisplayNames]] internal slot, throw a *TypeError* exception.
+        1. If Type(_code_) is not String, Number or Object, throw a *TypeError* exception.
+        1. If Type(_code_) is Object, then
+          1. Let _code_ be ? ToString(_code_).
+        1. If the result of ! IsValidCodeForDisplayNames(_displayNames_.[[Type]], _code_) is *false*, throw a *RangeError* exception.
+        1. Let _fields_ be _displayNames_.[[Fields]].
+        1. Let _name_ be _fields_[[&lt;_code_&gt;]].
+        1. If _name_ is not *undefined*, return _name_.
+        1. If _displayNames_.[[Fallback]] is `"code"`, return _code_.
+        1. Return *undefined*.
+      </emu-alg>
+    </emu-clause>
+
+    <emu-clause id="sec-Intl.DisplayNames.prototype.resolvedOptions">
+      <h1>Intl.DisplayNames.prototype.resolvedOptions ()</h1>
+
+      <p>
+        This function provides access to the locale and options computed during initialization of the object.
+      </p>
+
+      <emu-alg>
+        1. Let _displayNames_ be *this* value.
+        1. If Type(_displayNames_) is not Object, throw a *TypeError* exception.
+        1. If _displayNames_ does not have an [[InitializedDisplayNames]] internal slot, throw a *TypeError* exception.
+        1. Let _options_ be ! ObjectCreate(%ObjectPrototype%).
+        1. For each row of <emu-xref href="#table-displaynames-resolvedoptions-properties"></emu-xref>, except the header row, in table order, do
+          1. Let _p_ be the Property value of the current row.
+          1. Let _v_ be the value of _displayNames_'s internal slot whose name is the Internal Slot value of the current row.
+          1. If _v_ is not *undefined*, then
+            1. Perform ! CreateDataPropertyOrThrow(_options_, _p_, _v_).
+        1. Return _options_.
+      </emu-alg>
+
+      <emu-table id="table-displaynames-resolvedoptions-properties">
+        <emu-caption>Resolved Options of DisplayNames Instances</emu-caption>
+        <table class="real-table">
+          <thead>
+            <tr>
+              <th>Internal Slot</th>
+              <th>Property</th>
+            </tr>
+          </thead>
+          <tr>
+            <td>[[Locale]]</td>
+            <td>`"locale"`</td>
+          </tr>
+          <tr>
+            <td>[[Calendar]]</td>
+            <td>`"calendar"`</td>
+          </tr>
+          <tr>
+            <td>[[Style]]</td>
+            <td>`"style"`</td>
+          </tr>
+          <tr>
+            <td>[[Type]]</td>
+            <td>`"type"`</td>
+          </tr>
+          <tr>
+            <td>[[Fallback]]</td>
+            <td>`"fallback"`</td>
+          </tr>
+        </table>
+      </emu-table>
+    </emu-clause>
+  </emu-clause>
+
+  <emu-clause id="sec-properties-of-intl-displaynames-instances">
+    <h1>Properties of Intl.DisplayNames Instances</h1>
+
+    <p>
+      Intl.DisplayNames instances are ordinary objects that inherit properties from %DisplayNamesPrototype%.
+    </p>
+
+    <p>
+      Intl.DisplayNames instances have an [[InitializedDisplayNames]] internal slot.
+    </p>
+
+    <p>
+      Intl.DisplayNames instances also have several internal slots that are computed by the constructor:
+    </p>
+
+    <ul>
+      <li>[[Locale]] is a String value with the language tag of the locale whose localization is used for formatting.</li>
+      <li>[[Calendar]] is a String value with the `"type"` given in Unicode Technical Standard 35 for the calendar used for formatting.</li>
+      <li>[[Style]] is one of the String values `"narrow"`, `"short"`, or `"long"`, identifying the display names style used.</li>
+      <li>[[Type]] is one of the String values `"language"`, `"region"`, `"script"`, `"currency"`, `"weekday"`, `"month"`, `"quarter"`, `"dayPeriod"`, or `"dateTimeField"`, identifying the type of the display names requested.</li>
+      <li>[[Fallback]] is one of the String values `"code"`, or `"none"`, identifying the fallback return when the system does not have the requested display name.</li>
+      <li>[[Fields]] is a Record (see <emu-xref href="#sec-Intl.DisplayNames-internal-slots"></emu-xref>) which
+        must have fields with keys corresponding to codes according to [[Style]] and [[Type]].</li>
+    </ul>
+
+  </emu-clause>
+</emu-clause>
