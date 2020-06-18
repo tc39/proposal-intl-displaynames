@@ -63,23 +63,28 @@ contributors: Google, Ecma International
   <emu-clause id="sec-intl-displaynames-abstracts">
     <h1>Abstract Operations for DisplayNames Objects</h1>
 
-    <emu-clause id="sec-isvalidcodefordisplaynames" aoid="IsValidCodeForDisplayNames">
-      <h1>IsValidCodeForDisplayNames ( _type_,  _code_ )</h1>
+    <emu-clause id="sec-canonicalcodefordisplaynames" aoid="CanonicalCodeForDisplayNames">
+      <h1>CanonicalCodeForDisplayNames ( _type_,  _code_ )</h1>
       <p>
-        The IsValidCodeForDisplayNames abstract operation is called with arguments _type_, and _code_. It verifies that the _code_ argument represents a well-formed code according to the _type_ argument. The algorithm refers to <a href="https://www.unicode.org/reports/tr35/#Identifiers">UTS 35's Unicode Language and Locale Identifiers grammar</a>. The following steps are taken:
+        The CanonicalCodeForDisplayNames abstract operation is called with arguments _type_, and _code_. It verifies that the _code_ argument represents a well-formed code according to the _type_ argument and returns the case-regularized form of the _code_. The algorithm refers to <a href="https://www.unicode.org/reports/tr35/#Identifiers">UTS 35's Unicode Language and Locale Identifiers grammar</a>. The following steps are taken:
       </p>
       <emu-alg>
         1. If _type_ is `"language"`, then
-          1. If _code_ matches the `unicode_language_id` production, return *true*.
-          1. Return *false*.
+          1. If _code_ does not matches the `unicode_language_id` production, throw a *RangeError* exceptipon.
+          1. Let _code_ be the result of mapping _code_ to lower case as described in <emu-xref href="#sec-case-sensitivity-and-case-mapping"></emu-xref>.
+          1. Return _code_.
         1. If _type_ is `"region"`, then
-          1. If _code_ matches the `unicode_region_subtag` production, return *true*.
-          1. Return *false*.
+          1. If _code_ does not matches the `unicode_region_subtag` production, throw a *RangeError* exceptipon.
+          1. Let _code_ be the result of mapping _code_ to upper case as described in <emu-xref href="#sec-case-sensitivity-and-case-mapping"></emu-xref>.
+          1. Return _code_.
         1. If _type_ is `"script"`, then
-          1. If _code_ matches the `unicode_script_subtag` production, return *true*.
-          1. Return *false*.
+          1. If _code_ does not matches the `unicode_script_subtag` production, throw a *RangeError* exceptipon.
+          1. Let _code_ be the result of mapping the first character in _code_ to upper case, and mapping the second, third and fourth character in _code_ to lower case, as described in <emu-xref href="#sec-case-sensitivity-and-case-mapping"></emu-xref>.
+          1. Return _code_.
         1. Assert: _type_ is `"currency"`
-        1. Return ! IsWellFormedCurrencyCode(_code_).
+        1. If ! IsWellFormedCurrencyCode(_code_) is *false*, throw a *RangeError* exceptipon.
+        1. Let _code_ be the result of mapping _code_ to upper case as described in <emu-xref href="#sec-case-sensitivity-and-case-mapping"></emu-xref>.
+        1. Return _code_.
       </emu-alg>
     </emu-clause>
 
@@ -113,7 +118,8 @@ contributors: Google, Ecma International
         1. Let _r_ be ResolveLocale(%DisplayNames%.[[AvailableLocales]], _requestedLocales_, _opt_, %DisplayNames%.[[RelevantExtensionKeys]]).
         1. Let _style_ be ? GetOption(_options_, `"style"`, `"string"`, &laquo; `"narrow"`, `"short"`, `"long"` &raquo;, `"long"`).
         1. Set _displayNames_.[[Style]] to _style_.
-        1. Let _type_ be ? GetOption(_options_, `"type"`, `"string"`, &laquo; `"language"`, `"region"`, `"script"`, `"currency"` &raquo;, `"language"`).
+        1. Let _type_ be ? GetOption(_options_, `"type"`, `"string"`, &laquo; `"language"`, `"region"`, `"script"`, `"currency"` &raquo;, *undefined*).
+        1. If _type_ is *undefined*, throw a *TypeError* exception.
         1. Set _displayNames_.[[Type]] to _type_.
         1. Let _fallback_ be ? GetOption(_options_, `"fallback"`, `"string"`, &laquo; `"code"`, `"none"` &raquo;, `"code"`).
         1. Set _displayNames_.[[Fallback]] to _fallback_.
@@ -234,7 +240,7 @@ contributors: Google, Ecma International
         1. If Type(_displayNames_) is not Object, throw a *TypeError* exception.
         1. If _displayNames_ does not have an [[InitializedDisplayNames]] internal slot, throw a *TypeError* exception.
         1. Let _code_ be ? ToString(_code_).
-        1. If the result of ! IsValidCodeForDisplayNames(_displayNames_.[[Type]], _code_) is *false*, throw a *RangeError* exception.
+        1. Let _code_ be ? CanonicalCodeForDisplayNames(_displayNames_.[[Type]], _code_).
         1. Let _fields_ be _displayNames_.[[Fields]].
         1. Let _name_ be _fields_[[&lt;_code_&gt;]].
         1. If _name_ is not *undefined*, return _name_.
