@@ -22,6 +22,11 @@
     },
     {
       "type": "op",
+      "aoid": "CanonicalizeUnicodeLocaleId",
+      "id": "sec-canonicalizeunicodelocaleid"
+    },
+    {
+      "type": "op",
       "aoid": "SupportedLocales",
       "id": "sec-supportedlocales"
     },
