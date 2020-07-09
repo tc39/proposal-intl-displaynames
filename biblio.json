@@ -27,6 +27,11 @@
     },
     {
       "type": "op",
+      "aoid": "IsStructurallyValidLanguageTag",
+      "id": "sec-isstructurallyvalidlanguagetag"
+    },
+    {
+      "type": "op",
       "aoid": "SupportedLocales",
       "id": "sec-supportedlocales"
     },
