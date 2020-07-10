@@ -98,20 +98,17 @@ contributors: Google, Ecma International
       The DisplayNames constructor is a standard built-in property of the Intl object.</p>
 
     <emu-clause id="sec-Intl.DisplayNames">
-      <h1>Intl.DisplayNames ([ _locales_ [ , _options_ ]])</h1>
+      <h1>Intl.DisplayNames ( _locales_ , _options_ )</h1>
 
       <p>
-        When the *Intl.DisplayNames* function is called with optional arguments the following steps are taken:
+        When the *Intl.DisplayNames* function is called with arguments the following steps are taken:
       </p>
 
       <emu-alg>
         1. If NewTarget is *undefined*, throw a *TypeError* exception.
         1. Let _displayNames_ be ? OrdinaryCreateFromConstructor(NewTarget, `"%DisplayNamesPrototype%"`, « [[InitializedDisplayNames]], [[Locale]], [[Style]], [[Type]], [[Fallback]], [[Fields]] »).
         1. Let _requestedLocales_ be ? CanonicalizeLocaleList(_locales_).
-        1. If _options_ is *undefined*, then
-          1. Let _options_ be ObjectCreate(*null*).
-        1. Else
-          1. Let _options_ be ? ToObject(_options_).
+        1. Let _options_ be ? ToObject(_options_).
         1. Let _opt_ be a new Record.
         1. Let _localeData_ be %DisplayNames%.[[LocaleData]].
         1. Let _matcher_ be ? GetOption(_options_, `"localeMatcher"`, `"string"`, &laquo; `"lookup"`, `"best fit"` &raquo;, `"best fit"`).
