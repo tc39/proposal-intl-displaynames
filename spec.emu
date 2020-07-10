@@ -314,7 +314,6 @@ contributors: Google, Ecma International
 
     <ul>
       <li>[[Locale]] is a String value with the language tag of the locale whose localization is used for formatting.</li>
-      <li>[[Calendar]] is a String value with the `"type"` given in Unicode Technical Standard 35 for the calendar used for formatting.</li>
       <li>[[Style]] is one of the String values `"narrow"`, `"short"`, or `"long"`, identifying the display names style used.</li>
       <li>[[Type]] is one of the String values `"language"`, `"region"`, `"script"`, or `"currency"`, identifying the type of the display names requested.</li>
       <li>[[Fallback]] is one of the String values `"code"`, or `"none"`, identifying the fallback return when the system does not have the requested display name.</li>
