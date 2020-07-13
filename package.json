@@ -1,10 +1,11 @@
 {
   "private": true,
-  "name": "proposal-ecma402-displaynames",
+  "name": "proposal-intl-displaynames",
   "version": "0.0.0",
   "description": "Intl.DisplayNames API Specification proposal.",
   "scripts": {
     "build": "ecmarkup spec.emu index.html",
+    "watch": "ecmarkup --watch spec.emu index.html",
   },
   "homepage": "https://tc39.github.io/proposal-intl-displaynames",
   "repository": {
