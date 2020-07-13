@@ -5,8 +5,8 @@
 <script src="./spec.js"></script>
 <pre class="metadata">
 title: Intl.DisplayNames Proposal
-status: proposal
 stage: 3
+status: proposal
 location: https://github.com/tc39-transfer/proposal-intl-displaynames
 copyright: true
 contributors: Google, Ecma International
