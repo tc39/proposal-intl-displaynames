@@ -46,12 +46,13 @@ The parameter for Intl.DisplayNames constructor follow other Intl Objects in ECM
 The first parameter is *locales*, which is either a BCP 47 language tag or an array of such language tags ([more information](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_identification_and_negotiation)); the second parameter is an option Object.
 
 ```js
-Intl.DisplayNames([ locales [ , options ]])
+Intl.DisplayNames( locales , options)
 Intl.DisplayNames.prototype.of( code )
 ```
-* _options_ may have "localeMatcher", "style", and "type" properties.
-  * The value of _style_ could be either "narrow", "short" or "long" to indicate the length of the display names. For example, for type of "language", of("en-US") will return "English (United States)" under "long" style, but "English (US)" under "short" style. The default is "long".
+* _options_ need to have "type" properties.
   * The value of _type_ could be either "region", "script", "language", or "currency". 
+* _options_ may have "localeMatcher", "style", and "fallback" properties.
+  * The value of _style_ could be either "narrow", "short" or "long" to indicate the length of the display names. For example, for type of "language", of("en-US") will return "English (United States)" under "long" style, but "English (US)" under "short" style. The default is "long".
 * _code_ is a String.
 * Intl.DisplayNames.prototype.of( code ) function take a String as input and return a String, the display name of the _code_.
   * If the type is "region", the _code_ should be either an [ISO-3166 two letters region code](https://www.iso.org/iso-3166-country-codes.html),
