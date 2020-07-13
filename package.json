@@ -4,8 +4,7 @@
   "version": "0.0.0",
   "description": "Intl.DisplayNames API Specification proposal.",
   "scripts": {
-    "build": "ecmarkup spec.emu index.html",
-    "watch": "ecmarkup --watch spec.emu index.html",
+    "build": "[ -d out ] || mkdir out && ecmarkup spec.html out/index.html",
   },
   "homepage": "https://tc39.github.io/proposal-intl-displaynames",
   "repository": {
