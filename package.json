@@ -16,5 +16,6 @@
   "license": "SEE LICENSE IN https://tc39.github.io/ecma262/#sec-copyright-and-software-license",
   "devDependencies": {
     "ecmarkup": "^3.11.5"
-  }
+  },
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
 }
