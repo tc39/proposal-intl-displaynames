@@ -2,11 +2,13 @@
 
 ### Stage
 Stage 3
+* Plan to propose to [advance into Stage 4 in TC39 2020-09-21 meeting](https://docs.google.com/presentation/d/1SicCmt1bo4jyMTvAUiumCBW2ZqUh_-a18xrTO9nqG7U/edit#slide=id.p).
 * Advanced into Stage 3 in TC39 2019-10-2.
 * Advanced into Stage 2 in TC39 2019-6-5.
 * Advanced into Stage 1 in TC39 2019-1-31.
 * Discussed within ECMA402 members since July 2017.
 
+For additional Feature Requests- please fire issues under the new [v2 repo](https://github.com/FrankYFTang/intl-displaynames-v2/)
 
 ### Motivation
 Main motivation for Intl.DisplayNames project was to enable developers to get translation of language, region or script display names on the client. Translation of languages, regions or script display names requires large amount of data to transmit on the network, which is already available in most browsers. These display name translations also carry steep data size penalty for developers. This API will allow web developers to shrink the size of their HTML and/ or ECMA script code without the need to include the human readble form of display names and therefore reduce the download size to decrease latency. Also, this API will reduce the localization cost for the web developers. Our goal is to expose this data through Intl API for use in e.g. language, region and script pickers, etc.
@@ -161,4 +163,5 @@ console.log(currencyNames.of('CNY')); // "人民幣"
 * [Slide for promoting from Stage 0 to Stage 1 for TC39 2019 January meeting.](https://goo.gl/qzQK8A)
 * [Slide for promoting from Stage 1 to Stage 2 for TC39 2019 June meeting.](https://goo.gl/ZAaVds)
 * [Slide for promoting from Stage 2 to Stage 3 for TC39 2019 October meeting.](https://docs.google.com/presentation/d/1bq9h8BvP7a4_Tn3NM-DQ0QSlSr9uGZpmNSTFRRlCsV8/edit#slide=id.p)
+* [Slide for promoting from Stage 3 to Stage 4 for TC39 2020 September meeting.](https://docs.google.com/presentation/d/1SicCmt1bo4jyMTvAUiumCBW2ZqUh_-a18xrTO9nqG7U/edit#slide=id.p)
 
