@@ -160,5 +160,5 @@ console.log(currencyNames.of('CNY')); // "人民幣"
 ### Supporting Materials:
 * [Slide for promoting from Stage 0 to Stage 1 for TC39 2019 January meeting.](https://goo.gl/qzQK8A)
 * [Slide for promoting from Stage 1 to Stage 2 for TC39 2019 June meeting.](https://goo.gl/ZAaVds)
-* [Slide for promoting from Stage 2 to Stage 3 for TC39 2019 October meeting.](http://shorturl.at/yPSZ1)
+* [Slide for promoting from Stage 2 to Stage 3 for TC39 2019 October meeting.](https://docs.google.com/presentation/d/1bq9h8BvP7a4_Tn3NM-DQ0QSlSr9uGZpmNSTFRRlCsV8/edit#slide=id.p)
 
