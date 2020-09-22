@@ -1,8 +1,8 @@
 ## Proposal: Intl.DisplayNames
 
 ### Stage
-Stage 3
-* Plan to propose to [advance into Stage 4 in TC39 2020-09-21 meeting](https://docs.google.com/presentation/d/1SicCmt1bo4jyMTvAUiumCBW2ZqUh_-a18xrTO9nqG7U/edit#slide=id.p).
+Stage 4
+* [Advanced into Stage 4 in TC39 2020-09-21 meeting](https://docs.google.com/presentation/d/1SicCmt1bo4jyMTvAUiumCBW2ZqUh_-a18xrTO9nqG7U/edit#slide=id.p).
 * Advanced into Stage 3 in TC39 2019-10-2.
 * Advanced into Stage 2 in TC39 2019-6-5.
 * Advanced into Stage 1 in TC39 2019-1-31.
